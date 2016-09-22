@@ -5,8 +5,6 @@
  */
 package tcc;
 
-import gnu.io.CommPortIdentifier;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,29 +20,23 @@ import org.knowm.xchart.style.Styler.ChartTheme;
  *
  * @author henike
  */
-public class TempoReal implements ExampleChart<XYChart> {
+public class RealTime implements ExampleChart<XYChart> {
 
     private XYChart xyChart;
     private static TwoWaySerialComm serialcomm;
     private List<Double> yData, yData2;
     public static final String SERIES_NAME = "sensor 1";
     public static final String SERIES_NAME2 = "sensor 2";
+    private String informacao;
 
-    public static void main(String[] args) {
-        Enumeration en = CommPortIdentifier.getPortIdentifiers();
-        while (en.hasMoreElements()) {
-            CommPortIdentifier cpi = (CommPortIdentifier) en.nextElement();
-            System.out.println(cpi.getName());
-
-        }
+    public RealTime(String porta, String informacao) {
+        this.informacao = informacao;
         try {
             serialcomm = new TwoWaySerialComm();
-            serialcomm.connect("COM5");
+            serialcomm.connect(porta);
         } catch (Exception e) {
         }
-        // Setup the panel
-        final TempoReal temporeal = new TempoReal();
-        temporeal.go();
+        this.go();
     }
 
     private void go() {
@@ -74,7 +66,7 @@ public class TempoReal implements ExampleChart<XYChart> {
         yData2 = getDataSensor2();
 
         // Create Chart
-        xyChart = new XYChartBuilder().width(500).height(400).theme(ChartTheme.GGPlot2).title("Temperatura em tempo real").build();
+        xyChart = new XYChartBuilder().width(500).height(400).theme(ChartTheme.GGPlot2).title(this.informacao).build();
         xyChart.addSeries(SERIES_NAME, null, yData);
         xyChart.addSeries(SERIES_NAME2, null, yData2);
 
@@ -86,12 +78,12 @@ public class TempoReal implements ExampleChart<XYChart> {
         yData2.addAll(getDataSensor2());
 
         // Limit the total number of points
-        while (yData.size() > 20) {
+        while (yData.size() > 50) {
             yData.remove(0);
         }
 
         // Limit the total number of points
-        while (yData2.size() > 20) {
+        while (yData2.size() > 50) {
             yData2.remove(0);
         }
 
@@ -102,7 +94,11 @@ public class TempoReal implements ExampleChart<XYChart> {
     private List<Double> getDataSensor1() {
         List<Double> data = new CopyOnWriteArrayList<>();
         try {
-            data.add(Double.parseDouble(serialcomm.getLuminosidadeSensor1()));
+            if ("Temperatura".equals(this.informacao)) {
+                data.add(Double.parseDouble(serialcomm.getTemperaturaSensor1()));
+            } else {
+                data.add(Double.parseDouble(serialcomm.getLuminosidadeSensor1()));
+            }
         } catch (NumberFormatException | NullPointerException e) {
             data.add(0.0);
         }
@@ -112,7 +108,11 @@ public class TempoReal implements ExampleChart<XYChart> {
     private List<Double> getDataSensor2() {
         List<Double> data = new CopyOnWriteArrayList<>();
         try {
-            data.add(Double.parseDouble(serialcomm.getLuminosidadeSensor2()));
+            if ("Temperatura".equals(this.informacao)) {
+                data.add(Double.parseDouble(serialcomm.getTemperaturaSensor2()));
+            } else {
+                data.add(Double.parseDouble(serialcomm.getLuminosidadeSensor2()));
+            }
         } catch (NumberFormatException | NullPointerException e) {
             data.add(0.0);
         }
