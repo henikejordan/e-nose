@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.CopyOnWriteArrayList;
+import javax.swing.JFrame;
 
-import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
 import org.knowm.xchart.demo.charts.ExampleChart;
@@ -20,13 +21,13 @@ import org.knowm.xchart.style.Styler.ChartTheme;
  *
  * @author henike
  */
-public class RealTime implements ExampleChart<XYChart> {
+public class RealTime implements ExampleChart {
 
     private XYChart xyChart;
     private static TwoWaySerialComm serialcomm;
     private List<Double> yData, yData2;
-    public static final String SERIES_NAME = "sensor 1";
-    public static final String SERIES_NAME2 = "sensor 2";
+    private static final String SERIES_NAME = "sensor 1";
+    private static final String SERIES_NAME2 = "sensor 2";
     private String informacao;
 
     public RealTime(String porta, String informacao) {
@@ -40,8 +41,20 @@ public class RealTime implements ExampleChart<XYChart> {
     }
 
     private void go() {
-        final SwingWrapper<XYChart> swingWrapper = new SwingWrapper<>(getChart());
-        swingWrapper.displayChart();
+        final XChartPanel chartPanel = this.buildPanel();
+
+        // Schedule a job for the event-dispatching thread:
+        // creating and showing this application's GUI.
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            // Create and set up the window.
+            JFrame frame = new JFrame("XChart");
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.add(chartPanel);
+
+            // Display the window.
+            frame.pack();
+            frame.setVisible(true);
+        });
 
         // Simulate a data feed
         TimerTask chartUpdaterTask = new TimerTask() {
@@ -51,7 +64,7 @@ public class RealTime implements ExampleChart<XYChart> {
                 updateData();
 
                 javax.swing.SwingUtilities.invokeLater(() -> {
-                    swingWrapper.repaintChart();
+                    chartPanel.updateUI();
                 });
             }
         };
@@ -60,13 +73,20 @@ public class RealTime implements ExampleChart<XYChart> {
         timer.scheduleAtFixedRate(chartUpdaterTask, 0, 200);
     }
 
+    private XChartPanel buildPanel() {
+        return new XChartPanel(getChart());
+    }
+
     @Override
     public XYChart getChart() {
         yData = getDataSensor1();
         yData2 = getDataSensor2();
 
         // Create Chart
-        xyChart = new XYChartBuilder().width(500).height(400).theme(ChartTheme.GGPlot2).title(this.informacao).build();
+        xyChart = new XYChartBuilder().width(500).height(400).theme(ChartTheme.GGPlot2).build();
+        xyChart.setTitle(this.informacao);
+        xyChart.setYAxisTitle(this.getAxisYInfo());
+        xyChart.setXAxisTitle("hora");
         xyChart.addSeries(SERIES_NAME, null, yData);
         xyChart.addSeries(SERIES_NAME2, null, yData2);
 
@@ -117,6 +137,15 @@ public class RealTime implements ExampleChart<XYChart> {
             data.add(0.0);
         }
         return data;
+    }
+
+    private String getAxisYInfo() {
+        switch (this.informacao) {
+            case "Temperatura":
+                return "°C";
+            default:
+                return "abs";
+        }
     }
 
 }
