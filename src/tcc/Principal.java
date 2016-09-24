@@ -10,7 +10,7 @@ import java.util.Enumeration;
 
 /**
  *
- * @author henik
+ * @author henike
  */
 public class Principal extends javax.swing.JFrame {
 
@@ -19,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        getRootPane().setDefaultButton(jButtonAbrir);
         this.preencherComboBoxPorta();
     }
 
@@ -42,28 +43,29 @@ public class Principal extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabelPorta = new javax.swing.JLabel();
-        jButtonConfirmar = new javax.swing.JButton();
-        jButtonCancelar = new javax.swing.JButton();
+        jButtonAbrir = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
         jComboBoxPorta = new javax.swing.JComboBox<>();
         jLabelDados = new javax.swing.JLabel();
         jRadioButtonTemp = new javax.swing.JRadioButton();
         jRadioButtonLum = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Real Time");
 
         jLabelPorta.setText("Porta Serial:");
 
-        jButtonConfirmar.setText("Confirmar");
-        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAbrir.setText("Abrir");
+        jButtonAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmarActionPerformed(evt);
+                jButtonAbrirActionPerformed(evt);
             }
         });
 
-        jButtonCancelar.setText("Cancelar");
-        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarActionPerformed(evt);
+                jButtonSairActionPerformed(evt);
             }
         });
 
@@ -88,17 +90,14 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBoxPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelDados)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonTemp))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jButtonConfirmar)))
+                        .addComponent(jLabelDados)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonCancelar)
+                            .addComponent(jRadioButtonTemp)
+                            .addComponent(jButtonAbrir))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonSair)
                             .addComponent(jRadioButtonLum))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -116,8 +115,8 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jRadioButtonLum))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonConfirmar)
-                    .addComponent(jButtonCancelar))
+                    .addComponent(jButtonAbrir)
+                    .addComponent(jButtonSair))
                 .addContainerGap())
         );
 
@@ -125,7 +124,7 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+    private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
         String porta = (String) jComboBoxPorta.getSelectedItem();
         String informacao = "";
         if (jRadioButtonTemp.isSelected()) {
@@ -135,13 +134,13 @@ public class Principal extends javax.swing.JFrame {
         }
         if (!"".equals(porta) && !"".equals(informacao)) {
             final RealTime temporeal = new RealTime(porta, informacao);
-            this.dispose();
+            //this.dispose();
         }
-    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+    }//GEN-LAST:event_jButtonAbrirActionPerformed
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
+    }//GEN-LAST:event_jButtonSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,8 +174,8 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonAbrir;
+    private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox<String> jComboBoxPorta;
     private javax.swing.JLabel jLabelDados;
     private javax.swing.JLabel jLabelPorta;
