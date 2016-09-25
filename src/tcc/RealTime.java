@@ -31,13 +31,16 @@ public class RealTime {
     private static final String[] SERIES_NAME = {"sensor 1", "sensor 2"};
     private String info;
 
-    public RealTime(String porta, String info) {
+    public RealTime(String port, String info) {
         this.info = info;
+
         try {
             serialcomm = new TwoWaySerialComm();
-            serialcomm.connect(porta);
+            serialcomm.connect(port);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+
         this.go();
     }
 
@@ -155,7 +158,7 @@ public class RealTime {
             case "Temperatura":
                 return "°C";
             default:
-                return "abs";
+                return "%";
         }
     }
 

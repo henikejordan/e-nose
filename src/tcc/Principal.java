@@ -20,10 +20,10 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         getRootPane().setDefaultButton(jButtonAbrir);
-        this.preencherComboBoxPorta();
+        this.fillComboBoxPorta();
     }
 
-    private void preencherComboBoxPorta() {
+    private void fillComboBoxPorta() {
         Enumeration en = CommPortIdentifier.getPortIdentifiers();
         jComboBoxPorta.addItem("");
         while (en.hasMoreElements()) {
