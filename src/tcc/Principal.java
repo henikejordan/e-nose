@@ -15,7 +15,7 @@ import java.util.Enumeration;
 public class Principal extends javax.swing.JFrame {
 
     /**
-     * Creates new form TCC
+     * Creates new form Principal
      */
     public Principal() {
         initComponents();
@@ -41,14 +41,15 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabelPorta = new javax.swing.JLabel();
         jButtonAbrir = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jComboBoxPorta = new javax.swing.JComboBox<>();
         jLabelDados = new javax.swing.JLabel();
-        jRadioButtonTemp = new javax.swing.JRadioButton();
-        jRadioButtonLum = new javax.swing.JRadioButton();
+        jCheckBoxTemp = new javax.swing.JCheckBox();
+        jCheckBoxLum = new javax.swing.JCheckBox();
+        jCheckBoxUmiAr = new javax.swing.JCheckBox();
+        jCheckBoxUmiSolo = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Real Time");
@@ -71,18 +72,20 @@ public class Principal extends javax.swing.JFrame {
 
         jLabelDados.setText("Dados:");
 
-        buttonGroup1.add(jRadioButtonTemp);
-        jRadioButtonTemp.setText("Temperatura");
+        jCheckBoxTemp.setText("Temperatura");
 
-        buttonGroup1.add(jRadioButtonLum);
-        jRadioButtonLum.setText("Luminosidade");
+        jCheckBoxLum.setText("Luminosidade");
+
+        jCheckBoxUmiAr.setText("Umidade do ar");
+
+        jCheckBoxUmiSolo.setText("Umidade do solo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -93,13 +96,19 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jLabelDados)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButtonTemp)
-                            .addComponent(jButtonAbrir))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonSair)
-                            .addComponent(jRadioButtonLum))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonAbrir)
+                                .addGap(38, 38, 38)
+                                .addComponent(jButtonSair))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxTemp)
+                                    .addComponent(jCheckBoxUmiAr))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxUmiSolo)
+                                    .addComponent(jCheckBoxLum))))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,9 +120,13 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDados)
-                    .addComponent(jRadioButtonTemp)
-                    .addComponent(jRadioButtonLum))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                    .addComponent(jCheckBoxTemp)
+                    .addComponent(jCheckBoxLum))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxUmiAr)
+                    .addComponent(jCheckBoxUmiSolo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAbrir)
                     .addComponent(jButtonSair))
@@ -125,22 +138,41 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
-        String porta = (String) jComboBoxPorta.getSelectedItem();
-        String informacao = "";
-        if (jRadioButtonTemp.isSelected()) {
-            informacao = "Temperatura";
-        } else if (jRadioButtonLum.isSelected()) {
-            informacao = "Luminosidade";
+        String port = (String) jComboBoxPorta.getSelectedItem();
+        String info;
+        if (jCheckBoxTemp.isSelected()) {
+            info = "Temperatura";
+            if (!"".equals(port)) {
+                buildChart(port, info);
+            }
         }
-        if (!"".equals(porta) && !"".equals(informacao)) {
-            final RealTime temporeal = new RealTime(porta, informacao);
-            //this.dispose();
+        if (jCheckBoxLum.isSelected()) {
+            info = "Luminosidade";
+            if (!"".equals(port)) {
+                buildChart(port, info);
+            }
+        }
+        if (jCheckBoxUmiAr.isSelected()) {
+            info = "Umidade do ar";
+            if (!"".equals(port)) {
+                buildChart(port, info);
+            }
+        }
+        if (jCheckBoxUmiSolo.isSelected()) {
+            info = "Umidade do solo";
+            if (!"".equals(port)) {
+                buildChart(port, info);
+            }
         }
     }//GEN-LAST:event_jButtonAbrirActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private RealTime buildChart(String port, String info) {
+        return new RealTime(port, info);
+    }
 
     /**
      * @param args the command line arguments
@@ -173,13 +205,14 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonAbrir;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JCheckBox jCheckBoxLum;
+    private javax.swing.JCheckBox jCheckBoxTemp;
+    private javax.swing.JCheckBox jCheckBoxUmiAr;
+    private javax.swing.JCheckBox jCheckBoxUmiSolo;
     private javax.swing.JComboBox<String> jComboBoxPorta;
     private javax.swing.JLabel jLabelDados;
     private javax.swing.JLabel jLabelPorta;
-    private javax.swing.JRadioButton jRadioButtonLum;
-    private javax.swing.JRadioButton jRadioButtonTemp;
     // End of variables declaration//GEN-END:variables
 }
