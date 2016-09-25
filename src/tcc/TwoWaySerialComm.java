@@ -22,10 +22,6 @@ public class TwoWaySerialComm {
     private static String ret;
     private String[] split;
 
-    public TwoWaySerialComm() {
-        super();
-    }
-
     public void connect(String portName) throws Exception {
         CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
         if (portIdentifier.isCurrentlyOwned()) {
@@ -69,6 +65,7 @@ public class TwoWaySerialComm {
                     ret += new String(buffer, 0, len);
                 }
             } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -92,6 +89,7 @@ public class TwoWaySerialComm {
                     this.out.write(c);
                 }
             } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -105,38 +103,26 @@ public class TwoWaySerialComm {
     }
 
     public String getData(String info, String sensor) {
-        if (ret != null) {
-            split = ret.split(";");
-            for (int i = split.length - 1; i >= 0; i--) {
-                if (sensor.equals(split[i])) {
-                    switch (info) {
-                        case "Temperatura":
-                            try {
+        try {
+            if (ret != null) {
+                split = ret.split(";");
+                for (int i = split.length - 1; i >= 0; i--) {
+                    if (sensor.equals(split[i])) {
+                        switch (info) {
+                            case "Temperatura":
                                 return split[i + 1];
-                            } catch (IndexOutOfBoundsException e) {
-                            }
-                            break;
-                        case "Luminosidade":
-                            try {
+                            case "Luminosidade":
                                 return split[i + 2];
-                            } catch (IndexOutOfBoundsException e) {
-                            }
-                            break;
-                        case "Umidade do ar":
-                            try {
+                            case "Umidade do ar":
                                 return split[i + 3];
-                            } catch (IndexOutOfBoundsException e) {
-                            }
-                            break;
-                        case "Umidade do solo":
-                            try {
+                            case "Umidade do solo":
                                 return split[i + 4];
-                            } catch (IndexOutOfBoundsException e) {
-                            }
-                            break;
+                        }
                     }
                 }
             }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
         }
         return null;
     }
