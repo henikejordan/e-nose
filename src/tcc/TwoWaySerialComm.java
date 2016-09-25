@@ -19,7 +19,8 @@ import java.io.OutputStream;
  */
 public class TwoWaySerialComm {
 
-    private static String retorno;
+    private static String ret;
+    private String[] split;
 
     public TwoWaySerialComm() {
         super();
@@ -65,7 +66,7 @@ public class TwoWaySerialComm {
             try {
                 while ((len = this.in.read(buffer)) > -1) {
                     //System.out.print(new String(buffer, 0, len));
-                    retorno += new String(buffer, 0, len);
+                    ret += new String(buffer, 0, len);
                 }
             } catch (IOException e) {
             }
@@ -95,59 +96,44 @@ public class TwoWaySerialComm {
         }
     }
 
-    public String getTemperaturaSensor1() {
-        if (retorno != null) {
-            String[] split = retorno.split(";");
-            for (int i = split.length - 1; i >= 0; i--) {
-                if ("SENSOR 1".equals(split[i])) {
-                    try {
-                        return split[i + 1];
-                    } catch (IndexOutOfBoundsException e) {
-                    }
-                }
-            }
-        }
-        return null;
+    public String getSensor1(String info) {
+        return this.getData(info, "SENSOR 1");
     }
 
-    public String getLuminosidadeSensor1() {
-        if (retorno != null) {
-            String[] split = retorno.split(";");
-            for (int i = split.length - 1; i >= 0; i--) {
-                if ("SENSOR 1".equals(split[i])) {
-                    try {
-                        return split[i + 2];
-                    } catch (IndexOutOfBoundsException e) {
-                    }
-                }
-            }
-        }
-        return null;
+    public String getSensor2(String info) {
+        return this.getData(info, "SENSOR 2");
     }
 
-    public String getTemperaturaSensor2() {
-        if (retorno != null) {
-            String[] split = retorno.split(";");
+    public String getData(String info, String sensor) {
+        if (ret != null) {
+            split = ret.split(";");
             for (int i = split.length - 1; i >= 0; i--) {
-                if ("SENSOR 2".equals(split[i])) {
-                    try {
-                        return split[i + 1];
-                    } catch (IndexOutOfBoundsException e) {
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    public String getLuminosidadeSensor2() {
-        if (retorno != null) {
-            String[] split = retorno.split(";");
-            for (int i = split.length - 1; i >= 0; i--) {
-                if ("SENSOR 2".equals(split[i])) {
-                    try {
-                        return split[i + 2];
-                    } catch (IndexOutOfBoundsException e) {
+                if (sensor.equals(split[i])) {
+                    switch (info) {
+                        case "Temperatura":
+                            try {
+                                return split[i + 1];
+                            } catch (IndexOutOfBoundsException e) {
+                            }
+                            break;
+                        case "Luminosidade":
+                            try {
+                                return split[i + 2];
+                            } catch (IndexOutOfBoundsException e) {
+                            }
+                            break;
+                        case "Umidade do ar":
+                            try {
+                                return split[i + 3];
+                            } catch (IndexOutOfBoundsException e) {
+                            }
+                            break;
+                        case "Umidade do solo":
+                            try {
+                                return split[i + 4];
+                            } catch (IndexOutOfBoundsException e) {
+                            }
+                            break;
                     }
                 }
             }

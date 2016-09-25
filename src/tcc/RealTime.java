@@ -5,6 +5,8 @@
  */
 package tcc;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,24 +16,23 @@ import javax.swing.JFrame;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
-import org.knowm.xchart.demo.charts.ExampleChart;
 import org.knowm.xchart.style.Styler.ChartTheme;
 
 /**
  *
  * @author henike
  */
-public class RealTime implements ExampleChart {
+public class RealTime {
 
     private XYChart xyChart;
     private static TwoWaySerialComm serialcomm;
-    private List<Double> yData, yData2;
-    private static final String SERIES_NAME = "sensor 1";
-    private static final String SERIES_NAME2 = "sensor 2";
-    private String informacao;
+    private List<Date> xData;
+    private List<Double> yData[] = new List[2];
+    private static final String[] SERIES_NAME = {"sensor 1", "sensor 2"};
+    private String info;
 
-    public RealTime(String porta, String informacao) {
-        this.informacao = informacao;
+    public RealTime(String porta, String info) {
+        this.info = info;
         try {
             serialcomm = new TwoWaySerialComm();
             serialcomm.connect(porta);
@@ -70,55 +71,65 @@ public class RealTime implements ExampleChart {
         };
 
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(chartUpdaterTask, 0, 200);
+        timer.scheduleAtFixedRate(chartUpdaterTask, 0, 1000);
     }
 
     private XChartPanel buildPanel() {
-        return new XChartPanel(getChart());
+        return new XChartPanel(this.getChart());
     }
 
-    @Override
-    public XYChart getChart() {
-        yData = getDataSensor1();
-        yData2 = getDataSensor2();
+    private XYChart getChart() {
+        xData = getTime();
+        yData[0] = getDataSensor1();
+        yData[1] = getDataSensor2();
 
         // Create Chart
         xyChart = new XYChartBuilder().width(500).height(400).theme(ChartTheme.GGPlot2).build();
-        xyChart.setTitle(this.informacao);
+        xyChart.setTitle(this.info);
+        xyChart.setXAxisTitle(this.getAxisXInfo());
         xyChart.setYAxisTitle(this.getAxisYInfo());
-        xyChart.setXAxisTitle("hora");
-        xyChart.addSeries(SERIES_NAME, null, yData);
-        xyChart.addSeries(SERIES_NAME2, null, yData2);
+        xyChart.addSeries(SERIES_NAME[0], xData, yData[0]);
+        xyChart.addSeries(SERIES_NAME[1], xData, yData[1]);
 
         return xyChart;
     }
 
     public void updateData() {
-        yData.addAll(getDataSensor1());
-        yData2.addAll(getDataSensor2());
+        xData.addAll(getTime());
+        yData[0].addAll(getDataSensor1());
+        yData[1].addAll(getDataSensor2());
 
         // Limit the total number of points
-        while (yData.size() > 50) {
-            yData.remove(0);
+        while (xData.size() > 50) {
+            xData.remove(0);
         }
 
         // Limit the total number of points
-        while (yData2.size() > 50) {
-            yData2.remove(0);
+        while (yData[0].size() > 50) {
+            yData[0].remove(0);
         }
 
-        xyChart.updateXYSeries(SERIES_NAME, null, yData, null);
-        xyChart.updateXYSeries(SERIES_NAME2, null, yData2, null);
+        // Limit the total number of points
+        while (yData[1].size() > 50) {
+            yData[1].remove(0);
+        }
+
+        xyChart.updateXYSeries(SERIES_NAME[0], xData, yData[0], null);
+        xyChart.updateXYSeries(SERIES_NAME[1], xData, yData[1], null);
+    }
+
+    private List<Date> getTime() {
+        Date hora = Calendar.getInstance().getTime();
+        List<Date> data = new CopyOnWriteArrayList<>();
+        data.add(hora);
+
+        return data;
     }
 
     private List<Double> getDataSensor1() {
         List<Double> data = new CopyOnWriteArrayList<>();
         try {
-            if ("Temperatura".equals(this.informacao)) {
-                data.add(Double.parseDouble(serialcomm.getTemperaturaSensor1()));
-            } else {
-                data.add(Double.parseDouble(serialcomm.getLuminosidadeSensor1()));
-            }
+            data.add(Double.parseDouble(serialcomm.getSensor1(this.info)));
         } catch (NumberFormatException | NullPointerException e) {
             data.add(0.0);
         }
@@ -128,19 +139,19 @@ public class RealTime implements ExampleChart {
     private List<Double> getDataSensor2() {
         List<Double> data = new CopyOnWriteArrayList<>();
         try {
-            if ("Temperatura".equals(this.informacao)) {
-                data.add(Double.parseDouble(serialcomm.getTemperaturaSensor2()));
-            } else {
-                data.add(Double.parseDouble(serialcomm.getLuminosidadeSensor2()));
-            }
+            data.add(Double.parseDouble(serialcomm.getSensor2(this.info)));
         } catch (NumberFormatException | NullPointerException e) {
             data.add(0.0);
         }
         return data;
     }
 
+    private String getAxisXInfo() {
+        return "hora";
+    }
+
     private String getAxisYInfo() {
-        switch (this.informacao) {
+        switch (this.info) {
             case "Temperatura":
                 return "°C";
             default:
