@@ -22,7 +22,14 @@ public class TwoWaySerialComm {
     private static String ret;
     private String[] split;
 
-    public void connect(String portName) throws Exception {
+    /**
+     * Connect to the port with specific baudrate.
+     *
+     * @param portName
+     * @param baudrate
+     * @throws java.lang.Exception
+     */
+    public void connect(String portName, Integer baudrate) throws Exception {
         CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
         if (portIdentifier.isCurrentlyOwned()) {
             System.out.println("Error: Port is currently in use");
@@ -31,7 +38,7 @@ public class TwoWaySerialComm {
 
             if (commPort instanceof SerialPort) {
                 SerialPort serialPort = (SerialPort) commPort;
-                serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+                serialPort.setSerialPortParams(baudrate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
 
                 InputStream in = serialPort.getInputStream();
                 OutputStream out = serialPort.getOutputStream();

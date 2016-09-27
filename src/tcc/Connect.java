@@ -22,7 +22,7 @@ public class Connect {
         Statement stmt;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:dados.db");
+            c = DriverManager.getConnection("jdbc:sqlite:data.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
