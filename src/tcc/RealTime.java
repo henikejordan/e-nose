@@ -154,12 +154,10 @@ public class RealTime {
     }
 
     private String getAxisYInfo() {
-        switch (this.info) {
-            case "Temperatura":
-                return "°C";
-            default:
-                return "%";
+        if (this.info.equals("Temperatura")) {
+            return "°C";
         }
+        return "%";
     }
 
 }
