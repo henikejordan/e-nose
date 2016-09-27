@@ -36,7 +36,7 @@ public class RealTime {
 
         try {
             serialcomm = new TwoWaySerialComm();
-            serialcomm.connect(port);
+            serialcomm.connect(port, 9600);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
