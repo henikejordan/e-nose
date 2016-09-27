@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="grupoBotoes">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Real Time"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -25,34 +30,57 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace pref="13" max="32767" attributes="0"/>
+              <EmptySpace pref="45" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelDados" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelData" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelHora" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jCheckBoxTemp" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxUmiAr" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="38" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jCheckBoxUmiSolo" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxLum" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Component id="jLabelPorta" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jComboBoxPorta" min="-2" pref="97" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabelDados" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jButtonAbrir" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                              <Component id="jButtonSair" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jCheckBoxTemp" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBoxUmiAr" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jRadioButtonLer" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonAbrir" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="1" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jCheckBoxUmiSolo" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBoxLum" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jFormattedTextFieldHora" max="32767" attributes="0"/>
+                                  <Component id="jFormattedTextFieldData" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabelDataAte" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelHoraAte" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jButtonSair" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonRel" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldDataAte" alignment="0" pref="82" max="32767" attributes="0"/>
+                          <Component id="jFormattedTextFieldHoraAte" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -79,7 +107,26 @@
                   <Component id="jCheckBoxUmiAr" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jCheckBoxUmiSolo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jRadioButtonLer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonRel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelData" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelDataAte" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jFormattedTextFieldData" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jFormattedTextFieldDataAte" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelHora" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelHoraAte" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jFormattedTextFieldHora" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jFormattedTextFieldHoraAte" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="28" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonAbrir" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonSair" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -144,6 +191,68 @@
     <Component class="javax.swing.JCheckBox" name="jCheckBoxUmiSolo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Umidade do solo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonLer">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="grupoBotoes"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Ler"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButtonLerMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonRel">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="grupoBotoes"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jRadioButtonRelMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelData">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Data:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelDataAte">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="At&#xe9;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelHora">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hora:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelHoraAte">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="At&#xe9;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldData">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDataAte">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldHora">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldHoraAte">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
   </SubComponents>
