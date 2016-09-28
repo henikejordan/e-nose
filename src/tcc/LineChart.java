@@ -24,6 +24,7 @@ public class LineChart {
 
     private XYChart xyChart;
     private static TwoWaySerialComm serialcomm;
+    private static final Connect CONNECT = new Connect();
     private List<Date> xData;
     private List<Double> yData[] = new List[2];
     private static final String[] SERIES_NAME = {"sensor 1", "sensor 2"};
