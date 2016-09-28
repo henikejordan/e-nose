@@ -26,6 +26,7 @@ public class RealTime {
 
     private XYChart xyChart;
     private static TwoWaySerialComm serialcomm;
+    private static final Connect CONNECT = new Connect();
     private List<Date> xData;
     private List<Double> yData[] = new List[2];
     private static final String[] SERIES_NAME = {"sensor 1", "sensor 2"};
@@ -85,6 +86,7 @@ public class RealTime {
         xData = getTime();
         yData[0] = getDataSensor1();
         yData[1] = getDataSensor2();
+        CONNECT.setValues(serialcomm.getValues());
 
         // Create Chart
         xyChart = new XYChartBuilder().width(500).height(400).theme(ChartTheme.GGPlot2).build();
