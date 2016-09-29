@@ -32,7 +32,7 @@ public class Connect {
             Class.forName(this.ADAPTER);
             c = DriverManager.getConnection(this.CONNECTION);
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            //System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
             String sql = "INSERT INTO DADOS"
@@ -47,7 +47,7 @@ public class Connect {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("Records created successfully");
+        //System.out.println("Records created successfully");
     }
 
     public List<Double> getValuesSensor(String sensor, String info, String data_hora_ini, String data_hora_fim) {
@@ -56,7 +56,7 @@ public class Connect {
             Class.forName(this.ADAPTER);
             c = DriverManager.getConnection(this.CONNECTION);
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            //System.out.println("Opened database successfully");
             stmt = c.createStatement();
             try (ResultSet rs = stmt.executeQuery("SELECT * FROM DADOS "
                     + "WHERE sensor = '" + sensor + "' AND "
@@ -73,7 +73,7 @@ public class Connect {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("Operation done successfully");
+        //System.out.println("Operation done successfully");
 
         return data;
     }
@@ -85,7 +85,7 @@ public class Connect {
             Class.forName(this.ADAPTER);
             c = DriverManager.getConnection(this.CONNECTION);
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            //System.out.println("Opened database successfully");
             stmt = c.createStatement();
             try (ResultSet rs = stmt.executeQuery("SELECT * FROM DADOS "
                     + "WHERE sensor = 'SENSOR 1' AND "
@@ -93,7 +93,6 @@ public class Connect {
                     + "data_hora > '" + data_hora_ini + "' AND "
                     + "data_hora < '" + data_hora_fim + "'")) {
                 while (rs.next()) {
-                    System.out.println("ok");
                     data.add(new Date(format.parse(rs.getString("data_hora")).getTime()));
                 }
             }
@@ -103,41 +102,9 @@ public class Connect {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("Operation done successfully");
+        //System.out.println("Operation done successfully");
 
         return data;
-    }
-
-    public void select() {
-        try {
-            Class.forName(this.ADAPTER);
-            c = DriverManager.getConnection(this.CONNECTION);
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-
-            stmt = c.createStatement();
-            try (ResultSet rs = stmt.executeQuery("SELECT * FROM DADOS;")) {
-                while (rs.next()) {
-                    int id_dados = rs.getInt("id_dados");
-                    String sensor = rs.getString("sensor");
-                    String informacao = rs.getString("informacao");
-                    String data_hora = rs.getString("data_hora");
-                    double valor = rs.getDouble("valor");
-                    System.out.println("ID_DADOS = " + id_dados);
-                    System.out.println("SENSOR = " + sensor);
-                    System.out.println("INFORMACAO = " + informacao);
-                    System.out.println("DATA_HORA = " + data_hora);
-                    System.out.println("VALOR = " + valor);
-                    System.out.println();
-                }
-            }
-            stmt.close();
-            c.close();
-        } catch (ClassNotFoundException | SQLException e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        System.out.println("Operation done successfully");
     }
 
 }

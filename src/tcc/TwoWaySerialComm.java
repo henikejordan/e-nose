@@ -12,7 +12,6 @@ import gnu.io.SerialPort;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Random;
 
 /**
  *
@@ -22,6 +21,7 @@ public class TwoWaySerialComm {
 
     private static String ret;
     private String[] split;
+    private Thread thread;
 
     /**
      * Connect to the port with specific baudrate.
@@ -42,10 +42,11 @@ public class TwoWaySerialComm {
                 serialPort.setSerialPortParams(baudrate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
 
                 InputStream in = serialPort.getInputStream();
-                OutputStream out = serialPort.getOutputStream();
+                //OutputStream out = serialPort.getOutputStream();
 
-                (new Thread(new SerialReader(in))).start();
-                (new Thread(new SerialWriter(out))).start();
+                thread = new Thread(new SerialReader(in));
+                thread.start();
+                //(new Thread(new SerialWriter(out))).start();
             } else {
                 System.out.println("Error: Only serial ports are handled by this example.");
             }
@@ -111,29 +112,24 @@ public class TwoWaySerialComm {
     }
 
     public String getData(String info, String sensor) {
-        Random gerador = new Random();
         try {
-            //if (ret != null) {
-                //split = ret.split(";");
-                //for (int i = split.length - 1; i >= 0; i--) {
-                    //if (sensor.equals(split[i])) {
+            if (ret != null) {
+                split = ret.split(";");
+                for (int i = split.length - 1; i >= 0; i--) {
+                    if (sensor.equals(split[i])) {
                         switch (info) {
                             case "Temperatura":
-                                return String.valueOf(gerador.nextDouble() * 100);
-                                //return split[i + 1];
+                                return split[i + 1];
                             case "Luminosidade":
-                                return String.valueOf(gerador.nextDouble() * 100);
-                                //return split[i + 2];
+                                return split[i + 2];
                             case "Umidade do ar":
-                                return String.valueOf(gerador.nextDouble() * 100);
-                                //return split[i + 3];
+                                return split[i + 3];
                             case "Umidade do solo":
-                                return String.valueOf(gerador.nextDouble() * 100);
-                                //return split[i + 4];
+                                return split[i + 4];
                         }
-                    //}
-                //}
-            //}
+                    }
+                }
+            }
         } catch (IndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }
