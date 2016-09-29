@@ -254,7 +254,7 @@ public class Principal extends javax.swing.JFrame {
         String info;
         if (jCheckBoxTemp.isSelected()) {
             try {
-                aux = temp.getInstancia();
+                aux = temp.getInstance();
             } catch (NullPointerException e) {
                 aux = false;
             }
@@ -271,7 +271,7 @@ public class Principal extends javax.swing.JFrame {
         }
         if (jCheckBoxLum.isSelected()) {
             try {
-                aux = luz.getInstancia();
+                aux = luz.getInstance();
             } catch (NullPointerException e) {
                 aux = false;
             }
@@ -288,7 +288,7 @@ public class Principal extends javax.swing.JFrame {
         }
         if (jCheckBoxUmiAr.isSelected()) {
             try {
-                aux = ar.getInstancia();
+                aux = ar.getInstance();
             } catch (NullPointerException e) {
                 aux = false;
             }
@@ -305,7 +305,7 @@ public class Principal extends javax.swing.JFrame {
         }
         if (jCheckBoxUmiSolo.isSelected()) {
             try {
-                aux = solo.getInstancia();
+                aux = solo.getInstance();
             } catch (NullPointerException e) {
                 aux = false;
             }
@@ -340,8 +340,8 @@ public class Principal extends javax.swing.JFrame {
         jFormattedTextFieldHoraFim.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonRelMouseClicked
 
-    private RealTime buildChart(String port, String info) {
-        return new RealTime(port, info);
+    private RealTimeChart buildChart(String port, String info) {
+        return new RealTimeChart(port, info);
     }
 
     private LineChart showChart(String info) {

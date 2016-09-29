@@ -26,7 +26,7 @@ import org.knowm.xchart.style.Styler.ChartTheme;
  *
  * @author henike
  */
-public final class RealTime implements Chart {
+public final class RealTimeChart implements Chart {
 
     private XYChart xyChart;
     private static TwoWaySerialComm serialcomm;
@@ -36,9 +36,9 @@ public final class RealTime implements Chart {
     private static final String[] SERIES_NAME = {"sensor 1", "sensor 2"};
     private String info, data_hora;
     private Timer timer = new Timer();
-    private boolean instancia = true;
+    private boolean instance = true;
 
-    public RealTime(String port, String info) {
+    public RealTimeChart(String port, String info) {
         this.info = info;
 
         try {
@@ -51,8 +51,7 @@ public final class RealTime implements Chart {
         this.go();
     }
 
-    @Override
-    public void go() {
+    private void go() {
         final XChartPanel chartPanel = this.buildPanel();
         TimerTask chartUpdaterTask;
 
@@ -67,7 +66,7 @@ public final class RealTime implements Chart {
                 @Override
                 public void windowClosing(WindowEvent ev) {
                     timer.cancel();
-                    instancia = false;
+                    instance = false;
                 }
             });
 
@@ -92,26 +91,8 @@ public final class RealTime implements Chart {
         timer.scheduleAtFixedRate(chartUpdaterTask, 0, 10000);
     }
 
-    @Override
-    public XChartPanel buildPanel() {
+    private XChartPanel buildPanel() {
         return new XChartPanel(this.getChart());
-    }
-
-    @Override
-    public XYChart getChart() {
-        xData = getTime();
-        yData[0] = getDataSensor1();
-        yData[1] = getDataSensor2();
-
-        // Create Chart
-        xyChart = new XYChartBuilder().width(500).height(400).theme(ChartTheme.GGPlot2).build();
-        xyChart.setTitle(this.info);
-        xyChart.setXAxisTitle(this.getAxisXInfo());
-        xyChart.setYAxisTitle(this.getAxisYInfo());
-        xyChart.addSeries(SERIES_NAME[0], xData, yData[0]);
-        xyChart.addSeries(SERIES_NAME[1], xData, yData[1]);
-
-        return xyChart;
     }
 
     private void updateData() {
@@ -136,6 +117,23 @@ public final class RealTime implements Chart {
 
         xyChart.updateXYSeries(SERIES_NAME[0], xData, yData[0], null);
         xyChart.updateXYSeries(SERIES_NAME[1], xData, yData[1], null);
+    }
+
+    @Override
+    public XYChart getChart() {
+        xData = getTime();
+        yData[0] = getDataSensor1();
+        yData[1] = getDataSensor2();
+
+        // Create Chart
+        xyChart = new XYChartBuilder().width(500).height(400).theme(ChartTheme.GGPlot2).build();
+        xyChart.setTitle(this.info);
+        xyChart.setXAxisTitle(this.getAxisXInfo());
+        xyChart.setYAxisTitle(this.getAxisYInfo());
+        xyChart.addSeries(SERIES_NAME[0], xData, yData[0]);
+        xyChart.addSeries(SERIES_NAME[1], xData, yData[1]);
+
+        return xyChart;
     }
 
     @Override
@@ -195,13 +193,8 @@ public final class RealTime implements Chart {
     }
 
     @Override
-    public void setInstancia(boolean instancia) {
-        this.instancia = instancia;
-    }
-
-    @Override
-    public boolean getInstancia() {
-        return instancia;
+    public boolean getInstance() {
+        return instance;
     }
 
 }

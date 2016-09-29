@@ -31,7 +31,7 @@ public final class LineChart implements Chart {
     private final List<Double> yData[] = new List[2];
     private static final String[] SERIES_NAME = {"sensor 1", "sensor 2"};
     private final String info, data_hora_ini, data_hora_fim;
-    private boolean instancia = true;
+    private boolean instance = true;
 
     public LineChart(String info, String data_hora_ini, String data_hora_fim) {
         this.info = info;
@@ -40,8 +40,7 @@ public final class LineChart implements Chart {
         this.go();
     }
 
-    @Override
-    public void go() {
+    private void go() {
         final XChartPanel chartPanel = this.buildPanel();
 
         // Schedule a job for the event-dispatching thread:
@@ -54,7 +53,7 @@ public final class LineChart implements Chart {
             frame.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent ev) {
-                    instancia = false;
+                    instance = false;
                 }
             });
 
@@ -64,9 +63,34 @@ public final class LineChart implements Chart {
         });
     }
 
-    @Override
-    public XChartPanel buildPanel() {
+    private XChartPanel buildPanel() {
         return new XChartPanel(this.getChart());
+    }
+
+    private void equals() {
+        Integer[] num = new Integer[3];
+        num[0] = xData.size();
+        num[1] = yData[0].size();
+        num[2] = yData[1].size();
+
+        List nums = Arrays.asList(num);
+
+        while (xData.size() > (int) Collections.min(nums)) {
+            xData.remove(xData.size() - 1);
+        }
+        while (yData[0].size() > (int) Collections.min(nums)) {
+            yData[0].remove(yData[0].size() - 1);
+        }
+        while (yData[1].size() > (int) Collections.min(nums)) {
+            yData[1].remove(yData[1].size() - 1);
+        }
+
+        if (num[0] == 0) {
+            xData.add(Calendar.getInstance().getTime());
+            yData[0].add(0.0);
+            yData[1].add(0.0);
+        }
+
     }
 
     @Override
@@ -115,40 +139,9 @@ public final class LineChart implements Chart {
         return "%";
     }
 
-    private void equals() {
-        Integer[] num = new Integer[3];
-        num[0] = xData.size();
-        num[1] = yData[0].size();
-        num[2] = yData[1].size();
-
-        List nums = Arrays.asList(num);
-
-        while (xData.size() > (int) Collections.min(nums)) {
-            xData.remove(xData.size() - 1);
-        }
-        while (yData[0].size() > (int) Collections.min(nums)) {
-            yData[0].remove(yData[0].size() - 1);
-        }
-        while (yData[1].size() > (int) Collections.min(nums)) {
-            yData[1].remove(yData[1].size() - 1);
-        }
-
-        if (num[0] == 0) {
-            xData.add(Calendar.getInstance().getTime());
-            yData[0].add(0.0);
-            yData[1].add(0.0);
-        }
-
-    }
-
     @Override
-    public void setInstancia(boolean instancia) {
-        this.instancia = instancia;
-    }
-
-    @Override
-    public boolean getInstancia() {
-        return instancia;
+    public boolean getInstance() {
+        return instance;
     }
 
 }
