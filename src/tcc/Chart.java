@@ -7,7 +7,6 @@ package tcc;
 
 import java.util.Date;
 import java.util.List;
-import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 
 /**
@@ -15,10 +14,6 @@ import org.knowm.xchart.XYChart;
  * @author Henike
  */
 public interface Chart {
-
-    public void go();
-
-    public XChartPanel buildPanel();
 
     public XYChart getChart();
 
@@ -32,8 +27,6 @@ public interface Chart {
 
     public String getAxisYInfo();
 
-    public void setInstancia(boolean instancia);
-
-    public boolean getInstancia();
+    public boolean getInstance();
 
 }

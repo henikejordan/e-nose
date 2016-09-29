@@ -21,7 +21,6 @@ public class TwoWaySerialComm {
 
     private static String ret;
     private String[] split;
-    private Thread thread;
 
     /**
      * Connect to the port with specific baudrate.
@@ -44,8 +43,7 @@ public class TwoWaySerialComm {
                 InputStream in = serialPort.getInputStream();
                 //OutputStream out = serialPort.getOutputStream();
 
-                thread = new Thread(new SerialReader(in));
-                thread.start();
+                (new Thread(new SerialReader(in))).start();
                 //(new Thread(new SerialWriter(out))).start();
             } else {
                 System.out.println("Error: Only serial ports are handled by this example.");
