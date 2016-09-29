@@ -91,6 +91,9 @@ public class Principal extends javax.swing.JFrame {
         jFormattedTextFieldDataFim = new javax.swing.JFormattedTextField();
         jFormattedTextFieldHoraIni = new javax.swing.JFormattedTextField();
         jFormattedTextFieldHoraFim = new javax.swing.JFormattedTextField();
+        jLabelTempo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldTempo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Real Time");
@@ -154,16 +157,31 @@ public class Principal extends javax.swing.JFrame {
 
         jFormattedTextFieldHoraFim.setEnabled(false);
 
+        jLabelTempo.setText("Tempo de atualização:");
+
+        jLabel1.setText("segundos");
+
+        jTextFieldTempo.setEnabled(false);
+        jTextFieldTempo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldTempoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelDataIni, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelDataFim)
-                    .addComponent(jLabelDados))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabelDados))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelDataIni)
+                            .addComponent(jLabelDataFim))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -179,22 +197,8 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(jComboBoxPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jRadioButtonLer)
-                                            .addGap(62, 62, 62))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jFormattedTextFieldDataIni, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                                                .addComponent(jFormattedTextFieldDataFim))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabelHoraIni)
-                                                .addComponent(jLabelHoraFim))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jFormattedTextFieldHoraIni)
-                                        .addComponent(jFormattedTextFieldHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jRadioButtonLer)
+                                    .addGap(198, 198, 198))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jCheckBoxTemp)
@@ -203,8 +207,28 @@ public class Principal extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jCheckBoxLum)
                                         .addComponent(jCheckBoxUmiSolo)
-                                        .addComponent(jRadioButtonRel)))))
-                        .addGap(0, 52, Short.MAX_VALUE))))
+                                        .addComponent(jRadioButtonRel)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jFormattedTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jFormattedTextFieldDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelHoraIni)
+                                        .addComponent(jLabelHoraFim))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jFormattedTextFieldHoraIni)
+                                        .addComponent(jFormattedTextFieldHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 47, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jLabelTempo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,19 +250,24 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButtonLer)
                     .addComponent(jRadioButtonRel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDataIni)
-                    .addComponent(jLabelHoraIni)
-                    .addComponent(jFormattedTextFieldDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldHoraIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelTempo)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldTempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDataFim)
+                    .addComponent(jLabelHoraIni)
+                    .addComponent(jFormattedTextFieldHoraIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDataIni)
+                    .addComponent(jFormattedTextFieldDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelHoraFim)
                     .addComponent(jFormattedTextFieldHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addComponent(jFormattedTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDataFim))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAbrir)
                     .addComponent(jButtonSair))
@@ -327,6 +356,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jRadioButtonLerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonLerMouseClicked
+        jTextFieldTempo.setEnabled(true);
         jFormattedTextFieldDataIni.setEnabled(false);
         jFormattedTextFieldDataFim.setEnabled(false);
         jFormattedTextFieldHoraIni.setEnabled(false);
@@ -334,14 +364,33 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonLerMouseClicked
 
     private void jRadioButtonRelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonRelMouseClicked
+        jTextFieldTempo.setEnabled(false);
         jFormattedTextFieldDataIni.setEnabled(true);
         jFormattedTextFieldDataFim.setEnabled(true);
         jFormattedTextFieldHoraIni.setEnabled(true);
         jFormattedTextFieldHoraFim.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonRelMouseClicked
 
+    private void jTextFieldTempoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTempoKeyTyped
+        try {
+            if (jTextFieldTempo.getText().length() >= 5) {
+                evt.consume();
+            } else if (Long.parseLong(String.valueOf(evt.getKeyChar())) == 0) {
+                evt.consume();
+            }
+        } catch (NumberFormatException err) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldTempoKeyTyped
+
     private RealTimeChart buildChart(String port, String info) {
-        return new RealTimeChart(port, info);
+        try {
+            long tempo = Long.parseLong(jTextFieldTempo.getText());
+            return new RealTimeChart(port, info, tempo);
+        } catch (NumberFormatException ex) {
+            ex.getMessage();
+        }
+        return null;
     }
 
     private LineChart showChart(String info) {
@@ -349,8 +398,8 @@ public class Principal extends javax.swing.JFrame {
         try {
             SimpleDateFormat formatoAtual = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             SimpleDateFormat formatoDesejado = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            data_hora_ini = formatoDesejado.format(formatoAtual.parse((String) jFormattedTextFieldDataIni.getText() + " " + (String) jFormattedTextFieldHoraIni.getText()));
-            data_hora_fim = formatoDesejado.format(formatoAtual.parse((String) jFormattedTextFieldDataFim.getText() + " " + (String) jFormattedTextFieldHoraFim.getText()));
+            data_hora_ini = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataIni.getText() + " " + jFormattedTextFieldHoraIni.getText()));
+            data_hora_fim = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataFim.getText() + " " + jFormattedTextFieldHoraFim.getText()));
 
             return new LineChart(info, data_hora_ini, data_hora_fim);
         } catch (ParseException ex) {
@@ -402,13 +451,16 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextFieldDataIni;
     private javax.swing.JFormattedTextField jFormattedTextFieldHoraFim;
     private javax.swing.JFormattedTextField jFormattedTextFieldHoraIni;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelDados;
     private javax.swing.JLabel jLabelDataFim;
     private javax.swing.JLabel jLabelDataIni;
     private javax.swing.JLabel jLabelHoraFim;
     private javax.swing.JLabel jLabelHoraIni;
     private javax.swing.JLabel jLabelPorta;
+    private javax.swing.JLabel jLabelTempo;
     private javax.swing.JRadioButton jRadioButtonLer;
     private javax.swing.JRadioButton jRadioButtonRel;
+    private javax.swing.JTextField jTextFieldTempo;
     // End of variables declaration//GEN-END:variables
 }

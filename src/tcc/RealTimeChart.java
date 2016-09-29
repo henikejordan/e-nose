@@ -37,9 +37,11 @@ public final class RealTimeChart implements Chart {
     private String info, data_hora;
     private Timer timer = new Timer();
     private boolean instance = true;
+    private long seconds;
 
-    public RealTimeChart(String port, String info) {
+    public RealTimeChart(String port, String info, long seconds) {
         this.info = info;
+        this.seconds = seconds;
 
         try {
             serialcomm = new TwoWaySerialComm();
@@ -88,7 +90,7 @@ public final class RealTimeChart implements Chart {
             }
         };
 
-        timer.scheduleAtFixedRate(chartUpdaterTask, 0, 10000);
+        timer.scheduleAtFixedRate(chartUpdaterTask, 0, seconds * 1000);
     }
 
     private XChartPanel buildPanel() {
