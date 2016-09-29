@@ -12,9 +12,7 @@ import gnu.io.SerialPort;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Random;
 
 /**
  *
@@ -113,69 +111,33 @@ public class TwoWaySerialComm {
     }
 
     public String getData(String info, String sensor) {
+        Random gerador = new Random();
         try {
-            if (ret != null) {
-                split = ret.split(";");
-                for (int i = split.length - 1; i >= 0; i--) {
-                    if (sensor.equals(split[i])) {
+            //if (ret != null) {
+                //split = ret.split(";");
+                //for (int i = split.length - 1; i >= 0; i--) {
+                    //if (sensor.equals(split[i])) {
                         switch (info) {
                             case "Temperatura":
-                                return split[i + 1];
+                                return String.valueOf(gerador.nextDouble() * 100);
+                                //return split[i + 1];
                             case "Luminosidade":
-                                return split[i + 2];
+                                return String.valueOf(gerador.nextDouble() * 100);
+                                //return split[i + 2];
                             case "Umidade do ar":
-                                return split[i + 3];
+                                return String.valueOf(gerador.nextDouble() * 100);
+                                //return split[i + 3];
                             case "Umidade do solo":
-                                return split[i + 4];
+                                return String.valueOf(gerador.nextDouble() * 100);
+                                //return split[i + 4];
                         }
-                    }
-                }
-            }
+                    //}
+                //}
+            //}
         } catch (IndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }
         return null;
-    }
-
-    public Values[] getValues() {
-        Values values[] = new Values[2];
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        int flag = 0;
-
-        for (int i = 0; i < values.length; i++) {
-            values[i] = new Values();
-        }
-
-        try {
-            if (ret != null) {
-                split = ret.split(";");
-                for (int i = split.length - 1; i >= 0; i--) {
-                    if (flag == 2) {
-                        break;
-                    } else if ("SENSOR 1".equals(split[i])) {
-                        values[0].setSensor(split[i]);
-                        values[0].setData_hora(dateFormat.format(date));
-                        values[0].setTemperatura(Float.parseFloat(split[i + 1]));
-                        values[0].setLuminosidade(Float.parseFloat(split[i + 2]));
-                        values[0].setUmidade_ar(Float.parseFloat(split[i + 3]));
-                        values[0].setUmidade_solo(Float.parseFloat(split[i + 4]));
-                        flag++;
-                    } else if ("SENSOR 2".equals(split[i])) {
-                        values[1].setSensor(split[i]);
-                        values[1].setData_hora(dateFormat.format(date));
-                        values[1].setTemperatura(Float.parseFloat(split[i + 1]));
-                        values[1].setLuminosidade(Float.parseFloat(split[i + 2]));
-                        values[1].setUmidade_ar(Float.parseFloat(split[i + 3]));
-                        values[1].setUmidade_solo(Float.parseFloat(split[i + 4]));
-                        flag++;
-                    }
-                }
-            }
-        } catch (IndexOutOfBoundsException e) {
-            return null;
-        }
-        return values;
     }
 
 }
