@@ -23,7 +23,7 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public Principal() {
-        new Connect();
+        new Connect().select();
         initComponents();
         getRootPane().setDefaultButton(jButtonAbrir);
         this.fillComboBoxPorta();
@@ -247,13 +247,13 @@ public class Principal extends javax.swing.JFrame {
         String info;
         if (jCheckBoxTemp.isSelected()) {
             info = "Temperatura";
-            if (!"".equals(port)) {
-                if (jRadioButtonLer.isSelected()) {
-                    buildChart(port, info);
-                } else if (jRadioButtonRel.isSelected()) {
-                    showChart(info);
-                }
+            //if (!"".equals(port)) {
+            if (jRadioButtonLer.isSelected()) {
+                buildChart(port, info);
+            } else if (jRadioButtonRel.isSelected()) {
+                showChart(info);
             }
+            //}
         }
         if (jCheckBoxLum.isSelected()) {
             info = "Luminosidade";
@@ -310,7 +310,18 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private LineChart showChart(String info) {
-        return new LineChart(info);
+        String data_hora_ini, data_hora_fim;
+        try {
+            SimpleDateFormat formatoAtual = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            SimpleDateFormat formatoDesejado = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            data_hora_ini = formatoDesejado.format(formatoAtual.parse((String) jFormattedTextFieldData.getText() + " " + (String) jFormattedTextFieldHora.getText()));
+            data_hora_fim = formatoDesejado.format(formatoAtual.parse((String) jFormattedTextFieldDataAte.getText() + " " + (String) jFormattedTextFieldHoraAte.getText()));
+
+            return new LineChart(info, data_hora_ini, data_hora_fim);
+        } catch (ParseException ex) {
+            ex.getMessage();
+        }
+        return null;
     }
 
     /**

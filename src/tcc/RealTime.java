@@ -5,6 +5,8 @@
  */
 package tcc;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -30,14 +32,14 @@ public class RealTime {
     private List<Date> xData;
     private List<Double> yData[] = new List[2];
     private static final String[] SERIES_NAME = {"sensor 1", "sensor 2"};
-    private String info;
+    private String info, data_hora;
 
     public RealTime(String port, String info) {
         this.info = info;
 
         try {
             serialcomm = new TwoWaySerialComm();
-            serialcomm.connect(port, 9600);
+            //serialcomm.connect(port, 9600);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -75,7 +77,7 @@ public class RealTime {
         };
 
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(chartUpdaterTask, 0, 1000);
+        timer.scheduleAtFixedRate(chartUpdaterTask, 0, 5000);
     }
 
     private XChartPanel buildPanel() {
@@ -86,7 +88,6 @@ public class RealTime {
         xData = getTime();
         yData[0] = getDataSensor1();
         yData[1] = getDataSensor2();
-        CONNECT.setValues(serialcomm.getValues());
 
         // Create Chart
         xyChart = new XYChartBuilder().width(500).height(400).theme(ChartTheme.GGPlot2).build();
@@ -126,6 +127,10 @@ public class RealTime {
     private List<Date> getTime() {
         Date hora = Calendar.getInstance().getTime();
         List<Date> data = new CopyOnWriteArrayList<>();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        data_hora = dateFormat.format(date);
         data.add(hora);
 
         return data;
@@ -133,8 +138,11 @@ public class RealTime {
 
     private List<Double> getDataSensor1() {
         List<Double> data = new CopyOnWriteArrayList<>();
+        double valor;
         try {
-            data.add(Double.parseDouble(serialcomm.getSensor1(this.info)));
+            valor = Double.parseDouble(serialcomm.getSensor1(this.info));
+            data.add(valor);
+            CONNECT.setValues("SENSOR 1", data_hora, info, valor);
         } catch (NumberFormatException | NullPointerException e) {
             data.add(0.0);
         }
@@ -143,8 +151,11 @@ public class RealTime {
 
     private List<Double> getDataSensor2() {
         List<Double> data = new CopyOnWriteArrayList<>();
+        double valor;
         try {
-            data.add(Double.parseDouble(serialcomm.getSensor2(this.info)));
+            valor = Double.parseDouble(serialcomm.getSensor2(this.info));
+            data.add(valor);
+            CONNECT.setValues("SENSOR 2", data_hora, info, valor);
         } catch (NumberFormatException | NullPointerException e) {
             data.add(0.0);
         }

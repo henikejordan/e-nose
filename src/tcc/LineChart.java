@@ -5,10 +5,10 @@
  */
 package tcc;
 
-import java.util.Calendar;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.JFrame;
 
 import org.knowm.xchart.XChartPanel;
@@ -28,10 +28,12 @@ public class LineChart {
     private List<Date> xData;
     private List<Double> yData[] = new List[2];
     private static final String[] SERIES_NAME = {"sensor 1", "sensor 2"};
-    private String info;
+    private final String info, data_hora_ini, data_hora_fim;
 
-    public LineChart(String info) {
+    public LineChart(String info, String data_hora_ini, String data_hora_fim) {
         this.info = info;
+        this.data_hora_ini = data_hora_ini;
+        this.data_hora_fim = data_hora_fim;
         this.go();
     }
 
@@ -60,6 +62,7 @@ public class LineChart {
         xData = getTime();
         yData[0] = getDataSensor1();
         yData[1] = getDataSensor2();
+        this.equals();
 
         // Create Chart
         xyChart = new XYChartBuilder().width(500).height(400).theme(Styler.ChartTheme.GGPlot2).build();
@@ -73,31 +76,15 @@ public class LineChart {
     }
 
     private List<Date> getTime() {
-        Date hora = Calendar.getInstance().getTime();
-        List<Date> data = new CopyOnWriteArrayList<>();
-        data.add(hora);
-
-        return data;
+        return CONNECT.getTimes(this.info, data_hora_ini, data_hora_fim);
     }
 
     private List<Double> getDataSensor1() {
-        List<Double> data = new CopyOnWriteArrayList<>();
-        try {
-            data.add(Double.parseDouble(serialcomm.getSensor1(this.info)));
-        } catch (NumberFormatException | NullPointerException e) {
-            data.add(0.0);
-        }
-        return data;
+        return CONNECT.getValuesSensor("SENSOR 1", this.info, data_hora_ini, data_hora_fim);
     }
 
     private List<Double> getDataSensor2() {
-        List<Double> data = new CopyOnWriteArrayList<>();
-        try {
-            data.add(Double.parseDouble(serialcomm.getSensor2(this.info)));
-        } catch (NumberFormatException | NullPointerException e) {
-            data.add(0.0);
-        }
-        return data;
+        return CONNECT.getValuesSensor("SENSOR 2", this.info, data_hora_ini, data_hora_fim);
     }
 
     private String getAxisXInfo() {
@@ -110,4 +97,25 @@ public class LineChart {
         }
         return "%";
     }
+
+    private void equals() {
+        Integer[] num = new Integer[3];
+        num[0] = xData.size();
+        num[1] = yData[0].size();
+        num[2] = yData[1].size();
+
+        List nums = Arrays.asList(num);
+
+        while (xData.size() > (int) Collections.min(nums)) {
+            xData.remove(xData.size() - 1);
+        }
+        while (yData[0].size() > (int) Collections.min(nums)) {
+            yData[0].remove(yData[0].size() - 1);
+        }
+        while (yData[1].size() > (int) Collections.min(nums)) {
+            yData[1].remove(yData[1].size() - 1);
+        }
+
+    }
+
 }
