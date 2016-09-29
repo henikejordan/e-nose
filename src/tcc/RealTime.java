@@ -5,14 +5,16 @@
  */
 package tcc;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.JFrame;
 
 import org.knowm.xchart.XChartPanel;
@@ -24,7 +26,7 @@ import org.knowm.xchart.style.Styler.ChartTheme;
  *
  * @author henike
  */
-public class RealTime {
+public final class RealTime implements Chart {
 
     private XYChart xyChart;
     private static TwoWaySerialComm serialcomm;
@@ -33,13 +35,15 @@ public class RealTime {
     private List<Double> yData[] = new List[2];
     private static final String[] SERIES_NAME = {"sensor 1", "sensor 2"};
     private String info, data_hora;
+    private Timer timer = new Timer();
+    private boolean instancia = true;
 
     public RealTime(String port, String info) {
         this.info = info;
 
         try {
             serialcomm = new TwoWaySerialComm();
-            //serialcomm.connect(port, 9600);
+            serialcomm.connect(port, 9600);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -47,8 +51,10 @@ public class RealTime {
         this.go();
     }
 
-    private void go() {
+    @Override
+    public void go() {
         final XChartPanel chartPanel = this.buildPanel();
+        TimerTask chartUpdaterTask;
 
         // Schedule a job for the event-dispatching thread:
         // creating and showing this application's GUI.
@@ -57,6 +63,13 @@ public class RealTime {
             JFrame frame = new JFrame("XChart");
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.add(chartPanel);
+            frame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent ev) {
+                    timer.cancel();
+                    instancia = false;
+                }
+            });
 
             // Display the window.
             frame.pack();
@@ -64,7 +77,7 @@ public class RealTime {
         });
 
         // Simulate a data feed
-        TimerTask chartUpdaterTask = new TimerTask() {
+        chartUpdaterTask = new TimerTask() {
 
             @Override
             public void run() {
@@ -76,15 +89,16 @@ public class RealTime {
             }
         };
 
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(chartUpdaterTask, 0, 5000);
+        timer.scheduleAtFixedRate(chartUpdaterTask, 0, 10000);
     }
 
-    private XChartPanel buildPanel() {
+    @Override
+    public XChartPanel buildPanel() {
         return new XChartPanel(this.getChart());
     }
 
-    private XYChart getChart() {
+    @Override
+    public XYChart getChart() {
         xData = getTime();
         yData[0] = getDataSensor1();
         yData[1] = getDataSensor2();
@@ -100,7 +114,7 @@ public class RealTime {
         return xyChart;
     }
 
-    public void updateData() {
+    private void updateData() {
         xData.addAll(getTime());
         yData[0].addAll(getDataSensor1());
         yData[1].addAll(getDataSensor2());
@@ -124,9 +138,10 @@ public class RealTime {
         xyChart.updateXYSeries(SERIES_NAME[1], xData, yData[1], null);
     }
 
-    private List<Date> getTime() {
+    @Override
+    public List<Date> getTime() {
         Date hora = Calendar.getInstance().getTime();
-        List<Date> data = new CopyOnWriteArrayList<>();
+        List<Date> data = new ArrayList<>();
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
@@ -136,41 +151,57 @@ public class RealTime {
         return data;
     }
 
-    private List<Double> getDataSensor1() {
-        List<Double> data = new CopyOnWriteArrayList<>();
-        double valor;
+    @Override
+    public List<Double> getDataSensor1() {
+        List<Double> data = new ArrayList<>();
+        double valor = 0.0;
         try {
             valor = Double.parseDouble(serialcomm.getSensor1(this.info));
-            data.add(valor);
-            CONNECT.setValues("SENSOR 1", data_hora, info, valor);
         } catch (NumberFormatException | NullPointerException e) {
-            data.add(0.0);
+
         }
+        data.add(valor);
+        CONNECT.setValues("SENSOR 1", data_hora, info, valor);
+
         return data;
     }
 
-    private List<Double> getDataSensor2() {
-        List<Double> data = new CopyOnWriteArrayList<>();
-        double valor;
+    @Override
+    public List<Double> getDataSensor2() {
+        List<Double> data = new ArrayList<>();
+        double valor = 0.0;
         try {
             valor = Double.parseDouble(serialcomm.getSensor2(this.info));
-            data.add(valor);
-            CONNECT.setValues("SENSOR 2", data_hora, info, valor);
         } catch (NumberFormatException | NullPointerException e) {
-            data.add(0.0);
+
         }
+        data.add(valor);
+        CONNECT.setValues("SENSOR 2", data_hora, info, valor);
+
         return data;
     }
 
-    private String getAxisXInfo() {
+    @Override
+    public String getAxisXInfo() {
         return "hora";
     }
 
-    private String getAxisYInfo() {
+    @Override
+    public String getAxisYInfo() {
         if (this.info.equals("Temperatura")) {
             return "°C";
         }
         return "%";
+    }
+
+    @Override
+    public void setInstancia(boolean instancia) {
+        this.instancia = instancia;
+    }
+
+    @Override
+    public boolean getInstancia() {
+        return instancia;
     }
 
 }

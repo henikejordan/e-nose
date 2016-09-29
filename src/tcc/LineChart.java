@@ -5,7 +5,10 @@
  */
 package tcc;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -20,15 +23,15 @@ import org.knowm.xchart.style.Styler;
  *
  * @author henike
  */
-public class LineChart {
+public final class LineChart implements Chart {
 
     private XYChart xyChart;
-    private static TwoWaySerialComm serialcomm;
     private static final Connect CONNECT = new Connect();
     private List<Date> xData;
-    private List<Double> yData[] = new List[2];
+    private final List<Double> yData[] = new List[2];
     private static final String[] SERIES_NAME = {"sensor 1", "sensor 2"};
     private final String info, data_hora_ini, data_hora_fim;
+    private boolean instancia = true;
 
     public LineChart(String info, String data_hora_ini, String data_hora_fim) {
         this.info = info;
@@ -37,7 +40,8 @@ public class LineChart {
         this.go();
     }
 
-    private void go() {
+    @Override
+    public void go() {
         final XChartPanel chartPanel = this.buildPanel();
 
         // Schedule a job for the event-dispatching thread:
@@ -47,6 +51,12 @@ public class LineChart {
             JFrame frame = new JFrame("XChart");
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.add(chartPanel);
+            frame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent ev) {
+                    instancia = false;
+                }
+            });
 
             // Display the window.
             frame.pack();
@@ -54,11 +64,13 @@ public class LineChart {
         });
     }
 
-    private XChartPanel buildPanel() {
+    @Override
+    public XChartPanel buildPanel() {
         return new XChartPanel(this.getChart());
     }
 
-    private XYChart getChart() {
+    @Override
+    public XYChart getChart() {
         xData = getTime();
         yData[0] = getDataSensor1();
         yData[1] = getDataSensor2();
@@ -75,23 +87,28 @@ public class LineChart {
         return xyChart;
     }
 
-    private List<Date> getTime() {
+    @Override
+    public List<Date> getTime() {
         return CONNECT.getTimes(this.info, data_hora_ini, data_hora_fim);
     }
 
-    private List<Double> getDataSensor1() {
+    @Override
+    public List<Double> getDataSensor1() {
         return CONNECT.getValuesSensor("SENSOR 1", this.info, data_hora_ini, data_hora_fim);
     }
 
-    private List<Double> getDataSensor2() {
+    @Override
+    public List<Double> getDataSensor2() {
         return CONNECT.getValuesSensor("SENSOR 2", this.info, data_hora_ini, data_hora_fim);
     }
 
-    private String getAxisXInfo() {
+    @Override
+    public String getAxisXInfo() {
         return "hora";
     }
 
-    private String getAxisYInfo() {
+    @Override
+    public String getAxisYInfo() {
         if (this.info.equals("Temperatura")) {
             return "°C";
         }
@@ -116,6 +133,22 @@ public class LineChart {
             yData[1].remove(yData[1].size() - 1);
         }
 
+        if (num[0] == 0) {
+            xData.add(Calendar.getInstance().getTime());
+            yData[0].add(0.0);
+            yData[1].add(0.0);
+        }
+
+    }
+
+    @Override
+    public void setInstancia(boolean instancia) {
+        this.instancia = instancia;
+    }
+
+    @Override
+    public boolean getInstancia() {
+        return instancia;
     }
 
 }
