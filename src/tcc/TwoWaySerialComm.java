@@ -118,9 +118,9 @@ public class TwoWaySerialComm {
                         switch (info) {
                             case "Temperatura":
                                 return split[i + 1];
-                            case "Luminosidade":
-                                return split[i + 2];
                             case "Umidade do ar":
+                                return split[i + 2];
+                            case "Luminosidade":
                                 return split[i + 3];
                             case "Umidade do solo":
                                 return split[i + 4];

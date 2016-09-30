@@ -290,8 +290,8 @@ public class Principal extends javax.swing.JFrame {
 
             info = "Temperatura";
 
-            if (!"".equals(port) && !aux) {
-                if (jRadioButtonLer.isSelected()) {
+            if (!aux) {
+                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                     temp = buildChart(port, info);
                 } else if (jRadioButtonRel.isSelected()) {
                     temp = showChart(info);
@@ -307,8 +307,8 @@ public class Principal extends javax.swing.JFrame {
 
             info = "Luminosidade";
 
-            if (!"".equals(port) && !aux) {
-                if (jRadioButtonLer.isSelected()) {
+            if (!aux) {
+                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                     luz = buildChart(port, info);
                 } else if (jRadioButtonRel.isSelected()) {
                     luz = showChart(info);
@@ -324,8 +324,8 @@ public class Principal extends javax.swing.JFrame {
 
             info = "Umidade do ar";
 
-            if (!"".equals(port) && !aux) {
-                if (jRadioButtonLer.isSelected()) {
+            if (!aux) {
+                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                     ar = buildChart(port, info);
                 } else if (jRadioButtonRel.isSelected()) {
                     ar = showChart(info);
@@ -341,8 +341,8 @@ public class Principal extends javax.swing.JFrame {
 
             info = "Umidade do solo";
 
-            if (!"".equals(port) && !aux) {
-                if (jRadioButtonLer.isSelected()) {
+            if (!aux) {
+                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                     solo = buildChart(port, info);
                 } else if (jRadioButtonRel.isSelected()) {
                     solo = showChart(info);
