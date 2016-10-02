@@ -62,7 +62,7 @@ public class Connect {
                     + "WHERE sensor = '" + sensor + "' AND "
                     + "informacao = '" + info + "' AND "
                     + "data_hora > '" + data_hora_ini + "' AND "
-                    + "data_hora < '" + data_hora_fim + "'")) {
+                    + "data_hora < '" + data_hora_fim + "' ORDER BY data_hora")) {
                 while (rs.next()) {
                     data.add(rs.getDouble("valor"));
                 }
@@ -91,7 +91,7 @@ public class Connect {
                     + "WHERE sensor = 'SENSOR 1' AND "
                     + "informacao = '" + info + "' AND "
                     + "data_hora > '" + data_hora_ini + "' AND "
-                    + "data_hora < '" + data_hora_fim + "'")) {
+                    + "data_hora < '" + data_hora_fim + "' ORDER BY data_hora")) {
                 while (rs.next()) {
                     data.add(new Date(format.parse(rs.getString("data_hora")).getTime()));
                 }

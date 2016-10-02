@@ -375,10 +375,10 @@ public class Principal extends javax.swing.JFrame {
         try {
             if (jTextFieldTempo.getText().length() >= 5) {
                 evt.consume();
-            } else if (Long.parseLong(String.valueOf(evt.getKeyChar())) == 0) {
+            } else if (jTextFieldTempo.getText().length() == 0 && Long.parseLong(String.valueOf(evt.getKeyChar())) == 0) {
                 evt.consume();
             }
-        } catch (NumberFormatException err) {
+        } catch (NumberFormatException ex) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextFieldTempoKeyTyped
