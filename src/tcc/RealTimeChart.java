@@ -102,7 +102,11 @@ public final class RealTimeChart implements Chart {
             }
         };
 
-        timer.scheduleAtFixedRate(chartUpdaterTask, 0, seconds * 1000);
+        try {
+            timer.scheduleAtFixedRate(chartUpdaterTask, 0, seconds * 1000);
+        } catch (IllegalArgumentException ex) {
+
+        }
     }
 
     /**
