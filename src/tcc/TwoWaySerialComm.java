@@ -15,7 +15,7 @@ import java.io.OutputStream;
 
 /**
  *
- * @author henike
+ * @author Henike
  */
 public class TwoWaySerialComm {
 
@@ -58,10 +58,19 @@ public class TwoWaySerialComm {
 
         InputStream in;
 
+        /**
+         * Constructor.
+         *
+         * @param in
+         */
         public SerialReader(InputStream in) {
             this.in = in;
         }
 
+        /**
+         * Run the thread that will read the serial port.
+         *
+         */
         @Override
         public void run() {
             byte[] buffer = new byte[1024];
@@ -84,10 +93,19 @@ public class TwoWaySerialComm {
 
         OutputStream out;
 
+        /**
+         * Constructor.
+         *
+         * @param out
+         */
         public SerialWriter(OutputStream out) {
             this.out = out;
         }
 
+        /**
+         * Run the thread that will write the serial port.
+         *
+         */
         @Override
         public void run() {
             try {
@@ -101,14 +119,33 @@ public class TwoWaySerialComm {
         }
     }
 
+    /**
+     * Returns last value of sensor 1.
+     *
+     * @param info
+     * @return
+     */
     public String getSensor1(String info) {
         return this.getData(info, "SENSOR 1");
     }
 
+    /**
+     * Returns last value of sensor 2.
+     *
+     * @param info
+     * @return
+     */
     public String getSensor2(String info) {
         return this.getData(info, "SENSOR 2");
     }
 
+    /**
+     * Returns last values of sensor and module specified.
+     *
+     * @param info
+     * @param sensor
+     * @return
+     */
     public String getData(String info, String sensor) {
         try {
             if (ret != null) {

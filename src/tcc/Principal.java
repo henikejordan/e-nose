@@ -15,7 +15,7 @@ import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author henike
+ * @author Henike
  */
 public class Principal extends javax.swing.JFrame {
 
@@ -23,7 +23,8 @@ public class Principal extends javax.swing.JFrame {
     private boolean aux;
 
     /**
-     * Creates new form Principal
+     * Creates new form Principal.
+     *
      */
     public Principal() {
         initComponents();
@@ -51,6 +52,10 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Fill the combobox serial port.
+     *
+     */
     private void fillComboBoxPorta() {
         Enumeration en = CommPortIdentifier.getPortIdentifiers();
         jComboBoxPorta.addItem("");
@@ -278,6 +283,10 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Show the chart specified.
+     *
+     */
     private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
         String port = (String) jComboBoxPorta.getSelectedItem();
         String info;
@@ -351,10 +360,18 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonAbrirActionPerformed
 
+    /**
+     * Close the application.
+     *
+     */
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButtonSairActionPerformed
 
+    /**
+     * Select the read option.
+     *
+     */
     private void jRadioButtonLerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonLerMouseClicked
         jTextFieldTempo.setEnabled(true);
         jFormattedTextFieldDataIni.setEnabled(false);
@@ -363,6 +380,10 @@ public class Principal extends javax.swing.JFrame {
         jFormattedTextFieldHoraFim.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonLerMouseClicked
 
+    /**
+     * Select the report option.
+     *
+     */
     private void jRadioButtonRelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonRelMouseClicked
         jTextFieldTempo.setEnabled(false);
         jFormattedTextFieldDataIni.setEnabled(true);
@@ -371,6 +392,10 @@ public class Principal extends javax.swing.JFrame {
         jFormattedTextFieldHoraFim.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonRelMouseClicked
 
+    /**
+     * Method that allows just integer values in the jTextFieldTempo.
+     *
+     */
     private void jTextFieldTempoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTempoKeyTyped
         try {
             if (jTextFieldTempo.getText().length() >= 5) {
@@ -383,6 +408,13 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextFieldTempoKeyTyped
 
+    /**
+     * Build in real time the chart specified.
+     *
+     * @param port
+     * @param info
+     * @return
+     */
     private RealTimeChart buildChart(String port, String info) {
         try {
             long tempo = Long.parseLong(jTextFieldTempo.getText());
@@ -393,6 +425,12 @@ public class Principal extends javax.swing.JFrame {
         return null;
     }
 
+    /**
+     * Show the chart specified.
+     *
+     * @param info
+     * @return
+     */
     private LineChart showChart(String info) {
         String data_hora_ini, data_hora_fim;
         try {
