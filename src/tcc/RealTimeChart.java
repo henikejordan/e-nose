@@ -24,7 +24,7 @@ import org.knowm.xchart.style.Styler.ChartTheme;
 
 /**
  *
- * @author henike
+ * @author Henike
  */
 public final class RealTimeChart implements Chart {
 
@@ -35,10 +35,18 @@ public final class RealTimeChart implements Chart {
     private List<Double> yData[] = new List[2];
     private static final String[] SERIES_NAME = {"sensor 1", "sensor 2"};
     private String info, data_hora;
+    private double valorSensor1, valorSensor2;
     private Timer timer = new Timer();
     private boolean instance = true;
     private long seconds;
 
+    /**
+     * Constructor.
+     *
+     * @param port
+     * @param info
+     * @param seconds
+     */
     public RealTimeChart(String port, String info, long seconds) {
         this.info = info;
         this.seconds = seconds;
@@ -53,6 +61,10 @@ public final class RealTimeChart implements Chart {
         this.go();
     }
 
+    /**
+     * Start chart construction.
+     *
+     */
     private void go() {
         final XChartPanel chartPanel = this.buildPanel();
         TimerTask chartUpdaterTask;
@@ -93,14 +105,24 @@ public final class RealTimeChart implements Chart {
         timer.scheduleAtFixedRate(chartUpdaterTask, 0, seconds * 1000);
     }
 
+    /**
+     * Build panel chart.
+     *
+     * @return
+     */
     private XChartPanel buildPanel() {
         return new XChartPanel(this.getChart());
     }
 
+    /**
+     * Update the chart in real time.
+     *
+     */
     private void updateData() {
         xData.addAll(getTime());
         yData[0].addAll(getDataSensor1());
         yData[1].addAll(getDataSensor2());
+        this.storeData();
 
         // Limit the total number of points
         while (xData.size() > 50) {
@@ -121,6 +143,11 @@ public final class RealTimeChart implements Chart {
         xyChart.updateXYSeries(SERIES_NAME[1], xData, yData[1], null);
     }
 
+    /**
+     * Returns chart.
+     *
+     * @return
+     */
     @Override
     public XYChart getChart() {
         xData = getTime();
@@ -130,14 +157,19 @@ public final class RealTimeChart implements Chart {
         // Create Chart
         xyChart = new XYChartBuilder().width(500).height(400).theme(ChartTheme.GGPlot2).build();
         xyChart.setTitle(this.info);
-        xyChart.setXAxisTitle(this.getAxisXInfo());
-        xyChart.setYAxisTitle(this.getAxisYInfo());
+        xyChart.setXAxisTitle(this.getXAxisInfo());
+        xyChart.setYAxisTitle(this.getYAxisInfo());
         xyChart.addSeries(SERIES_NAME[0], xData, yData[0]);
         xyChart.addSeries(SERIES_NAME[1], xData, yData[1]);
 
         return xyChart;
     }
 
+    /**
+     * Returns values of times.
+     *
+     * @return
+     */
     @Override
     public List<Date> getTime() {
         Date hora = Calendar.getInstance().getTime();
@@ -151,52 +183,86 @@ public final class RealTimeChart implements Chart {
         return data;
     }
 
+    /**
+     * Returns values of sensor 1.
+     *
+     * @return
+     */
     @Override
     public List<Double> getDataSensor1() {
         List<Double> data = new ArrayList<>();
-        double valor = 0.0;
+        valorSensor1 = 0.0;
         try {
-            valor = Double.parseDouble(serialcomm.getSensor1(this.info));
+            valorSensor1 = Double.parseDouble(serialcomm.getSensor1(this.info));
         } catch (NumberFormatException | NullPointerException e) {
 
         }
-        data.add(valor);
-        CONNECT.setValues("SENSOR 1", data_hora, info, valor);
+        data.add(valorSensor1);
 
         return data;
     }
 
+    /**
+     * Returns values of sensor 2.
+     *
+     * @return
+     */
     @Override
     public List<Double> getDataSensor2() {
         List<Double> data = new ArrayList<>();
-        double valor = 0.0;
+        valorSensor2 = 0.0;
         try {
-            valor = Double.parseDouble(serialcomm.getSensor2(this.info));
+            valorSensor2 = Double.parseDouble(serialcomm.getSensor2(this.info));
         } catch (NumberFormatException | NullPointerException e) {
 
         }
-        data.add(valor);
-        CONNECT.setValues("SENSOR 2", data_hora, info, valor);
+        data.add(valorSensor2);
 
         return data;
     }
 
+    /**
+     * Returns legend X axis.
+     *
+     * @return
+     */
     @Override
-    public String getAxisXInfo() {
+    public String getXAxisInfo() {
         return "hora";
     }
 
+    /**
+     * Returns legend Y axis.
+     *
+     * @return
+     */
     @Override
-    public String getAxisYInfo() {
+    public String getYAxisInfo() {
         if (this.info.equals("Temperatura")) {
             return "°C";
         }
         return "%";
     }
 
+    /**
+     * Returns instance object.
+     *
+     * @return
+     */
     @Override
     public boolean getInstance() {
         return instance;
+    }
+
+    /**
+     * Save the data in the database.
+     *
+     */
+    private void storeData() {
+        if (valorSensor1 != 0.0 && valorSensor2 != 0.0) {
+            CONNECT.setValues("SENSOR 1", data_hora, info, valorSensor1);
+            CONNECT.setValues("SENSOR 2", data_hora, info, valorSensor2);
+        }
     }
 
 }

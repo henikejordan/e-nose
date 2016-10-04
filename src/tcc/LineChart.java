@@ -21,7 +21,7 @@ import org.knowm.xchart.style.Styler;
 
 /**
  *
- * @author henike
+ * @author Henike
  */
 public final class LineChart implements Chart {
 
@@ -33,6 +33,13 @@ public final class LineChart implements Chart {
     private final String info, data_hora_ini, data_hora_fim;
     private boolean instance = true;
 
+    /**
+     * Constructor.
+     *
+     * @param info
+     * @param data_hora_ini
+     * @param data_hora_fim
+     */
     public LineChart(String info, String data_hora_ini, String data_hora_fim) {
         this.info = info;
         this.data_hora_ini = data_hora_ini;
@@ -40,6 +47,10 @@ public final class LineChart implements Chart {
         this.go();
     }
 
+    /**
+     * Start chart construction.
+     *
+     */
     private void go() {
         final XChartPanel chartPanel = this.buildPanel();
 
@@ -63,10 +74,19 @@ public final class LineChart implements Chart {
         });
     }
 
+    /**
+     * Build panel chart.
+     *
+     * @return
+     */
     private XChartPanel buildPanel() {
         return new XChartPanel(this.getChart());
     }
 
+    /**
+     * Equals the number of sensor values.
+     *
+     */
     private void equals() {
         Integer[] num = new Integer[3];
         num[0] = xData.size();
@@ -93,6 +113,11 @@ public final class LineChart implements Chart {
 
     }
 
+    /**
+     * Returns chart.
+     *
+     * @return
+     */
     @Override
     public XYChart getChart() {
         xData = getTime();
@@ -103,42 +128,72 @@ public final class LineChart implements Chart {
         // Create Chart
         xyChart = new XYChartBuilder().width(500).height(400).theme(Styler.ChartTheme.GGPlot2).build();
         xyChart.setTitle(this.info);
-        xyChart.setXAxisTitle(this.getAxisXInfo());
-        xyChart.setYAxisTitle(this.getAxisYInfo());
+        xyChart.setXAxisTitle(this.getXAxisInfo());
+        xyChart.setYAxisTitle(this.getYAxisInfo());
         xyChart.addSeries(SERIES_NAME[0], xData, yData[0]);
         xyChart.addSeries(SERIES_NAME[1], xData, yData[1]);
 
         return xyChart;
     }
 
+    /**
+     * Returns values of times.
+     *
+     * @return
+     */
     @Override
     public List<Date> getTime() {
         return CONNECT.getTimes(this.info, data_hora_ini, data_hora_fim);
     }
 
+    /**
+     * Returns values of sensor 1.
+     *
+     * @return
+     */
     @Override
     public List<Double> getDataSensor1() {
         return CONNECT.getValuesSensor("SENSOR 1", this.info, data_hora_ini, data_hora_fim);
     }
 
+    /**
+     * Returns values of sensor 2.
+     *
+     * @return
+     */
     @Override
     public List<Double> getDataSensor2() {
         return CONNECT.getValuesSensor("SENSOR 2", this.info, data_hora_ini, data_hora_fim);
     }
 
+    /**
+     * Returns legend X axis.
+     *
+     * @return
+     */
     @Override
-    public String getAxisXInfo() {
+    public String getXAxisInfo() {
         return "hora";
     }
 
+    /**
+     * Returns legend Y axis.
+     *
+     * @return
+     */
     @Override
-    public String getAxisYInfo() {
+    public String getYAxisInfo() {
         if (this.info.equals("Temperatura")) {
             return "°C";
         }
         return "%";
     }
 
+    /**
+     * Returns instance object.
+     *
+     * @return
+     */
     @Override
     public boolean getInstance() {
         return instance;

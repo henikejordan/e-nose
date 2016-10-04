@@ -27,6 +27,14 @@ public class Connect {
     private Connection c;
     private Statement stmt;
 
+    /**
+     * Save in the database the sensor values.
+     *
+     * @param sensor
+     * @param data_hora
+     * @param info
+     * @param value
+     */
     public synchronized void setValues(String sensor, String data_hora, String info, double value) {
         try {
             Class.forName(this.ADAPTER);
@@ -50,6 +58,15 @@ public class Connect {
         //System.out.println("Records created successfully");
     }
 
+    /**
+     * Returns values of the specified sensor.
+     *
+     * @param sensor
+     * @param info
+     * @param data_hora_ini
+     * @param data_hora_fim
+     * @return
+     */
     public List<Double> getValuesSensor(String sensor, String info, String data_hora_ini, String data_hora_fim) {
         List<Double> data = new CopyOnWriteArrayList<>();
         try {
@@ -78,6 +95,14 @@ public class Connect {
         return data;
     }
 
+    /**
+     * Returns time values of the specified sensor.
+     *
+     * @param info
+     * @param data_hora_ini
+     * @param data_hora_fim
+     * @return
+     */
     public List<Date> getTimes(String info, String data_hora_ini, String data_hora_fim) {
         List<Date> data = new CopyOnWriteArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
