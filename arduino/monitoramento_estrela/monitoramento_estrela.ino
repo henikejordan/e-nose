@@ -16,6 +16,54 @@ int addr2;
 int addr3;
 int addr4;
 
+//This function returns analog pins value
+int calculateXBeeAnalog(int analogMSB, int analogLSB) {
+  return analogLSB + (analogMSB * 256); //Turn the two bytes into an integer value
+}
+
+//this function calculates temp in C from temp sensor
+float calculateTempC(float volt) {
+  return volt * 100;
+}
+
+//this function calculates luminosity from temp sensor
+float calculateLuminosity(float value) {
+  return value / 10.23;
+}
+
+//this function calculates humidity soil from temp sensor
+float calculateHumiditySoil(float volt) {
+  return (-2500 * volt / 9) + 200;
+}
+
+//this function calculates humidity air from temp sensor
+float calculateHumidityAir(float value, float temp) {
+  return (value / 10.23 * 1.31) / (1.0546 - (0.00216 * temp));
+}
+
+//This function takes an XBee analog pin reading and converts it to a voltage value
+float calculateXBeeVolt(int analogMSB, int analogLSB) {
+  int analogReading = calculateXBeeAnalog(analogMSB, analogLSB);
+  float volt = ((float)analogReading / 1023) * 1.23; //Convert the analog value to a voltage value
+  return volt;
+}
+
+//Function takes in the XBee address and returns the identity of the Xbee that sent the temperature data
+String identifySensor(int a1, int a2, int a3, int a4) {
+  int rout1[] = {64, 226, 196, 251}; //Arrays are the 32 bit address of the two XBees routers
+  int rout2[] = {64, 230, 74, 29};
+  if (a1 == rout1[0] && a2 == rout1[1] && a3 == rout1[2] && a4 == rout1[3]) { //Check if Sensor 1
+    return "SENSOR 1";
+  } //temp data is from XBee one
+  else if (a1 == rout2[0] && a2 == rout2[1] && a3 == rout2[2] && a4 == rout2[3]) { //Check if Sensor 2
+    return "SENSOR 2";
+  } //temp data is from XBee two
+
+  else {
+    return "I don't know this sensor";  //Data is from an unknown XBee
+  }
+}
+
 void setup()  {
   //Aciona o relogio
   rtc.halt(false);
@@ -57,15 +105,14 @@ void loop()  {
       }
       int analogMSB = Serial.read(); // Read the first analog byte data
       int analogLSB = Serial.read(); // Read the second byte
-      float volt = calculateXBeeVolt(analogMSB, analogLSB);//Convert analog values to voltage values
       Serial.print(identifySensor(addr1, addr2, addr3, addr4)); //get identity of XBee and print it
       Serial.print(";");
-      //Serial.print("Temperature in C: ");
-      Serial.print(calculateTempC(volt)); //calculate temperature value from voltage value
+      float temp = calculateTempC(calculateXBeeVolt(analogMSB, analogLSB));
+      Serial.print(temp); //calculate temperature value from voltage value
       analogMSB = Serial.read(); // Read the first analog byte data
       analogLSB = Serial.read(); // Read the second byte
       Serial.print(";");
-      Serial.print(calculateHumidityAir(calculateXBeeAnalog(analogMSB, analogLSB))); //calculate luminosity value
+      Serial.print(calculateHumidityAir(calculateXBeeAnalog(analogMSB, analogLSB), temp));
       analogMSB = Serial.read(); // Read the first analog byte data
       analogLSB = Serial.read(); // Read the second byte
       Serial.print(";");
@@ -73,9 +120,9 @@ void loop()  {
       analogMSB = Serial.read(); // Read the first analog byte data
       analogLSB = Serial.read(); // Read the second byte
       Serial.print(";");
-      Serial.print(calculateHumiditySoil(calculateXBeeAnalog(analogMSB, analogLSB)));
+      Serial.print(calculateHumiditySoil(calculateXBeeVolt(analogMSB, analogLSB)));
       Serial.print(";");
-      //Mostra as informações no Serial Monitor
+      //Show datas in Serial Monitor
       //Serial.print("Hora : ");
       //Serial.print(rtc.getTimeStr());
       //Serial.print(" ");
@@ -88,49 +135,3 @@ void loop()  {
   delay(10); //delay to allow operations to complete
 }
 
-//Function takes in the XBee address and returns the identity of the Xbee that sent the temperature data
-String identifySensor(int a1, int a2, int a3, int a4) {
-  int rout1[] = {64, 228, 42, 141}; //Arrays are the 32 bit address of the two XBees routers
-  int rout2[] = {64, 230, 74, 29};
-  if (a1 == rout1[0] && a2 == rout1[1] && a3 == rout1[2] && a4 == rout1[3]) { //Check if Sensor 1
-    return "SENSOR 1";
-  } //temp data is from XBee one
-  else if (a1 == rout2[0] && a2 == rout2[1] && a3 == rout2[2] && a4 == rout2[3]) { //Check if Sensor 2
-    return "SENSOR 2";
-  } //temp data is from XBee two
-  else {
-    return "I don't know this sensor";  //Data is from an unknown XBee
-  }
-}
-
-//This function takes an XBee analog pin reading and converts it to a voltage value
-float calculateXBeeVolt(int analogMSB, int analogLSB) {
-  int analogReading = calculateXBeeAnalog(analogMSB, analogLSB);
-  float volt = ((float)analogReading / 1023) * 1.23; //Convert the analog value to a voltage value
-  return volt;
-}
-
-//This function returns analog pins value
-int calculateXBeeAnalog(int analogMSB, int analogLSB) {
-  return analogLSB + (analogMSB * 256); //Turn the two bytes into an integer value
-}
-
-//this function calculates temp in C from temp sensor
-float calculateTempC(float volt) {
-  return volt * 100;
-}
-
-//this function calculates luminosity from temp sensor
-float calculateLuminosity(float value) {
-  return value / 10.23;
-}
-
-//this function calculates humidity soil from temp sensor
-float calculateHumiditySoil(float value) {
-  return value / 10.23;
-}
-
-//this function calculates humidity air from temp sensor
-float calculateHumidityAir(float value) {
-  return value / 10.23;
-}
