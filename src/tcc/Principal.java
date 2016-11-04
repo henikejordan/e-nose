@@ -6,29 +6,64 @@
 package tcc;
 
 import gnu.io.CommPortIdentifier;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author henike
+ * @author Henike
  */
 public class Principal extends javax.swing.JFrame {
 
+    private Chart temp, luz, ar, solo;
+    private boolean aux;
+
     /**
-     * Creates new form Principal
+     * Creates new form Principal.
+     *
      */
     public Principal() {
         initComponents();
         getRootPane().setDefaultButton(jButtonAbrir);
         this.fillComboBoxPorta();
+
+        MaskFormatter formDia, formHora;
+        try {
+            formDia = new MaskFormatter("##/##/####");
+            formHora = new MaskFormatter("##:##");
+            jFormattedTextFieldDataIni.setFormatterFactory(new DefaultFormatterFactory(formDia));
+            jFormattedTextFieldDataFim.setFormatterFactory(new DefaultFormatterFactory(formDia));
+            jFormattedTextFieldHoraIni.setFormatterFactory(new DefaultFormatterFactory(formHora));
+            jFormattedTextFieldHoraFim.setFormatterFactory(new DefaultFormatterFactory(formHora));
+
+            // pega data do sistema
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Date hoje = new Date();
+            jFormattedTextFieldDataIni.setText(df.format(hoje));
+            jFormattedTextFieldDataFim.setText(df.format(hoje));
+            jFormattedTextFieldHoraIni.setText("00:00");
+            jFormattedTextFieldHoraFim.setText("23:59");
+        } catch (ParseException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
+    /**
+     * Fill the combobox serial port.
+     *
+     */
     private void fillComboBoxPorta() {
         Enumeration en = CommPortIdentifier.getPortIdentifiers();
         jComboBoxPorta.addItem("");
         while (en.hasMoreElements()) {
             CommPortIdentifier cpi = (CommPortIdentifier) en.nextElement();
-            jComboBoxPorta.addItem(cpi.getName());
+            if (cpi.getPortType() == 1) {
+                jComboBoxPorta.addItem(cpi.getName());
+            }
         }
     }
 
@@ -41,6 +76,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupoBotoes = new javax.swing.ButtonGroup();
         jLabelPorta = new javax.swing.JLabel();
         jButtonAbrir = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
@@ -50,9 +86,23 @@ public class Principal extends javax.swing.JFrame {
         jCheckBoxLum = new javax.swing.JCheckBox();
         jCheckBoxUmiAr = new javax.swing.JCheckBox();
         jCheckBoxUmiSolo = new javax.swing.JCheckBox();
+        jRadioButtonLer = new javax.swing.JRadioButton();
+        jRadioButtonRel = new javax.swing.JRadioButton();
+        jLabelDataIni = new javax.swing.JLabel();
+        jLabelHoraIni = new javax.swing.JLabel();
+        jLabelDataFim = new javax.swing.JLabel();
+        jLabelHoraFim = new javax.swing.JLabel();
+        jFormattedTextFieldDataIni = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataFim = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldHoraIni = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldHoraFim = new javax.swing.JFormattedTextField();
+        jLabelTempo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldTempo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Real Time");
+        setResizable(false);
 
         jLabelPorta.setText("Porta Serial:");
 
@@ -80,35 +130,110 @@ public class Principal extends javax.swing.JFrame {
 
         jCheckBoxUmiSolo.setText("Umidade do solo");
 
+        grupoBotoes.add(jRadioButtonLer);
+        jRadioButtonLer.setText("Ler");
+        jRadioButtonLer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButtonLerMouseClicked(evt);
+            }
+        });
+
+        grupoBotoes.add(jRadioButtonRel);
+        jRadioButtonRel.setText("Relatório");
+        jRadioButtonRel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButtonRelMouseClicked(evt);
+            }
+        });
+
+        jLabelDataIni.setText("Data inicial:");
+
+        jLabelHoraIni.setText("Hora inicial:");
+
+        jLabelDataFim.setText("Data final:");
+
+        jLabelHoraFim.setText("Hora final:");
+
+        jFormattedTextFieldDataIni.setEnabled(false);
+
+        jFormattedTextFieldDataFim.setEnabled(false);
+
+        jFormattedTextFieldHoraIni.setEnabled(false);
+
+        jFormattedTextFieldHoraFim.setEnabled(false);
+
+        jLabelTempo.setText("Tempo de atualização:");
+
+        jLabel1.setText("segundos");
+
+        jTextFieldTempo.setEnabled(false);
+        jTextFieldTempo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldTempoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabelPorta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabelDados))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelDataIni)
+                            .addComponent(jLabelDataFim))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelDados)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonAbrir)
+                        .addGap(74, 74, 74)
+                        .addComponent(jButtonSair)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonAbrir)
-                                .addGap(38, 38, 38)
-                                .addComponent(jButtonSair))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBoxTemp)
-                                    .addComponent(jCheckBoxUmiAr))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBoxUmiSolo)
-                                    .addComponent(jCheckBoxLum))))))
-                .addContainerGap())
+                                .addComponent(jLabelPorta)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jRadioButtonLer)
+                                    .addGap(198, 198, 198))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCheckBoxTemp)
+                                        .addComponent(jCheckBoxUmiAr))
+                                    .addGap(41, 41, 41)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCheckBoxLum)
+                                        .addComponent(jCheckBoxUmiSolo)
+                                        .addComponent(jRadioButtonRel)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jFormattedTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jFormattedTextFieldDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelHoraIni)
+                                        .addComponent(jLabelHoraFim))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jFormattedTextFieldHoraIni)
+                                        .addComponent(jFormattedTextFieldHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 47, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jLabelTempo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +242,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPorta)
                     .addComponent(jComboBoxPorta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDados)
                     .addComponent(jCheckBoxTemp)
@@ -126,7 +251,28 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBoxUmiAr)
                     .addComponent(jCheckBoxUmiSolo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButtonLer)
+                    .addComponent(jRadioButtonRel))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTempo)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldTempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelHoraIni)
+                    .addComponent(jFormattedTextFieldHoraIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDataIni)
+                    .addComponent(jFormattedTextFieldDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelHoraFim)
+                    .addComponent(jFormattedTextFieldHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDataFim))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAbrir)
                     .addComponent(jButtonSair))
@@ -137,41 +283,167 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Show the chart specified.
+     *
+     */
     private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
         String port = (String) jComboBoxPorta.getSelectedItem();
         String info;
         if (jCheckBoxTemp.isSelected()) {
+            try {
+                aux = temp.getInstance();
+            } catch (NullPointerException e) {
+                aux = false;
+            }
+
             info = "Temperatura";
-            if (!"".equals(port)) {
-                buildChart(port, info);
+
+            if (!aux) {
+                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
+                    temp = buildChart(port, info);
+                } else if (jRadioButtonRel.isSelected()) {
+                    temp = showChart(info);
+                }
             }
         }
         if (jCheckBoxLum.isSelected()) {
+            try {
+                aux = luz.getInstance();
+            } catch (NullPointerException e) {
+                aux = false;
+            }
+
             info = "Luminosidade";
-            if (!"".equals(port)) {
-                buildChart(port, info);
+
+            if (!aux) {
+                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
+                    luz = buildChart(port, info);
+                } else if (jRadioButtonRel.isSelected()) {
+                    luz = showChart(info);
+                }
             }
         }
         if (jCheckBoxUmiAr.isSelected()) {
+            try {
+                aux = ar.getInstance();
+            } catch (NullPointerException e) {
+                aux = false;
+            }
+
             info = "Umidade do ar";
-            if (!"".equals(port)) {
-                buildChart(port, info);
+
+            if (!aux) {
+                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
+                    ar = buildChart(port, info);
+                } else if (jRadioButtonRel.isSelected()) {
+                    ar = showChart(info);
+                }
             }
         }
         if (jCheckBoxUmiSolo.isSelected()) {
+            try {
+                aux = solo.getInstance();
+            } catch (NullPointerException e) {
+                aux = false;
+            }
+
             info = "Umidade do solo";
-            if (!"".equals(port)) {
-                buildChart(port, info);
+
+            if (!aux) {
+                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
+                    solo = buildChart(port, info);
+                } else if (jRadioButtonRel.isSelected()) {
+                    solo = showChart(info);
+                }
             }
         }
     }//GEN-LAST:event_jButtonAbrirActionPerformed
 
+    /**
+     * Close the application.
+     *
+     */
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButtonSairActionPerformed
 
-    private RealTime buildChart(String port, String info) {
-        return new RealTime(port, info);
+    /**
+     * Select the read option.
+     *
+     */
+    private void jRadioButtonLerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonLerMouseClicked
+        jTextFieldTempo.setEnabled(true);
+        jFormattedTextFieldDataIni.setEnabled(false);
+        jFormattedTextFieldDataFim.setEnabled(false);
+        jFormattedTextFieldHoraIni.setEnabled(false);
+        jFormattedTextFieldHoraFim.setEnabled(false);
+    }//GEN-LAST:event_jRadioButtonLerMouseClicked
+
+    /**
+     * Select the report option.
+     *
+     */
+    private void jRadioButtonRelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonRelMouseClicked
+        jTextFieldTempo.setEnabled(false);
+        jFormattedTextFieldDataIni.setEnabled(true);
+        jFormattedTextFieldDataFim.setEnabled(true);
+        jFormattedTextFieldHoraIni.setEnabled(true);
+        jFormattedTextFieldHoraFim.setEnabled(true);
+    }//GEN-LAST:event_jRadioButtonRelMouseClicked
+
+    /**
+     * Method that allows just integer values in the jTextFieldTempo.
+     *
+     */
+    private void jTextFieldTempoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTempoKeyTyped
+        try {
+            if (jTextFieldTempo.getText().length() >= 5) {
+                evt.consume();
+            } else if (jTextFieldTempo.getText().length() == 0 && Long.parseLong(String.valueOf(evt.getKeyChar())) == 0) {
+                evt.consume();
+            }
+        } catch (NumberFormatException ex) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldTempoKeyTyped
+
+    /**
+     * Build in real time the chart specified.
+     *
+     * @param port
+     * @param info
+     * @return
+     */
+    private RealTimeChart buildChart(String port, String info) {
+        try {
+            long tempo = Long.parseLong(jTextFieldTempo.getText());
+            return new RealTimeChart(port, info, tempo);
+        } catch (NumberFormatException ex) {
+            ex.getMessage();
+        }
+        return null;
+    }
+
+    /**
+     * Show the chart specified.
+     *
+     * @param info
+     * @return
+     */
+    private LineChart showChart(String info) {
+        String data_hora_ini, data_hora_fim;
+        try {
+            SimpleDateFormat formatoAtual = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            SimpleDateFormat formatoDesejado = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            data_hora_ini = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataIni.getText() + " " + jFormattedTextFieldHoraIni.getText()));
+            data_hora_fim = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataFim.getText() + " " + jFormattedTextFieldHoraFim.getText()));
+
+            return new LineChart(info, data_hora_ini, data_hora_fim);
+        } catch (ParseException ex) {
+            ex.getMessage();
+        }
+        return null;
     }
 
     /**
@@ -205,6 +477,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup grupoBotoes;
     private javax.swing.JButton jButtonAbrir;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JCheckBox jCheckBoxLum;
@@ -212,7 +485,20 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxUmiAr;
     private javax.swing.JCheckBox jCheckBoxUmiSolo;
     private javax.swing.JComboBox<String> jComboBoxPorta;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDataFim;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDataIni;
+    private javax.swing.JFormattedTextField jFormattedTextFieldHoraFim;
+    private javax.swing.JFormattedTextField jFormattedTextFieldHoraIni;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelDados;
+    private javax.swing.JLabel jLabelDataFim;
+    private javax.swing.JLabel jLabelDataIni;
+    private javax.swing.JLabel jLabelHoraFim;
+    private javax.swing.JLabel jLabelHoraIni;
     private javax.swing.JLabel jLabelPorta;
+    private javax.swing.JLabel jLabelTempo;
+    private javax.swing.JRadioButton jRadioButtonLer;
+    private javax.swing.JRadioButton jRadioButtonRel;
+    private javax.swing.JTextField jTextFieldTempo;
     // End of variables declaration//GEN-END:variables
 }
