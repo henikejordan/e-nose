@@ -263,7 +263,7 @@ public final class RealTimeChart implements Chart {
      *
      */
     private void storeData() {
-        if (valorSensor1 > 0.0 && valorSensor2 > 0.0) {
+        if (valorSensor1 > 0.0 && valorSensor2 > 0.0 && valorSensor1 <= 100.0 && valorSensor2 <= 100.0) {
             CONNECT.setValues("SENSOR 1", data_hora, info, valorSensor1);
             CONNECT.setValues("SENSOR 2", data_hora, info, valorSensor2);
         }
