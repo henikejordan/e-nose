@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package tcc;
+package dissertacao;
 
 import gnu.io.CommPortIdentifier;
 import java.text.ParseException;
@@ -19,7 +14,7 @@ import javax.swing.text.MaskFormatter;
  */
 public class Principal extends javax.swing.JFrame {
 
-    private Chart temp, luz, ar, solo;
+    private Chart sensores, temp, umidade, pressao;
     private boolean aux;
 
     /**
@@ -81,11 +76,6 @@ public class Principal extends javax.swing.JFrame {
         jButtonAbrir = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jComboBoxPorta = new javax.swing.JComboBox<>();
-        jLabelDados = new javax.swing.JLabel();
-        jCheckBoxTemp = new javax.swing.JCheckBox();
-        jCheckBoxLum = new javax.swing.JCheckBox();
-        jCheckBoxUmiAr = new javax.swing.JCheckBox();
-        jCheckBoxUmiSolo = new javax.swing.JCheckBox();
         jRadioButtonLer = new javax.swing.JRadioButton();
         jRadioButtonRel = new javax.swing.JRadioButton();
         jLabelDataIni = new javax.swing.JLabel();
@@ -99,6 +89,10 @@ public class Principal extends javax.swing.JFrame {
         jLabelTempo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldTempo = new javax.swing.JTextField();
+        jCheckBoxSensores = new javax.swing.JCheckBox();
+        jCheckBoxTemp = new javax.swing.JCheckBox();
+        jCheckBoxUmidade = new javax.swing.JCheckBox();
+        jCheckBoxPressao = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Real Time");
@@ -119,16 +113,6 @@ public class Principal extends javax.swing.JFrame {
                 jButtonSairActionPerformed(evt);
             }
         });
-
-        jLabelDados.setText("Dados:");
-
-        jCheckBoxTemp.setText("Temperatura");
-
-        jCheckBoxLum.setText("Luminosidade");
-
-        jCheckBoxUmiAr.setText("Umidade do ar");
-
-        jCheckBoxUmiSolo.setText("Umidade do solo");
 
         grupoBotoes.add(jRadioButtonLer);
         jRadioButtonLer.setText("Ler");
@@ -173,6 +157,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jCheckBoxSensores.setText("Sensores");
+
+        jCheckBoxTemp.setText("Temperatura");
+
+        jCheckBoxUmidade.setText("Umidade");
+
+        jCheckBoxPressao.setText("Pressão");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,82 +172,80 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabelDados))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelDataIni)
-                            .addComponent(jLabelDataFim))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonAbrir)
-                        .addGap(74, 74, 74)
-                        .addComponent(jButtonSair)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelPorta)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelDataIni)
+                                    .addComponent(jLabelDataFim))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jRadioButtonLer)
-                                    .addGap(198, 198, 198))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jCheckBoxTemp)
-                                        .addComponent(jCheckBoxUmiAr))
-                                    .addGap(41, 41, 41)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jCheckBoxLum)
-                                        .addComponent(jCheckBoxUmiSolo)
-                                        .addComponent(jRadioButtonRel)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jFormattedTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jFormattedTextFieldDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabelHoraIni)
-                                        .addComponent(jLabelHoraFim))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jFormattedTextFieldHoraIni)
-                                        .addComponent(jFormattedTextFieldHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 47, Short.MAX_VALUE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jFormattedTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jFormattedTextFieldDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelHoraIni)
+                                            .addComponent(jLabelHoraFim))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jFormattedTextFieldHoraIni)
+                                            .addComponent(jFormattedTextFieldHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jButtonAbrir)
+                                        .addGap(74, 74, 74)
+                                        .addComponent(jButtonSair))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabelTempo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxUmidade)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jCheckBoxSensores)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jRadioButtonLer)
+                                        .addGap(26, 26, 26)))
+                                .addGap(52, 52, 52)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxPressao)
+                                    .addComponent(jCheckBoxTemp)
+                                    .addComponent(jRadioButtonRel))))))
+                .addGap(0, 50, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jLabelTempo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addGap(115, 115, 115)
+                .addComponent(jLabelPorta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBoxPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPorta)
                     .addComponent(jComboBoxPorta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxSensores)
+                    .addComponent(jCheckBoxTemp))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDados)
-                    .addComponent(jCheckBoxTemp)
-                    .addComponent(jCheckBoxLum))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxUmiAr)
-                    .addComponent(jCheckBoxUmiSolo))
-                .addGap(18, 18, 18)
+                    .addComponent(jCheckBoxUmidade)
+                    .addComponent(jCheckBoxPressao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButtonLer)
                     .addComponent(jRadioButtonRel))
-                .addGap(30, 30, 30)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTempo)
                     .addComponent(jLabel1)
@@ -272,7 +262,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jFormattedTextFieldHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelDataFim))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAbrir)
                     .addComponent(jButtonSair))
@@ -290,6 +280,23 @@ public class Principal extends javax.swing.JFrame {
     private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
         String port = (String) jComboBoxPorta.getSelectedItem();
         String info;
+        if (jCheckBoxSensores.isSelected()) {
+            try {
+                aux = sensores.getInstance();
+            } catch (NullPointerException e) {
+                aux = false;
+            }
+
+            info = "Sensores";
+
+            if (!aux) {
+                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
+                    sensores = buildChart(port, info);
+                } else if (jRadioButtonRel.isSelected()) {
+                    sensores = showChart(info);
+                }
+            }
+        }
         if (jCheckBoxTemp.isSelected()) {
             try {
                 aux = temp.getInstance();
@@ -307,54 +314,37 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         }
-        if (jCheckBoxLum.isSelected()) {
+        if (jCheckBoxUmidade.isSelected()) {
             try {
-                aux = luz.getInstance();
+                aux = umidade.getInstance();
             } catch (NullPointerException e) {
                 aux = false;
             }
 
-            info = "Luminosidade";
+            info = "Umidade do Ar";
 
             if (!aux) {
                 if (!"".equals(port) && jRadioButtonLer.isSelected()) {
-                    luz = buildChart(port, info);
+                    umidade = buildChart(port, info);
                 } else if (jRadioButtonRel.isSelected()) {
-                    luz = showChart(info);
+                    umidade = showChart(info);
                 }
             }
         }
-        if (jCheckBoxUmiAr.isSelected()) {
+        if (jCheckBoxPressao.isSelected()) {
             try {
-                aux = ar.getInstance();
+                aux = pressao.getInstance();
             } catch (NullPointerException e) {
                 aux = false;
             }
 
-            info = "Umidade do ar";
+            info = "Pressão Atmosférica";
 
             if (!aux) {
                 if (!"".equals(port) && jRadioButtonLer.isSelected()) {
-                    ar = buildChart(port, info);
+                    pressao = buildChart(port, info);
                 } else if (jRadioButtonRel.isSelected()) {
-                    ar = showChart(info);
-                }
-            }
-        }
-        if (jCheckBoxUmiSolo.isSelected()) {
-            try {
-                aux = solo.getInstance();
-            } catch (NullPointerException e) {
-                aux = false;
-            }
-
-            info = "Umidade do solo";
-
-            if (!aux) {
-                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
-                    solo = buildChart(port, info);
-                } else if (jRadioButtonRel.isSelected()) {
-                    solo = showChart(info);
+                    pressao = showChart(info);
                 }
             }
         }
@@ -480,17 +470,16 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.ButtonGroup grupoBotoes;
     private javax.swing.JButton jButtonAbrir;
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JCheckBox jCheckBoxLum;
+    private javax.swing.JCheckBox jCheckBoxPressao;
+    private javax.swing.JCheckBox jCheckBoxSensores;
     private javax.swing.JCheckBox jCheckBoxTemp;
-    private javax.swing.JCheckBox jCheckBoxUmiAr;
-    private javax.swing.JCheckBox jCheckBoxUmiSolo;
+    private javax.swing.JCheckBox jCheckBoxUmidade;
     private javax.swing.JComboBox<String> jComboBoxPorta;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataFim;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataIni;
     private javax.swing.JFormattedTextField jFormattedTextFieldHoraFim;
     private javax.swing.JFormattedTextField jFormattedTextFieldHoraIni;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabelDados;
     private javax.swing.JLabel jLabelDataFim;
     private javax.swing.JLabel jLabelDataIni;
     private javax.swing.JLabel jLabelHoraFim;

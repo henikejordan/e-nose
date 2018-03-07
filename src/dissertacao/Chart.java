@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package tcc;
+package dissertacao;
 
 import java.util.Date;
 import java.util.List;
@@ -30,18 +25,12 @@ public interface Chart {
     public List<Date> getTime();
 
     /**
-     * Returns values of sensor 1.
+     * Returns values of sensors.
      *
+     * @param i
      * @return
      */
-    public List<Double> getDataSensor1();
-
-    /**
-     * Returns values of sensor 2.
-     *
-     * @return
-     */
-    public List<Double> getDataSensor2();
+    public List<Double> getDataSensors(int i);
 
     /**
      * Returns legend X axis.

@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package tcc;
+package dissertacao;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
@@ -120,53 +115,23 @@ public class TwoWaySerialComm {
     }
 
     /**
-     * Returns last value of sensor 1.
-     *
-     * @param info
-     * @return
-     */
-    public String getSensor1(String info) {
-        return this.getData(info, "SENSOR 1");
-    }
-
-    /**
-     * Returns last value of sensor 2.
-     *
-     * @param info
-     * @return
-     */
-    public String getSensor2(String info) {
-        return this.getData(info, "SENSOR 2");
-    }
-
-    /**
      * Returns last values of sensor and module specified.
      *
-     * @param info
-     * @param sensor
+     * @param i
      * @return
      */
-    public String getData(String info, String sensor) {
+    public String getData(int i) {
         try {
             if (ret != null) {
                 split = ret.split(";");
-                for (int i = split.length - 1; i >= 0; i--) {
-                    if (sensor.equals(split[i])) {
-                        switch (info) {
-                            case "Temperatura":
-                                return split[i + 1];
-                            case "Umidade do ar":
-                                return split[i + 2];
-                            case "Luminosidade":
-                                return split[i + 3];
-                            case "Umidade do solo":
-                                return split[i + 4];
-                        }
+                for (int j = split.length - 1; j >= 0; j--) {
+                    if ("inicio".equals(split[j])) {
+                        return split[j + i + 1];
                     }
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
         return null;
     }
