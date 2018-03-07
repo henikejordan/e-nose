@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import util.ConectaBanco;
 
 /**
@@ -53,16 +53,16 @@ public class Connect {
      * @return
      */
     public List<Double> getValuesSensor(String info, String data_hora_ini, String data_hora_fim) {
-        List<Double> data = new CopyOnWriteArrayList<>();
+        List<Double> data = new ArrayList<>();
         ResultSet resultado = conecta.executaSQL("select * from dados "
                 + "where informacao = '" + info + "' and "
-                + "data_hora > '" + data_hora_ini + "' and "
-                + "data_hora < '" + data_hora_fim + "' order by data_hora");
+                + "data_hora >= '" + data_hora_ini + "' and "
+                + "data_hora <= '" + data_hora_fim + "' order by data_hora");
+
         try {
             while (resultado.next()) {
                 data.add(resultado.getDouble("valor"));
             }
-            resultado.first();
         } catch (SQLException ex) {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
             System.exit(0);
@@ -80,13 +80,14 @@ public class Connect {
      * @return
      */
     public List<Date> getTimes(String info, String data_hora_ini, String data_hora_fim) {
-        List<Date> data = new CopyOnWriteArrayList<>();
+        List<Date> data = new ArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         ResultSet resultado = conecta.executaSQL("select * from dados "
                 + "where informacao = '" + info + "' and "
-                + "data_hora > '" + data_hora_ini + "' and "
-                + "data_hora < '" + data_hora_fim + "' order by data_hora");
+                + "data_hora >= '" + data_hora_ini + "' and "
+                + "data_hora <= '" + data_hora_fim + "' order by data_hora");
+
         try {
             while (resultado.next()) {
                 data.add(new Date(format.parse(resultado.getString("data_hora")).getTime()));

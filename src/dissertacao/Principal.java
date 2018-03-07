@@ -428,7 +428,7 @@ public class Principal extends javax.swing.JFrame {
             SimpleDateFormat formatoDesejado = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             data_hora_ini = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataIni.getText() + " " + jFormattedTextFieldHoraIni.getText()));
             data_hora_fim = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataFim.getText() + " " + jFormattedTextFieldHoraFim.getText()));
-
+            
             return new LineChart(info, data_hora_ini, data_hora_fim);
         } catch (ParseException ex) {
             ex.getMessage();

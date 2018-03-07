@@ -259,7 +259,7 @@ public final class LineChart implements Chart {
      */
     @Override
     public List<Date> getTime() {
-        return CONNECT.getTimes(info, data_hora_ini, data_hora_fim);
+        return CONNECT.getTimes(SENSORS_NAME[0], data_hora_ini, data_hora_fim);
     }
 
     /**
@@ -268,8 +268,7 @@ public final class LineChart implements Chart {
      * @return
      */
     @Override
-    public List<Double> getDataSensors(int i
-    ) {
+    public List<Double> getDataSensors(int i) {
         try {
             switch (info) {
                 case "Temperatura":
