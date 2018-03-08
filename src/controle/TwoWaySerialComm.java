@@ -1,4 +1,4 @@
-package dissertacao;
+package controle;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
@@ -14,16 +14,9 @@ import java.io.OutputStream;
  */
 public class TwoWaySerialComm {
 
-    private static String ret;
-    private String[] split;
+    private static String data;
+    private String[] dataSplit;
 
-    /**
-     * Connect to the port with specific baudrate.
-     *
-     * @param portName
-     * @param baudrate
-     * @throws java.lang.Exception
-     */
     public void connect(String portName, Integer baudrate) throws Exception {
         CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
         if (portIdentifier.isCurrentlyOwned()) {
@@ -46,26 +39,14 @@ public class TwoWaySerialComm {
         }
     }
 
-    /**
-     *
-     */
     public static class SerialReader implements Runnable {
 
         InputStream in;
 
-        /**
-         * Constructor.
-         *
-         * @param in
-         */
         public SerialReader(InputStream in) {
             this.in = in;
         }
 
-        /**
-         * Run the thread that will read the serial port.
-         *
-         */
         @Override
         public void run() {
             byte[] buffer = new byte[1024];
@@ -73,7 +54,7 @@ public class TwoWaySerialComm {
             try {
                 while ((len = this.in.read(buffer)) > -1) {
                     //System.out.print(new String(buffer, 0, len));
-                    ret += new String(buffer, 0, len);
+                    data += new String(buffer, 0, len);
                 }
             } catch (IOException e) {
                 System.out.println(e.getMessage());
@@ -81,26 +62,14 @@ public class TwoWaySerialComm {
         }
     }
 
-    /**
-     *
-     */
     public static class SerialWriter implements Runnable {
 
         OutputStream out;
 
-        /**
-         * Constructor.
-         *
-         * @param out
-         */
         public SerialWriter(OutputStream out) {
             this.out = out;
         }
 
-        /**
-         * Run the thread that will write the serial port.
-         *
-         */
         @Override
         public void run() {
             try {
@@ -114,19 +83,13 @@ public class TwoWaySerialComm {
         }
     }
 
-    /**
-     * Returns last values of sensor and module specified.
-     *
-     * @param i
-     * @return
-     */
     public String getData(int i) {
         try {
-            if (ret != null) {
-                split = ret.split(";");
-                for (int j = split.length - 1; j >= 0; j--) {
-                    if ("inicio".equals(split[j])) {
-                        return split[j + i + 1];
+            if (data != null) {
+                dataSplit = data.split(";");
+                for (int j = dataSplit.length - 1; j >= 0; j--) {
+                    if ("inicio".equals(dataSplit[j])) {
+                        return dataSplit[j + i + 1];
                     }
                 }
             }

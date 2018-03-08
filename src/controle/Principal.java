@@ -1,4 +1,4 @@
-package dissertacao;
+package controle;
 
 import gnu.io.CommPortIdentifier;
 import java.text.ParseException;
@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.Enumeration;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import modelo.ConcreteCreatorSensor;
+import modelo.Sensor;
 
 /**
  *
@@ -14,13 +16,6 @@ import javax.swing.text.MaskFormatter;
  */
 public class Principal extends javax.swing.JFrame {
 
-    private Chart sensores, temp, umidade, pressao;
-    private boolean aux;
-
-    /**
-     * Creates new form Principal.
-     *
-     */
     public Principal() {
         initComponents();
         getRootPane().setDefaultButton(jButtonAbrir);
@@ -47,10 +42,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Fill the combobox serial port.
-     *
-     */
     private void fillComboBoxPorta() {
         Enumeration en = CommPortIdentifier.getPortIdentifiers();
         jComboBoxPorta.addItem("");
@@ -273,95 +264,42 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Show the chart specified.
-     *
-     */
     private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
         String port = (String) jComboBoxPorta.getSelectedItem();
-        String info;
         if (jCheckBoxSensores.isSelected()) {
-            try {
-                aux = sensores.getInstance();
-            } catch (NullPointerException e) {
-                aux = false;
-            }
-
-            info = "Sensores";
-
-            if (!aux) {
-                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
-                    sensores = buildChart(port, info);
-                } else if (jRadioButtonRel.isSelected()) {
-                    sensores = showChart(info);
-                }
+            if (!"".equals(port) && jRadioButtonLer.isSelected()) {
+                buildChart(new ConcreteCreatorSensor().factoryMethod("Gases"), port);
+            } else if (jRadioButtonRel.isSelected()) {
+                showChart(new ConcreteCreatorSensor().factoryMethod("Gases"));
             }
         }
         if (jCheckBoxTemp.isSelected()) {
-            try {
-                aux = temp.getInstance();
-            } catch (NullPointerException e) {
-                aux = false;
-            }
-
-            info = "Temperatura";
-
-            if (!aux) {
-                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
-                    temp = buildChart(port, info);
-                } else if (jRadioButtonRel.isSelected()) {
-                    temp = showChart(info);
-                }
+            if (!"".equals(port) && jRadioButtonLer.isSelected()) {
+                buildChart(new ConcreteCreatorSensor().factoryMethod("Temperatura"), port);
+            } else if (jRadioButtonRel.isSelected()) {
+                showChart(new ConcreteCreatorSensor().factoryMethod("Temperatura"));
             }
         }
         if (jCheckBoxUmidade.isSelected()) {
-            try {
-                aux = umidade.getInstance();
-            } catch (NullPointerException e) {
-                aux = false;
-            }
-
-            info = "Umidade do Ar";
-
-            if (!aux) {
-                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
-                    umidade = buildChart(port, info);
-                } else if (jRadioButtonRel.isSelected()) {
-                    umidade = showChart(info);
-                }
+            if (!"".equals(port) && jRadioButtonLer.isSelected()) {
+                buildChart(new ConcreteCreatorSensor().factoryMethod("Umidade do Ar"), port);
+            } else if (jRadioButtonRel.isSelected()) {
+                showChart(new ConcreteCreatorSensor().factoryMethod("Umidade do Ar"));
             }
         }
         if (jCheckBoxPressao.isSelected()) {
-            try {
-                aux = pressao.getInstance();
-            } catch (NullPointerException e) {
-                aux = false;
-            }
-
-            info = "Pressão Atmosférica";
-
-            if (!aux) {
-                if (!"".equals(port) && jRadioButtonLer.isSelected()) {
-                    pressao = buildChart(port, info);
-                } else if (jRadioButtonRel.isSelected()) {
-                    pressao = showChart(info);
-                }
+            if (!"".equals(port) && jRadioButtonLer.isSelected()) {
+                buildChart(new ConcreteCreatorSensor().factoryMethod("Pressão Atmosférica"), port);
+            } else if (jRadioButtonRel.isSelected()) {
+                showChart(new ConcreteCreatorSensor().factoryMethod("Pressão Atmosférica"));
             }
         }
     }//GEN-LAST:event_jButtonAbrirActionPerformed
 
-    /**
-     * Close the application.
-     *
-     */
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButtonSairActionPerformed
 
-    /**
-     * Select the read option.
-     *
-     */
     private void jRadioButtonLerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonLerMouseClicked
         jTextFieldTempo.setEnabled(true);
         jFormattedTextFieldDataIni.setEnabled(false);
@@ -370,10 +308,6 @@ public class Principal extends javax.swing.JFrame {
         jFormattedTextFieldHoraFim.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonLerMouseClicked
 
-    /**
-     * Select the report option.
-     *
-     */
     private void jRadioButtonRelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonRelMouseClicked
         jTextFieldTempo.setEnabled(false);
         jFormattedTextFieldDataIni.setEnabled(true);
@@ -382,10 +316,6 @@ public class Principal extends javax.swing.JFrame {
         jFormattedTextFieldHoraFim.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonRelMouseClicked
 
-    /**
-     * Method that allows just integer values in the jTextFieldTempo.
-     *
-     */
     private void jTextFieldTempoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTempoKeyTyped
         try {
             if (jTextFieldTempo.getText().length() >= 5) {
@@ -398,47 +328,31 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextFieldTempoKeyTyped
 
-    /**
-     * Build in real time the chart specified.
-     *
-     * @param port
-     * @param info
-     * @return
-     */
-    private RealTimeChart buildChart(String port, String info) {
+    private GravacaoChart buildChart(Sensor sensor, String port) {
         try {
             long tempo = Long.parseLong(jTextFieldTempo.getText());
-            return new RealTimeChart(port, info, tempo);
+            return new GravacaoChart(sensor, port, tempo);
         } catch (NumberFormatException ex) {
             ex.getMessage();
         }
         return null;
     }
 
-    /**
-     * Show the chart specified.
-     *
-     * @param info
-     * @return
-     */
-    private LineChart showChart(String info) {
-        String data_hora_ini, data_hora_fim;
+    private LeituraChart showChart(Sensor sensor) {
+        String dataHoraIni, dataHoraFim;
         try {
             SimpleDateFormat formatoAtual = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             SimpleDateFormat formatoDesejado = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            data_hora_ini = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataIni.getText() + " " + jFormattedTextFieldHoraIni.getText()));
-            data_hora_fim = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataFim.getText() + " " + jFormattedTextFieldHoraFim.getText()));
-            
-            return new LineChart(info, data_hora_ini, data_hora_fim);
+            dataHoraIni = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataIni.getText() + " " + jFormattedTextFieldHoraIni.getText()));
+            dataHoraFim = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataFim.getText() + " " + jFormattedTextFieldHoraFim.getText()));
+
+            return new LeituraChart(sensor, dataHoraIni, dataHoraFim);
         } catch (ParseException ex) {
             ex.getMessage();
         }
         return null;
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

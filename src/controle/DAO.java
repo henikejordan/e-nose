@@ -1,4 +1,4 @@
-package dissertacao;
+package controle;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,17 +15,10 @@ import util.ConectaBanco;
  *
  * @author Henike
  */
-public class Connect {
+public class DAO {
 
     private final ConectaBanco conecta = ConectaBanco.getInstance();
 
-    /**
-     * Save in the database the sensor values.
-     *
-     * @param info
-     * @param data_hora
-     * @param value
-     */
     public synchronized void setValues(String info, String data_hora, double value) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -44,14 +37,6 @@ public class Connect {
         }
     }
 
-    /**
-     * Returns values of the specified sensor.
-     *
-     * @param info
-     * @param data_hora_ini
-     * @param data_hora_fim
-     * @return
-     */
     public List<Double> getValuesSensor(String info, String data_hora_ini, String data_hora_fim) {
         List<Double> data = new ArrayList<>();
         ResultSet resultado = conecta.executaSQL("select * from dados "
@@ -71,14 +56,6 @@ public class Connect {
         return data;
     }
 
-    /**
-     * Returns time values of the specified sensor.
-     *
-     * @param info
-     * @param data_hora_ini
-     * @param data_hora_fim
-     * @return
-     */
     public List<Date> getTimes(String info, String data_hora_ini, String data_hora_fim) {
         List<Date> data = new ArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
