@@ -94,7 +94,7 @@ public class TwoWaySerialComm {
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-            //System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return null;
     }

@@ -1,16 +1,12 @@
 package controle;
 
-import modelo.Gases;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JFrame;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
-import org.knowm.xchart.XYChartBuilder;
-import org.knowm.xchart.style.Styler;
 import modelo.Sensor;
 
 /**
@@ -21,7 +17,7 @@ public final class LeituraChart extends Chart {
 
     private final String dataHoraIni, dataHoraFim;
     private List<Date> xData;
-    private List<Double>[] yData;
+    private final List<Double>[] yData;
 
     public LeituraChart(Sensor sensor, String dataHoraIni, String dataHoraFim) {
         super(sensor);
@@ -32,21 +28,10 @@ public final class LeituraChart extends Chart {
         go();
     }
 
-    private void go() {
+    @Override
+    public void go() {
         final XChartPanel chartPanel = new XChartPanel(getChart());
-
-        // Schedule a job for the event-dispatching thread:
-        // creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            // Create and set up the window.
-            JFrame frame = new JFrame("XChart");
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.add(chartPanel);
-
-            // Display the window.
-            frame.pack();
-            frame.setVisible(true);
-        });
+        createPanel(chartPanel);
     }
 
     private void equals() {
@@ -82,38 +67,22 @@ public final class LeituraChart extends Chart {
 
         for (int i = 0; i < getSensor().getInfo().length; i++) {
             if (getSensor().getId() < 0) {
-                yData[i] = getDataSensors(i);
+                yData[i] = getDataSensors(i, i);
             } else {
-                yData[i] = getDataSensors(0);
+                yData[i] = getDataSensors(0, 0);
             }
         }
 
         equals();
-
-        // Create Chart
-        setXyChart(new XYChartBuilder().width(500).height(400).theme(Styler.ChartTheme.GGPlot2).build());
-
-        String[] aux = getSensor().getInfo();
-
-        if (getSensor() instanceof Gases) {
-            getXyChart().setTitle("Gases");
-        } else {
-            getXyChart().setTitle(aux[0]);
-        }
-
-        getXyChart().setXAxisTitle(getXAxisInfo());
-        getXyChart().setYAxisTitle(getYAxisInfo());
-
-        for (int i = 0; i < getSensor().getInfo().length; i++) {
-            getXyChart().addSeries(aux[i], xData, yData[i]);
-        }
+        createChart(xData, yData);
 
         return getXyChart();
     }
 
-    public List<Double> getDataSensors(int i) {
+    @Override
+    public List<Double> getDataSensors(int indice, int num) {
         String aux[] = getSensor().getInfo();
-        return getDao().getValuesSensor(aux[i], dataHoraIni, dataHoraFim);
+        return getDao().getValuesSensor(aux[indice], dataHoraIni, dataHoraFim);
     }
 
     @Override
