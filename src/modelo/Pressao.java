@@ -25,7 +25,7 @@ public class Pressao implements Sensor {
 
     @Override
     public String getUnidade() {
-        return "Atm";
+        return "Pa";
     }
 
 }
