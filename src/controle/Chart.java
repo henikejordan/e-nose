@@ -57,15 +57,10 @@ public abstract class Chart {
     }
 
     public void createPanel(final XChartPanel chartPanel) {
-        // Schedule a job for the event-dispatching thread:
-        // creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(() -> {
-            // Create and set up the window.
             JFrame frame = new JFrame("XChart");
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.add(chartPanel);
-
-            // Display the window.
             frame.pack();
             frame.setVisible(true);
         });

@@ -35,8 +35,9 @@ public final class GravacaoChart extends Chart {
         try {
             serialComm = new TwoWaySerialComm();
             serialComm.connect(port, 9600);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+            System.exit(0);
         }
 
         go();
@@ -47,13 +48,10 @@ public final class GravacaoChart extends Chart {
         final XChartPanel chartPanel = new XChartPanel(getChart());
         createPanel(chartPanel);
 
-        // Simulate a data feed
         TimerTask chartUpdaterTask = new TimerTask() {
-
             @Override
             public void run() {
                 updateData();
-
                 javax.swing.SwingUtilities.invokeLater(() -> {
                     chartPanel.updateUI();
                 });
@@ -63,7 +61,8 @@ public final class GravacaoChart extends Chart {
         try {
             timer.scheduleAtFixedRate(chartUpdaterTask, 0, seconds * 1000);
         } catch (IllegalArgumentException ex) {
-            //
+            System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+            System.exit(0);
         }
     }
 
@@ -119,8 +118,8 @@ public final class GravacaoChart extends Chart {
         List<Double> data = new ArrayList<>();
         try {
             valor[indice] = Double.parseDouble(serialComm.getData(num));
-        } catch (NumberFormatException | NullPointerException e) {
-            //
+        } catch (NumberFormatException | NullPointerException ex) {
+            System.out.println(ex.getClass().getName() + ": " + ex.getMessage());
         }
         data.add(valor[indice]);
 

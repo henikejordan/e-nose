@@ -25,7 +25,8 @@ public final class ConectaBanco {
             System.setProperty("jdbc.Drivers", driver);
             conn = DriverManager.getConnection(caminho, usuario, senha);
         } catch (SQLException ex) {
-            //
+            System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+            System.exit(0);
         }
     }
 
@@ -45,7 +46,8 @@ public final class ConectaBanco {
             stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return stm.executeQuery(sql);
         } catch (SQLException ex) {
-            //
+            System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+            System.exit(0);
         }
         return null;
     }
@@ -54,7 +56,8 @@ public final class ConectaBanco {
         try {
             conn.close();
         } catch (SQLException ex) {
-            //
+            System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+            System.exit(0);
         }
     }
 }

@@ -2,9 +2,7 @@ package controle;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,7 +29,7 @@ public class DAO {
             pst.setTimestamp(2, timestamp);
             pst.setDouble(3, value);
             pst.execute();
-        } catch (ParseException | SQLException ex) {
+        } catch (Exception ex) {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
             System.exit(0);
         }
@@ -48,7 +46,7 @@ public class DAO {
             while (resultado.next()) {
                 data.add(resultado.getDouble("valor"));
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
             System.exit(0);
         }
@@ -69,7 +67,7 @@ public class DAO {
             while (resultado.next()) {
                 data.add(new Date(format.parse(resultado.getString("data_hora")).getTime()));
             }
-        } catch (ParseException | SQLException ex) {
+        } catch (Exception ex) {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
             System.exit(0);
         }
