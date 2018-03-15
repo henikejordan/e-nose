@@ -7,8 +7,14 @@ package modelo;
 public class Pressao implements Sensor {
 
     @Override
-    public int getId() {
-        return 10;
+    public String getNome() {
+        return "Pressão Atmosférica";
+    }
+
+    @Override
+    public int[] getIndices() {
+        int[] ret = {10};
+        return ret;
     }
 
     @Override

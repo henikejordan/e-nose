@@ -69,12 +69,9 @@ public final class GravacaoChart extends Chart {
     private void updateData() {
         xData.addAll(getTime());
 
-        for (int i = 0; i < getSensor().getInfo().length; i++) {
-            if (getSensor().getId() < 0) {
-                yData[i].addAll(getDataSensors(i, i));
-            } else {
-                yData[i].addAll(getDataSensors(i, getSensor().getId()));
-            }
+        int[] indices = getSensor().getIndices();
+        for (int i = 0; i < getSensor().getIndices().length; i++) {
+            yData[i].addAll(getDataSensors(i, indices[i]));
         }
 
         storeData();
@@ -100,12 +97,9 @@ public final class GravacaoChart extends Chart {
     public XYChart getChart() {
         xData = getTime();
 
-        for (int i = 0; i < getSensor().getInfo().length; i++) {
-            if (getSensor().getId() < 0) {
-                yData[i] = getDataSensors(i, i);
-            } else {
-                yData[i] = getDataSensors(i, getSensor().getId());
-            }
+        int[] indices = getSensor().getIndices();
+        for (int i = 0; i < getSensor().getIndices().length; i++) {
+            yData[i] = getDataSensors(i, indices[i]);
         }
 
         createChart(xData, yData);

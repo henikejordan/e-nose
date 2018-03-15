@@ -80,7 +80,7 @@ public class Principal extends javax.swing.JFrame {
         jLabelTempo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldTempo = new javax.swing.JTextField();
-        jCheckBoxSensores = new javax.swing.JCheckBox();
+        jCheckBoxGases = new javax.swing.JCheckBox();
         jCheckBoxTemp = new javax.swing.JCheckBox();
         jCheckBoxUmidade = new javax.swing.JCheckBox();
         jCheckBoxPressao = new javax.swing.JCheckBox();
@@ -148,7 +148,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jCheckBoxSensores.setText("Sensores");
+        jCheckBoxGases.setText("Gases");
 
         jCheckBoxTemp.setText("Temperatura");
 
@@ -199,12 +199,10 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBoxUmidade)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jCheckBoxSensores)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jRadioButtonLer)
-                                        .addGap(26, 26, 26)))
-                                .addGap(52, 52, 52)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButtonLer)
+                                    .addComponent(jCheckBoxGases))
+                                .addGap(64, 64, 64)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jCheckBoxPressao)
                                     .addComponent(jCheckBoxTemp)
@@ -226,7 +224,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jComboBoxPorta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxSensores)
+                    .addComponent(jCheckBoxGases)
                     .addComponent(jCheckBoxTemp))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -266,7 +264,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
         String port = (String) jComboBoxPorta.getSelectedItem();
-        if (jCheckBoxSensores.isSelected()) {
+        if (jCheckBoxGases.isSelected()) {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 buildChart(new ConcreteCreatorSensor().factoryMethod("Gases"), port);
             } else if (jRadioButtonRel.isSelected()) {
@@ -384,8 +382,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.ButtonGroup grupoBotoes;
     private javax.swing.JButton jButtonAbrir;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JCheckBox jCheckBoxGases;
     private javax.swing.JCheckBox jCheckBoxPressao;
-    private javax.swing.JCheckBox jCheckBoxSensores;
     private javax.swing.JCheckBox jCheckBoxTemp;
     private javax.swing.JCheckBox jCheckBoxUmidade;
     private javax.swing.JComboBox<String> jComboBoxPorta;

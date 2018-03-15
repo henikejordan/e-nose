@@ -6,7 +6,9 @@ package modelo;
  */
 public interface Sensor {
 
-    int getId();
+    String getNome();
+
+    int[] getIndices();
 
     String[] getInfo();
 

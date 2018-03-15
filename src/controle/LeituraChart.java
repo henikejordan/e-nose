@@ -65,12 +65,8 @@ public final class LeituraChart extends Chart {
     public XYChart getChart() {
         xData = getTime();
 
-        for (int i = 0; i < getSensor().getInfo().length; i++) {
-            if (getSensor().getId() < 0) {
-                yData[i] = getDataSensors(i, i);
-            } else {
-                yData[i] = getDataSensors(0, 0);
-            }
+        for (int i = 0; i < getSensor().getIndices().length; i++) {
+            yData[i] = getDataSensors(i, i);
         }
 
         equals();

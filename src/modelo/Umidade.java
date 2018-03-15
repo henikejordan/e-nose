@@ -7,8 +7,14 @@ package modelo;
 public class Umidade implements Sensor {
 
     @Override
-    public int getId() {
-        return 12;
+    public String getNome() {
+        return "Umidade do Ar";
+    }
+
+    @Override
+    public int[] getIndices() {
+        int[] ret = {12};
+        return ret;
     }
 
     @Override

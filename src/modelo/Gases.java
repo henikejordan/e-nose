@@ -7,8 +7,14 @@ package modelo;
 public class Gases implements Sensor {
 
     @Override
-    public int getId() {
-        return -1;
+    public String getNome() {
+        return "Gases";
+    }
+
+    @Override
+    public int[] getIndices() {
+        int[] ret = {0, 1, 2, 3, 4, 5, 6, 7};
+        return ret;
     }
 
     @Override

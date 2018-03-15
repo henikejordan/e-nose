@@ -7,8 +7,14 @@ package modelo;
 public class Temperatura implements Sensor {
 
     @Override
-    public int getId() {
-        return 8;
+    public String getNome() {
+        return "Temperatura";
+    }
+
+    @Override
+    public int[] getIndices() {
+        int[] ret = {8};
+        return ret;
     }
 
     @Override

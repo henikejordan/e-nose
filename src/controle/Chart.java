@@ -3,7 +3,6 @@ package controle;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
-import modelo.Gases;
 import modelo.Sensor;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
@@ -70,13 +69,7 @@ public abstract class Chart {
         String[] aux = getSensor().getInfo();
 
         setXyChart(new XYChartBuilder().width(500).height(400).theme(Styler.ChartTheme.GGPlot2).build());
-
-        if (getSensor() instanceof Gases) {
-            getXyChart().setTitle("Gases");
-        } else {
-            getXyChart().setTitle(aux[0]);
-        }
-
+        getXyChart().setTitle(getSensor().getNome());
         getXyChart().setXAxisTitle(getXAxisInfo());
         getXyChart().setYAxisTitle(getYAxisInfo());
 
