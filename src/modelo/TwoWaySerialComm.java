@@ -1,4 +1,4 @@
-package controle;
+package modelo;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;

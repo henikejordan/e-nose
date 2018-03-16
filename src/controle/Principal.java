@@ -47,7 +47,7 @@ public class Principal extends javax.swing.JFrame {
         jComboBoxPorta.addItem("");
         while (en.hasMoreElements()) {
             CommPortIdentifier cpi = (CommPortIdentifier) en.nextElement();
-            if (cpi.getPortType() == 1) {
+            if (cpi.getPortType() == CommPortIdentifier.PORT_SERIAL) {
                 jComboBoxPorta.addItem(cpi.getName());
             }
         }

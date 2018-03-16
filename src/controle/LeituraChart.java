@@ -34,6 +34,32 @@ public final class LeituraChart extends Chart {
         createPanel(chartPanel);
     }
 
+    @Override
+    public XYChart getChart() {
+        xData = getTime();
+
+        for (int i = 0; i < getSensor().getIndices().length; i++) {
+            yData[i] = getDataSensors(i, i);
+        }
+
+        equals();
+        createChart(xData, yData);
+
+        return getXyChart();
+    }
+
+    @Override
+    public List<Double> getDataSensors(int indice, int num) {
+        String aux[] = getSensor().getInfo();
+        return getDao().getValuesSensor(aux[indice], dataHoraIni, dataHoraFim);
+    }
+
+    @Override
+    public List<Date> getTime() {
+        String aux[] = getSensor().getInfo();
+        return getDao().getTimes(aux[0], dataHoraIni, dataHoraFim);
+    }
+
     private void equals() {
         Integer[] num = new Integer[getSensor().getInfo().length + 1];
         num[0] = xData.size();
@@ -59,32 +85,6 @@ public final class LeituraChart extends Chart {
                 yData[i].add(0.0);
             }
         }
-    }
-
-    @Override
-    public XYChart getChart() {
-        xData = getTime();
-
-        for (int i = 0; i < getSensor().getIndices().length; i++) {
-            yData[i] = getDataSensors(i, i);
-        }
-
-        equals();
-        createChart(xData, yData);
-
-        return getXyChart();
-    }
-
-    @Override
-    public List<Double> getDataSensors(int indice, int num) {
-        String aux[] = getSensor().getInfo();
-        return getDao().getValuesSensor(aux[indice], dataHoraIni, dataHoraFim);
-    }
-
-    @Override
-    public List<Date> getTime() {
-        String aux[] = getSensor().getInfo();
-        return getDao().getTimes(aux[0], dataHoraIni, dataHoraFim);
     }
 
 }

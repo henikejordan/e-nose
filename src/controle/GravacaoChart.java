@@ -1,5 +1,6 @@
 package controle;
 
+import modelo.TwoWaySerialComm;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,33 +67,6 @@ public final class GravacaoChart extends Chart {
         }
     }
 
-    private void updateData() {
-        xData.addAll(getTime());
-
-        int[] indices = getSensor().getIndices();
-        for (int i = 0; i < getSensor().getIndices().length; i++) {
-            yData[i].addAll(getDataSensors(i, indices[i]));
-        }
-
-        storeData();
-
-        // Limit the total number of points
-        while (xData.size() > 50) {
-            xData.remove(0);
-        }
-
-        for (int i = 0; i < getSensor().getInfo().length; i++) {
-            while (yData[i].size() > 50) {
-                yData[i].remove(0);
-            }
-        }
-
-        String[] aux = getSensor().getInfo();
-        for (int i = 0; i < getSensor().getInfo().length; i++) {
-            getXyChart().updateXYSeries(aux[i], xData, yData[i], null);
-        }
-    }
-
     @Override
     public XYChart getChart() {
         xData = getTime();
@@ -131,6 +105,33 @@ public final class GravacaoChart extends Chart {
         data.add(hora);
 
         return data;
+    }
+
+    private void updateData() {
+        xData.addAll(getTime());
+
+        int[] indices = getSensor().getIndices();
+        for (int i = 0; i < getSensor().getIndices().length; i++) {
+            yData[i].addAll(getDataSensors(i, indices[i]));
+        }
+
+        storeData();
+
+        // Limit the total number of points
+        while (xData.size() > 50) {
+            xData.remove(0);
+        }
+
+        for (int i = 0; i < getSensor().getInfo().length; i++) {
+            while (yData[i].size() > 50) {
+                yData[i].remove(0);
+            }
+        }
+
+        String[] aux = getSensor().getInfo();
+        for (int i = 0; i < getSensor().getInfo().length; i++) {
+            getXyChart().updateXYSeries(aux[i], xData, yData[i], null);
+        }
     }
 
     private void storeData() {
