@@ -13,7 +13,7 @@ public class Temperatura implements Sensor {
 
     @Override
     public int[] getIndices() {
-        int[] ret = {8};
+        int[] ret = {16};
         return ret;
     }
 

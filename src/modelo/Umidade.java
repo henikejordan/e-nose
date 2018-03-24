@@ -13,7 +13,7 @@ public class Umidade implements Sensor {
 
     @Override
     public int[] getIndices() {
-        int[] ret = {12};
+        int[] ret = {20};
         return ret;
     }
 

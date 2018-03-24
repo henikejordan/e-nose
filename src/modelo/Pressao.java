@@ -13,7 +13,7 @@ public class Pressao implements Sensor {
 
     @Override
     public int[] getIndices() {
-        int[] ret = {10};
+        int[] ret = {18};
         return ret;
     }
 
