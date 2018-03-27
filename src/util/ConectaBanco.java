@@ -10,9 +10,9 @@ import java.sql.Statement;
  *
  * @author henike
  */
-public final class ConectaBanco {
+public class ConectaBanco {
 
-    private static ConectaBanco instance;
+    private static ConectaBanco instance = null;
     private Statement stm; //responsável por preparar e realizar pesquisas no BD
     private Connection conn; //responsável por realizar a conexão com o BD
     private final String driver = "org.postgresql.Driver";

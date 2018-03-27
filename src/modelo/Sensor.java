@@ -4,14 +4,29 @@ package modelo;
  *
  * @author usuario
  */
-public interface Sensor {
+public abstract class Sensor {
 
-    String getNome();
+    private int[] indices;
+    private String[] info;
 
-    int[] getIndices();
+    public int[] getIndices() {
+        return indices;
+    }
 
-    String[] getInfo();
+    public void setIndices(int[] indices) {
+        this.indices = indices;
+    }
 
-    String getUnidade();
+    public String[] getInfo() {
+        return info;
+    }
+
+    public void setInfo(String[] info) {
+        this.info = info;
+    }
+
+    public abstract String getNome();
+
+    public abstract String getUnidade();
 
 }

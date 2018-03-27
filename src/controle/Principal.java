@@ -16,6 +16,11 @@ import modelo.Sensor;
  */
 public class Principal extends javax.swing.JFrame {
 
+    private EditarGases editarGases = EditarGases.getInstance();
+    private EditarPressao editarPressao = EditarPressao.getInstance();
+    private EditarTemperatura editarTemperatura = EditarTemperatura.getInstance();
+    private EditarUmidade editarUmidade = EditarUmidade.getInstance();
+
     public Principal() {
         initComponents();
         getRootPane().setDefaultButton(jButtonAbrir);
@@ -84,6 +89,10 @@ public class Principal extends javax.swing.JFrame {
         jCheckBoxTemp = new javax.swing.JCheckBox();
         jCheckBoxUmidade = new javax.swing.JCheckBox();
         jCheckBoxPressao = new javax.swing.JCheckBox();
+        jButtonEditarGases = new javax.swing.JButton();
+        jButtonEditarTemp = new javax.swing.JButton();
+        jButtonEditarPressao = new javax.swing.JButton();
+        jButtonEditarUmidade = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Real Time");
@@ -156,57 +165,97 @@ public class Principal extends javax.swing.JFrame {
 
         jCheckBoxPressao.setText("Pressão");
 
+        jButtonEditarGases.setText("+");
+        jButtonEditarGases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarGasesActionPerformed(evt);
+            }
+        });
+
+        jButtonEditarTemp.setText("+");
+        jButtonEditarTemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarTempActionPerformed(evt);
+            }
+        });
+
+        jButtonEditarPressao.setText("+");
+        jButtonEditarPressao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarPressaoActionPerformed(evt);
+            }
+        });
+
+        jButtonEditarUmidade.setText("+");
+        jButtonEditarUmidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarUmidadeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelDataIni)
+                            .addComponent(jLabelDataFim))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelDataIni)
-                                    .addComponent(jLabelDataFim))
+                                    .addComponent(jFormattedTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jFormattedTextFieldDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelHoraIni)
+                                    .addComponent(jLabelHoraFim))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jFormattedTextFieldHoraIni)
+                                    .addComponent(jFormattedTextFieldHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jButtonAbrir)
+                                .addGap(74, 74, 74)
+                                .addComponent(jButtonSair))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jFormattedTextFieldDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jFormattedTextFieldDataIni, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelHoraIni)
-                                            .addComponent(jLabelHoraFim))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jFormattedTextFieldHoraIni)
-                                            .addComponent(jFormattedTextFieldHoraFim, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jRadioButtonLer)
+                                        .addGap(42, 42, 42))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jCheckBoxUmidade)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonEditarUmidade)
+                                        .addGap(30, 30, 30))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jButtonAbrir)
-                                        .addGap(74, 74, 74)
-                                        .addComponent(jButtonSair))))
+                                        .addComponent(jCheckBoxGases)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonEditarGases)
+                                        .addGap(41, 41, 41)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jCheckBoxPressao)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonEditarPressao))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jCheckBoxTemp)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonEditarTemp))
+                                    .addComponent(jRadioButtonRel)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
                                 .addComponent(jLabelTempo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBoxUmidade)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButtonLer)
-                                    .addComponent(jCheckBoxGases))
-                                .addGap(64, 64, 64)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBoxPressao)
-                                    .addComponent(jCheckBoxTemp)
-                                    .addComponent(jRadioButtonRel))))))
+                                .addComponent(jLabel1)))))
                 .addGap(0, 50, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(115, 115, 115)
@@ -225,11 +274,15 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBoxGases)
-                    .addComponent(jCheckBoxTemp))
+                    .addComponent(jCheckBoxTemp)
+                    .addComponent(jButtonEditarGases)
+                    .addComponent(jButtonEditarTemp))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBoxUmidade)
-                    .addComponent(jCheckBoxPressao))
+                    .addComponent(jCheckBoxPressao)
+                    .addComponent(jButtonEditarPressao)
+                    .addComponent(jButtonEditarUmidade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButtonLer)
@@ -264,32 +317,53 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
         String port = (String) jComboBoxPorta.getSelectedItem();
+        Sensor sensor;
         if (jCheckBoxGases.isSelected()) {
+            sensor = new ConcreteCreatorSensor().factoryMethod("Gases");
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
-                buildChart(new ConcreteCreatorSensor().factoryMethod("Gases"), port);
+                sensor.setIndices(editarGases.getOpcIndices());
+                sensor.setInfo(editarGases.getOpcInfo());
+                buildChart(sensor, port);
             } else if (jRadioButtonRel.isSelected()) {
-                showChart(new ConcreteCreatorSensor().factoryMethod("Gases"));
-            }
-        }
-        if (jCheckBoxTemp.isSelected()) {
-            if (!"".equals(port) && jRadioButtonLer.isSelected()) {
-                buildChart(new ConcreteCreatorSensor().factoryMethod("Temperatura"), port);
-            } else if (jRadioButtonRel.isSelected()) {
-                showChart(new ConcreteCreatorSensor().factoryMethod("Temperatura"));
-            }
-        }
-        if (jCheckBoxUmidade.isSelected()) {
-            if (!"".equals(port) && jRadioButtonLer.isSelected()) {
-                buildChart(new ConcreteCreatorSensor().factoryMethod("Umidade do Ar"), port);
-            } else if (jRadioButtonRel.isSelected()) {
-                showChart(new ConcreteCreatorSensor().factoryMethod("Umidade do Ar"));
+                sensor.setIndices(editarGases.getIndices());
+                sensor.setInfo(editarGases.getInfo());
+                showChart(sensor);
             }
         }
         if (jCheckBoxPressao.isSelected()) {
+            sensor = new ConcreteCreatorSensor().factoryMethod("Pressão Atmosférica");
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
-                buildChart(new ConcreteCreatorSensor().factoryMethod("Pressão Atmosférica"), port);
+                sensor.setIndices(editarPressao.getOpcIndices());
+                sensor.setInfo(editarPressao.getOpcInfo());
+                buildChart(sensor, port);
             } else if (jRadioButtonRel.isSelected()) {
-                showChart(new ConcreteCreatorSensor().factoryMethod("Pressão Atmosférica"));
+                sensor.setIndices(editarPressao.getIndices());
+                sensor.setInfo(editarPressao.getInfo());
+                showChart(sensor);
+            }
+        }
+        if (jCheckBoxTemp.isSelected()) {
+            sensor = new ConcreteCreatorSensor().factoryMethod("Temperatura");
+            if (!"".equals(port) && jRadioButtonLer.isSelected()) {
+                sensor.setIndices(editarTemperatura.getOpcIndices());
+                sensor.setInfo(editarTemperatura.getOpcInfo());
+                buildChart(sensor, port);
+            } else if (jRadioButtonRel.isSelected()) {
+                sensor.setIndices(editarTemperatura.getIndices());
+                sensor.setInfo(editarTemperatura.getInfo());
+                showChart(sensor);
+            }
+        }
+        if (jCheckBoxUmidade.isSelected()) {
+            sensor = new ConcreteCreatorSensor().factoryMethod("Umidade do Ar");
+            if (!"".equals(port) && jRadioButtonLer.isSelected()) {
+                sensor.setIndices(editarUmidade.getOpcIndices());
+                sensor.setInfo(editarUmidade.getOpcInfo());
+                buildChart(sensor, port);
+            } else if (jRadioButtonRel.isSelected()) {
+                sensor.setIndices(editarUmidade.getIndices());
+                sensor.setInfo(editarUmidade.getInfo());
+                showChart(sensor);
             }
         }
     }//GEN-LAST:event_jButtonAbrirActionPerformed
@@ -325,6 +399,22 @@ public class Principal extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jTextFieldTempoKeyTyped
+
+    private void jButtonEditarGasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarGasesActionPerformed
+        editarGases.setVisible(true);
+    }//GEN-LAST:event_jButtonEditarGasesActionPerformed
+
+    private void jButtonEditarTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarTempActionPerformed
+        editarTemperatura.setVisible(true);
+    }//GEN-LAST:event_jButtonEditarTempActionPerformed
+
+    private void jButtonEditarUmidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarUmidadeActionPerformed
+        editarUmidade.setVisible(true);
+    }//GEN-LAST:event_jButtonEditarUmidadeActionPerformed
+
+    private void jButtonEditarPressaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarPressaoActionPerformed
+        editarPressao.setVisible(true);
+    }//GEN-LAST:event_jButtonEditarPressaoActionPerformed
 
     private GravacaoChart buildChart(Sensor sensor, String port) {
         try {
@@ -381,6 +471,10 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup grupoBotoes;
     private javax.swing.JButton jButtonAbrir;
+    private javax.swing.JButton jButtonEditarGases;
+    private javax.swing.JButton jButtonEditarPressao;
+    private javax.swing.JButton jButtonEditarTemp;
+    private javax.swing.JButton jButtonEditarUmidade;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JCheckBox jCheckBoxGases;
     private javax.swing.JCheckBox jCheckBoxPressao;
