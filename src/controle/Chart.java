@@ -18,10 +18,11 @@ public abstract class Chart {
 
     private Sensor sensor;
     private XYChart xyChart;
-    private DAO dao = new DAO();
+    private DAO dao;
 
-    public Chart(Sensor sensor) {
+    public Chart(Sensor sensor, DAO dao) {
         this.sensor = sensor;
+        this.dao = dao;
     }
 
     public Sensor getSensor() {

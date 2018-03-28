@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import modelo.DAO;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 import modelo.Sensor;
@@ -27,8 +28,8 @@ public final class GravacaoChart extends Chart {
     private List<Date> xData;
     private List<Double>[] yData;
 
-    public GravacaoChart(Sensor sensor, String port, long seconds) {
-        super(sensor);
+    public GravacaoChart(Sensor sensor, String port, long seconds, DAO dao) {
+        super(sensor, dao);
         this.seconds = seconds;
         valor = new double[sensor.getInfo().length];
         yData = new List[sensor.getInfo().length];
@@ -115,7 +116,8 @@ public final class GravacaoChart extends Chart {
             yData[i].addAll(getDataSensors(i, indices[i]));
         }
 
-        storeData();
+        //Store data
+        getDao().setValues(dataHora, valor);
 
         // Limit the total number of points
         while (xData.size() > 50) {
@@ -131,13 +133,6 @@ public final class GravacaoChart extends Chart {
         String[] aux = getSensor().getInfo();
         for (int i = 0; i < getSensor().getInfo().length; i++) {
             getXyChart().updateXYSeries(aux[i], xData, yData[i], null);
-        }
-    }
-
-    private void storeData() {
-        String aux[] = getSensor().getInfo();
-        for (int i = 0; i < getSensor().getInfo().length; i++) {
-            getDao().setValues(aux[i], dataHora, valor[i]);
         }
     }
 

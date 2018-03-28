@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import modelo.DAO;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 import modelo.Sensor;
@@ -19,8 +20,8 @@ public final class LeituraChart extends Chart {
     private List<Date> xData;
     private final List<Double>[] yData;
 
-    public LeituraChart(Sensor sensor, String dataHoraIni, String dataHoraFim) {
-        super(sensor);
+    public LeituraChart(Sensor sensor, String dataHoraIni, String dataHoraFim, DAO dao) {
+        super(sensor, dao);
         this.dataHoraIni = dataHoraIni;
         this.dataHoraFim = dataHoraFim;
         yData = new List[sensor.getInfo().length];
@@ -56,8 +57,7 @@ public final class LeituraChart extends Chart {
 
     @Override
     public List<Date> getTime() {
-        String aux[] = getSensor().getInfo();
-        return getDao().getTimes(aux[0], dataHoraIni, dataHoraFim);
+        return getDao().getTimes(dataHoraIni, dataHoraFim);
     }
 
     private void equals() {

@@ -99,7 +99,7 @@
     <folder id="FOLTAB72" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB74" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX23" populated="true" UUID="fc8e4db6-798a-4c78-819b-657a6b9fec10" clustered="false" name="id_gases" physicalName="id_gases" primaryKeyIndex="true" unique="false" >
+    <index id="IDX23" populated="true" UUID="fc8e4db6-798a-4c78-819b-657a6b9fec10" clustered="false" name="id_gases" physicalName="pk_informacao" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC24" populated="true" UUID="49efad52-fd52-40c1-9893-d0b9cdf2eddb" ascendingOrDescending="UNSPECIFIED" column-ref="COL8" name="id_gases" physicalName="id_gases" />
     </index>
    </folder>
