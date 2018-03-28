@@ -1,5 +1,6 @@
 package controle;
 
+import modelo.DAO;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
