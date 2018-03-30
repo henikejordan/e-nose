@@ -7,15 +7,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import util.ConectaBanco;
 
 /**
  *
  * @author Henike
  */
-public class DAOTemperatura implements DAO {
+public class DAOTemperatura extends DAO {
 
-    private final ConectaBanco conecta = ConectaBanco.getInstance();
+    public DAOTemperatura(String sensor) {
+        super(sensor);
+    }
 
     @Override
     public synchronized void setValues(String data_hora, double[] valor) {
@@ -24,7 +25,7 @@ public class DAOTemperatura implements DAO {
             Date parsedDate = dateFormat.parse(data_hora);
             Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
 
-            PreparedStatement pst = conecta.getConnection().prepareStatement("insert into temperatura "
+            PreparedStatement pst = getConecta().getConnection().prepareStatement("insert into temperatura "
                     + "(data_hora, temperatura) "
                     + "values(?,?)");
             pst.setTimestamp(1, timestamp);
@@ -41,34 +42,13 @@ public class DAOTemperatura implements DAO {
     @Override
     public List<Double> getValuesSensor(String info, String data_hora_ini, String data_hora_fim) {
         List<Double> data = new ArrayList<>();
-        ResultSet resultado = conecta.executaSQL("select * from temperatura "
+        ResultSet resultado = getConecta().executaSQL("select * from temperatura "
                 + "where  data_hora >= '" + data_hora_ini + "' and "
                 + "data_hora <= '" + data_hora_fim + "' order by data_hora");
 
         try {
             while (resultado.next()) {
                 data.add(resultado.getDouble("Temperatura"));
-            }
-        } catch (Exception ex) {
-            System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
-            System.exit(0);
-        }
-
-        return data;
-    }
-
-    @Override
-    public List<Date> getTimes(String data_hora_ini, String data_hora_fim) {
-        List<Date> data = new ArrayList<>();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        ResultSet resultado = conecta.executaSQL("select * from temperatura "
-                + "where data_hora >= '" + data_hora_ini + "' and "
-                + "data_hora <= '" + data_hora_fim + "' order by data_hora");
-
-        try {
-            while (resultado.next()) {
-                data.add(new Date(format.parse(resultado.getString("data_hora")).getTime()));
             }
         } catch (Exception ex) {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
