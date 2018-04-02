@@ -1,8 +1,6 @@
 package controle;
 
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import modelo.DAO;
@@ -43,7 +41,12 @@ public final class LeituraChart extends Chart {
             yData[i] = getDataSensors(i, i);
         }
 
-        equals();
+        if (xData.isEmpty()) {
+            xData.add(Calendar.getInstance().getTime());
+            for (int i = 0; i < getSensor().getInfo().length; i++) {
+                yData[i].add(0.0);
+            }
+        }
         createChart(xData, yData);
 
         return getXyChart();
@@ -58,33 +61,6 @@ public final class LeituraChart extends Chart {
     @Override
     public List<Date> getTime() {
         return getDao().getTimes(dataHoraIni, dataHoraFim);
-    }
-
-    private void equals() {
-        Integer[] num = new Integer[getSensor().getInfo().length + 1];
-        num[0] = xData.size();
-        for (int i = 0; i < getSensor().getInfo().length; i++) {
-            num[i + 1] = yData[i].size();
-        }
-
-        List nums = Arrays.asList(num);
-
-        while (xData.size() > (int) Collections.min(nums)) {
-            xData.remove(xData.size() - 1);
-        }
-
-        for (int i = 0; i < getSensor().getInfo().length; i++) {
-            while (yData[i].size() > (int) Collections.min(nums)) {
-                yData[i].remove(yData[i].size() - 1);
-            }
-        }
-
-        if (num[0] == 0) {
-            xData.add(Calendar.getInstance().getTime());
-            for (int i = 0; i < getSensor().getInfo().length; i++) {
-                yData[i].add(0.0);
-            }
-        }
     }
 
 }

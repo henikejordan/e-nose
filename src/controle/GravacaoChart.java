@@ -57,6 +57,9 @@ public final class GravacaoChart extends Chart {
                 javax.swing.SwingUtilities.invokeLater(() -> {
                     chartPanel.updateUI();
                 });
+                if (!chartPanel.isShowing()) {
+                    this.cancel();
+                }
             }
         };
 
