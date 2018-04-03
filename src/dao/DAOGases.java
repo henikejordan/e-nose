@@ -23,8 +23,10 @@ public class DAOGases extends DAO {
     public List<Double> getValues(String info, String data_hora_ini, String data_hora_fim, MediaMovel mediaMovel) {
         List<Double> data = new ArrayList<>();
         ResultSet resultado = getConecta().executaSQL("select * from gases "
-                + "where  data_hora >= '" + data_hora_ini + "' and "
-                + "data_hora <= '" + data_hora_fim + "' order by data_hora");
+                + "where data_hora >= '" + data_hora_ini + "' "
+                + "and data_hora <= '" + data_hora_fim + "' "
+                //+ "and data_hora::text like '____-__-__ __:__:_0' "
+                + "order by data_hora");
 
         try {
             while (resultado.next()) {

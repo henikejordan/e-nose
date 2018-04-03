@@ -30,8 +30,10 @@ public abstract class DAO {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         ResultSet resultado = getConecta().executaSQL("select * from " + sensor + " "
-                + "where data_hora >= '" + data_hora_ini + "' and "
-                + "data_hora <= '" + data_hora_fim + "' order by data_hora");
+                + "where data_hora >= '" + data_hora_ini + "' "
+                + "and data_hora <= '" + data_hora_fim + "' "
+                //+ "and data_hora::text like '____-__-__ __:__:_0' "
+                + "order by data_hora");
 
         try {
             while (resultado.next()) {
