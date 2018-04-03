@@ -1,4 +1,4 @@
-package modelo;
+package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import modelo.MediaMovel;
 
 /**
  *
@@ -19,7 +20,7 @@ public class DAOGases extends DAO {
     }
 
     @Override
-    public List<Double> getValuesSensor(String info, String data_hora_ini, String data_hora_fim) {
+    public List<Double> getValues(String info, String data_hora_ini, String data_hora_fim, MediaMovel mediaMovel) {
         List<Double> data = new ArrayList<>();
         ResultSet resultado = getConecta().executaSQL("select * from gases "
                 + "where  data_hora >= '" + data_hora_ini + "' and "
@@ -27,7 +28,7 @@ public class DAOGases extends DAO {
 
         try {
             while (resultado.next()) {
-                data.add(resultado.getDouble(info.replaceAll("-", "")));
+                data.add(mediaMovel.calcula(resultado.getDouble(info.replaceAll("-", ""))));
             }
         } catch (Exception ex) {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
@@ -38,7 +39,7 @@ public class DAOGases extends DAO {
     }
 
     @Override
-    public synchronized void setValues(String data_hora, double[] valor) {
+    public synchronized void setValues(String data_hora, double[] valor, MediaMovel mediaMovel) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date parsedDate = dateFormat.parse(data_hora);

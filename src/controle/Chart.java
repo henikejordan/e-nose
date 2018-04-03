@@ -1,9 +1,10 @@
 package controle;
 
-import modelo.DAO;
+import dao.DAO;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
+import modelo.MediaMovel;
 import modelo.Sensor;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
@@ -19,10 +20,12 @@ public abstract class Chart {
     private Sensor sensor;
     private XYChart xyChart;
     private DAO dao;
+    private MediaMovel mediaMovel;
 
-    public Chart(Sensor sensor, DAO dao) {
+    public Chart(Sensor sensor, DAO dao, MediaMovel mediaMovel) {
         this.sensor = sensor;
         this.dao = dao;
+        this.mediaMovel = mediaMovel;
     }
 
     public Sensor getSensor() {
@@ -57,6 +60,14 @@ public abstract class Chart {
         return sensor.getUnidade();
     }
 
+    public MediaMovel getMediaMovel() {
+        return mediaMovel;
+    }
+
+    public void setMediaMovel(MediaMovel mediaMovel) {
+        this.mediaMovel = mediaMovel;
+    }
+
     public void createPanel(final XChartPanel chartPanel) {
         javax.swing.SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("XChart");
@@ -84,7 +95,7 @@ public abstract class Chart {
 
     public abstract XYChart getChart();
 
-    public abstract List<Double> getDataSensors(int indice, int num);
+    public abstract List<Double> getData(int indice, int num);
 
     public abstract List<Date> getTime();
 

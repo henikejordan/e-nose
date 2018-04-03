@@ -22,4 +22,6 @@ public interface Editar {
 
     int[] getIndices();
 
+    int getMedia();
+
 }

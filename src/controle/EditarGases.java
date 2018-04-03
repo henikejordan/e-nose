@@ -51,6 +51,8 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
         jCheckBoxMq135 = new javax.swing.JCheckBox();
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jIntegerFieldMedia = new util.JIntegerField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -102,6 +104,8 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
             }
         });
 
+        jLabel1.setText("Média móvel:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,20 +113,33 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonConfirmar)
-                    .addComponent(jCheckBoxMq3)
-                    .addComponent(jCheckBoxMq6)
-                    .addComponent(jCheckBoxMq2)
-                    .addComponent(jCheckBoxMq5)
-                    .addComponent(jCheckBoxMq4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBoxMq8)
-                    .addComponent(jCheckBoxMq7)
-                    .addComponent(jCheckBoxMq9)
-                    .addComponent(jCheckBoxMq135)
-                    .addComponent(jButtonCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxMq3)
+                                    .addComponent(jCheckBoxMq6)
+                                    .addComponent(jCheckBoxMq2)
+                                    .addComponent(jCheckBoxMq5)
+                                    .addComponent(jCheckBoxMq4))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxMq8)
+                                    .addComponent(jCheckBoxMq7)
+                                    .addComponent(jCheckBoxMq9)
+                                    .addComponent(jCheckBoxMq135))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonConfirmar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                                .addComponent(jButtonCancelar)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jIntegerFieldMedia, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,11 +162,15 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
                     .addComponent(jCheckBoxMq135))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBoxMq6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jIntegerFieldMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConfirmar)
                     .addComponent(jButtonCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -249,6 +270,11 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
         return indices;
     }
 
+    @Override
+    public int getMedia() {
+        return Integer.parseInt(jIntegerFieldMedia.getText());
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
@@ -261,5 +287,7 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
     private javax.swing.JCheckBox jCheckBoxMq7;
     private javax.swing.JCheckBox jCheckBoxMq8;
     private javax.swing.JCheckBox jCheckBoxMq9;
+    private util.JIntegerField jIntegerFieldMedia;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

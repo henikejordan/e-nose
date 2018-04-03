@@ -30,22 +30,42 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jButtonConfirmar" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBoxMq3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBoxMq6" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBoxMq2" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBoxMq5" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBoxMq4" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jCheckBoxMq3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxMq6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxMq2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxMq5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxMq4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jCheckBoxMq8" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxMq7" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxMq9" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxMq135" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jButtonConfirmar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="17" max="32767" attributes="0"/>
+                              <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jIntegerFieldMedia" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jCheckBoxMq8" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBoxMq7" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBoxMq9" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBoxMq135" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,12 +94,16 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jCheckBoxMq6" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="13" max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jIntegerFieldMedia" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -155,6 +179,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="M&#xe9;dia m&#xf3;vel:"/>
+      </Properties>
+    </Component>
+    <Component class="util.JIntegerField" name="jIntegerFieldMedia">
     </Component>
   </SubComponents>
 </Form>

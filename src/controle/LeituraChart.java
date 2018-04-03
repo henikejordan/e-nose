@@ -3,7 +3,8 @@ package controle;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import modelo.DAO;
+import dao.DAO;
+import modelo.MediaMovel;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 import modelo.Sensor;
@@ -18,8 +19,8 @@ public final class LeituraChart extends Chart {
     private List<Date> xData;
     private final List<Double>[] yData;
 
-    public LeituraChart(Sensor sensor, String dataHoraIni, String dataHoraFim, DAO dao) {
-        super(sensor, dao);
+    public LeituraChart(Sensor sensor, String dataHoraIni, String dataHoraFim, DAO dao, MediaMovel mediaMovel) {
+        super(sensor, dao, mediaMovel);
         this.dataHoraIni = dataHoraIni;
         this.dataHoraFim = dataHoraFim;
         yData = new List[sensor.getInfo().length];
@@ -38,7 +39,7 @@ public final class LeituraChart extends Chart {
         xData = getTime();
 
         for (int i = 0; i < getSensor().getIndices().length; i++) {
-            yData[i] = getDataSensors(i, i);
+            yData[i] = getData(i, i);
         }
 
         if (xData.isEmpty()) {
@@ -53,9 +54,9 @@ public final class LeituraChart extends Chart {
     }
 
     @Override
-    public List<Double> getDataSensors(int indice, int num) {
+    public List<Double> getData(int indice, int num) {
         String aux[] = getSensor().getInfo();
-        return getDao().getValuesSensor(aux[indice], dataHoraIni, dataHoraFim);
+        return getDao().getValues(aux[indice], dataHoraIni, dataHoraFim, getMediaMovel());
     }
 
     @Override

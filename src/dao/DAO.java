@@ -1,10 +1,11 @@
-package modelo;
+package dao;
 
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import modelo.MediaMovel;
 import util.ConectaBanco;
 
 /**
@@ -44,8 +45,8 @@ public abstract class DAO {
         return data;
     }
 
-    public abstract List<Double> getValuesSensor(String info, String data_hora_ini, String data_hora_fim);
+    public abstract List<Double> getValues(String info, String data_hora_ini, String data_hora_fim, MediaMovel mediaMovel);
 
-    public abstract void setValues(String data_hora, double[] valor);
+    public abstract void setValues(String data_hora, double[] valor, MediaMovel mediaMovel);
 
 }

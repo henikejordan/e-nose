@@ -1,4 +1,4 @@
-package modelo;
+package util;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;

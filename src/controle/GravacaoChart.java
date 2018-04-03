@@ -1,6 +1,6 @@
 package controle;
 
-import modelo.TwoWaySerialComm;
+import util.TwoWaySerialComm;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,7 +9,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import modelo.DAO;
+import dao.DAO;
+import modelo.MediaMovel;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 import modelo.Sensor;
@@ -28,8 +29,8 @@ public final class GravacaoChart extends Chart {
     private List<Date> xData;
     private List<Double>[] yData;
 
-    public GravacaoChart(Sensor sensor, String port, long seconds, DAO dao) {
-        super(sensor, dao);
+    public GravacaoChart(Sensor sensor, String port, long seconds, DAO dao, MediaMovel mediaMovel) {
+        super(sensor, dao, mediaMovel);
         this.seconds = seconds;
         valor = new double[sensor.getInfo().length];
         yData = new List[sensor.getInfo().length];
@@ -77,7 +78,7 @@ public final class GravacaoChart extends Chart {
 
         int[] indices = getSensor().getIndices();
         for (int i = 0; i < getSensor().getIndices().length; i++) {
-            yData[i] = getDataSensors(i, indices[i]);
+            yData[i] = getData(i, indices[i]);
         }
 
         createChart(xData, yData);
@@ -86,7 +87,7 @@ public final class GravacaoChart extends Chart {
     }
 
     @Override
-    public List<Double> getDataSensors(int indice, int num) {
+    public List<Double> getData(int indice, int num) {
         List<Double> data = new ArrayList<>();
         try {
             valor[indice] = Double.parseDouble(serialComm.getData(num));
@@ -116,11 +117,11 @@ public final class GravacaoChart extends Chart {
 
         int[] indices = getSensor().getIndices();
         for (int i = 0; i < getSensor().getIndices().length; i++) {
-            yData[i].addAll(getDataSensors(i, indices[i]));
+            yData[i].addAll(getData(i, indices[i]));
         }
 
         //Store data
-        getDao().setValues(dataHora, valor);
+        getDao().setValues(dataHora, valor, getMediaMovel());
 
         // Limit the total number of points
         while (xData.size() > 50) {
