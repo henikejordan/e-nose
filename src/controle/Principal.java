@@ -87,7 +87,6 @@ public class Principal extends javax.swing.JFrame {
         jFormattedTextFieldHoraFim = new javax.swing.JFormattedTextField();
         jLabelTempo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldTempo = new javax.swing.JTextField();
         jCheckBoxGases = new javax.swing.JCheckBox();
         jCheckBoxTemp = new javax.swing.JCheckBox();
         jCheckBoxUmidade = new javax.swing.JCheckBox();
@@ -96,6 +95,7 @@ public class Principal extends javax.swing.JFrame {
         jButtonEditarTemp = new javax.swing.JButton();
         jButtonEditarPressao = new javax.swing.JButton();
         jButtonEditarUmidade = new javax.swing.JButton();
+        jIntegerFieldTempo = new modelo.JIntegerField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Real Time");
@@ -152,13 +152,6 @@ public class Principal extends javax.swing.JFrame {
         jLabelTempo.setText("Tempo de atualização:");
 
         jLabel1.setText("segundos");
-
-        jTextFieldTempo.setEnabled(false);
-        jTextFieldTempo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFieldTempoKeyTyped(evt);
-            }
-        });
 
         jCheckBoxGases.setText("Gases");
 
@@ -256,7 +249,7 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelTempo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jIntegerFieldTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel1)))))
                 .addGap(0, 50, Short.MAX_VALUE))
@@ -294,7 +287,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTempo)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldTempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jIntegerFieldTempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelHoraIni)
@@ -320,15 +313,17 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
         String port = (String) jComboBoxPorta.getSelectedItem(), dataHoraIni, dataHoraFim;
+        long tempo;
         Sensor sensor;
         DAO dao;
-        Estatistica mediaMovel;
+        Estatistica estatistica;
         try {
             SimpleDateFormat formatoAtual = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             SimpleDateFormat formatoDesejado = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             dataHoraIni = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataIni.getText() + " " + jFormattedTextFieldHoraIni.getText()));
             dataHoraFim = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataFim.getText() + " " + jFormattedTextFieldHoraFim.getText()));
-        } catch (ParseException ex) {
+            tempo = Long.parseLong(jIntegerFieldTempo.getText());
+        } catch (ParseException | NumberFormatException ex) {
             ex.getMessage();
             return;
         }
@@ -338,13 +333,13 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarGases.getOpcIndices());
                 sensor.setInfo(editarGases.getOpcInfo());
-                mediaMovel = new Estatistica(editarGases.getMedia(), "Retirar Maiores Desvios");
-                buildChart(sensor, port, dao, mediaMovel);
+                estatistica = new Estatistica(editarGases.getMedia(), "Retirar Maiores Desvios");
+                GravacaoChart gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarGases.getIndices());
                 sensor.setInfo(editarGases.getInfo());
-                mediaMovel = new Estatistica(editarGases.getMedia(), "Retirar Maiores Desvios");
-                showChart(sensor, dao, mediaMovel);
+                estatistica = new Estatistica(editarGases.getMedia(), "Retirar Maiores Desvios");
+                LeituraChart leituraChart = new LeituraChart(sensor, dao, estatistica);
             }
         }
         if (jCheckBoxPressao.isSelected()) {
@@ -353,13 +348,13 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarPressao.getOpcIndices());
                 sensor.setInfo(editarPressao.getOpcInfo());
-                mediaMovel = new Estatistica(editarPressao.getMedia(), "Retirar Maiores Desvios");
-                buildChart(sensor, port, dao, mediaMovel);
+                estatistica = new Estatistica(editarPressao.getMedia(), "Retirar Maiores Desvios");
+                GravacaoChart gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarPressao.getIndices());
                 sensor.setInfo(editarPressao.getInfo());
-                mediaMovel = new Estatistica(editarPressao.getMedia(), "Retirar Maiores Desvios");
-                showChart(sensor, dao, mediaMovel);
+                estatistica = new Estatistica(editarPressao.getMedia(), "Retirar Maiores Desvios");
+                LeituraChart leituraChart = new LeituraChart(sensor, dao, estatistica);
             }
         }
         if (jCheckBoxTemp.isSelected()) {
@@ -368,13 +363,13 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarTemperatura.getOpcIndices());
                 sensor.setInfo(editarTemperatura.getOpcInfo());
-                mediaMovel = new Estatistica(editarTemperatura.getMedia(), "Retirar Maiores Desvios");
-                buildChart(sensor, port, dao, mediaMovel);
+                estatistica = new Estatistica(editarTemperatura.getMedia(), "Retirar Maiores Desvios");
+                GravacaoChart gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarTemperatura.getIndices());
                 sensor.setInfo(editarTemperatura.getInfo());
-                mediaMovel = new Estatistica(editarTemperatura.getMedia(), "Retirar Maiores Desvios");
-                showChart(sensor, dao, mediaMovel);
+                estatistica = new Estatistica(editarTemperatura.getMedia(), "Retirar Maiores Desvios");
+                LeituraChart leituraChart = new LeituraChart(sensor, dao, estatistica);
             }
         }
         if (jCheckBoxUmidade.isSelected()) {
@@ -383,13 +378,13 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarUmidade.getOpcIndices());
                 sensor.setInfo(editarUmidade.getOpcInfo());
-                mediaMovel = new Estatistica(editarUmidade.getMedia(), "Retirar Maiores Desvios");
-                buildChart(sensor, port, dao, mediaMovel);
+                estatistica = new Estatistica(editarUmidade.getMedia(), "Retirar Maiores Desvios");
+                GravacaoChart gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarUmidade.getIndices());
                 sensor.setInfo(editarUmidade.getInfo());
-                mediaMovel = new Estatistica(editarUmidade.getMedia(), "Retirar Maiores Desvios");
-                showChart(sensor, dao, mediaMovel);
+                estatistica = new Estatistica(editarUmidade.getMedia(), "Retirar Maiores Desvios");
+                LeituraChart leituraChart = new LeituraChart(sensor, dao, estatistica);
             }
         }
     }//GEN-LAST:event_jButtonAbrirActionPerformed
@@ -399,7 +394,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jRadioButtonLerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonLerMouseClicked
-        jTextFieldTempo.setEnabled(true);
+        jIntegerFieldTempo.setEnabled(true);
         jFormattedTextFieldDataIni.setEnabled(false);
         jFormattedTextFieldDataFim.setEnabled(false);
         jFormattedTextFieldHoraIni.setEnabled(false);
@@ -407,24 +402,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonLerMouseClicked
 
     private void jRadioButtonRelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonRelMouseClicked
-        jTextFieldTempo.setEnabled(false);
+        jIntegerFieldTempo.setEnabled(false);
         jFormattedTextFieldDataIni.setEnabled(true);
         jFormattedTextFieldDataFim.setEnabled(true);
         jFormattedTextFieldHoraIni.setEnabled(true);
         jFormattedTextFieldHoraFim.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonRelMouseClicked
-
-    private void jTextFieldTempoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTempoKeyTyped
-        try {
-            if (jTextFieldTempo.getText().length() >= 5) {
-                evt.consume();
-            } else if (jTextFieldTempo.getText().length() == 0 && Long.parseLong(String.valueOf(evt.getKeyChar())) == 0) {
-                evt.consume();
-            }
-        } catch (NumberFormatException ex) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextFieldTempoKeyTyped
 
     private void jButtonEditarGasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarGasesActionPerformed
         editarGases.setVisible(true);
@@ -441,20 +424,6 @@ public class Principal extends javax.swing.JFrame {
     private void jButtonEditarPressaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarPressaoActionPerformed
         editarPressao.setVisible(true);
     }//GEN-LAST:event_jButtonEditarPressaoActionPerformed
-
-    private GravacaoChart buildChart(Sensor sensor, String port, DAO dao, Estatistica mediaMovel) {
-        try {
-            long tempo = Long.parseLong(jTextFieldTempo.getText());
-            return new GravacaoChart(sensor, port, tempo, dao, mediaMovel);
-        } catch (NumberFormatException ex) {
-            ex.getMessage();
-        }
-        return null;
-    }
-
-    private LeituraChart showChart(Sensor sensor, DAO dao, Estatistica mediaMovel) {
-        return new LeituraChart(sensor, dao, mediaMovel);
-    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -500,6 +469,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextFieldDataIni;
     private javax.swing.JFormattedTextField jFormattedTextFieldHoraFim;
     private javax.swing.JFormattedTextField jFormattedTextFieldHoraIni;
+    private modelo.JIntegerField jIntegerFieldTempo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelDataFim;
     private javax.swing.JLabel jLabelDataIni;
@@ -509,6 +479,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTempo;
     private javax.swing.JRadioButton jRadioButtonLer;
     private javax.swing.JRadioButton jRadioButtonRel;
-    private javax.swing.JTextField jTextFieldTempo;
     // End of variables declaration//GEN-END:variables
 }

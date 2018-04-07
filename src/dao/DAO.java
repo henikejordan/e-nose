@@ -62,8 +62,8 @@ public abstract class DAO {
         return data;
     }
 
-    public abstract List<Double> getValues(String info, Estatistica mediaMovel);
+    public abstract List<Double> getValues(String info, Estatistica estatistica);
 
-    public abstract void setValues(String data_hora, double[] valor, Estatistica mediaMovel);
+    public abstract void setValues(String data_hora, double[] valor, Estatistica estatistica);
 
 }

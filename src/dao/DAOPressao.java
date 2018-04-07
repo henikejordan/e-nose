@@ -20,27 +20,6 @@ public class DAOPressao extends DAO {
     }
 
     @Override
-    public synchronized void setValues(String data_hora, double[] valor, Estatistica mediaMovel) {
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date parsedDate = dateFormat.parse(data_hora);
-            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-
-            PreparedStatement pst = getConecta().getConnection().prepareStatement("insert into pressao "
-                    + "(data_hora, pressao) "
-                    + "values(?,?)");
-            pst.setTimestamp(1, timestamp);
-            for (int i = 0; i < valor.length; i++) {
-                pst.setDouble(i + 2, valor[i]);
-            }
-            pst.execute();
-        } catch (Exception ex) {
-            System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
-            System.exit(0);
-        }
-    }
-
-    @Override
     public List<Double> getValues(String info, Estatistica estatistica) {
         List<Double> data = new ArrayList<>();
         ResultSet resultado = getConecta().executaSQL("select * from pressao "
@@ -59,6 +38,27 @@ public class DAOPressao extends DAO {
         }
 
         return data;
+    }
+
+    @Override
+    public synchronized void setValues(String data_hora, double[] valor, Estatistica estatistica) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date parsedDate = dateFormat.parse(data_hora);
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+
+            PreparedStatement pst = getConecta().getConnection().prepareStatement("insert into pressao "
+                    + "(data_hora, pressao) "
+                    + "values(?,?)");
+            pst.setTimestamp(1, timestamp);
+            for (int i = 0; i < valor.length; i++) {
+                pst.setDouble(i + 2, valor[i]);
+            }
+            pst.execute();
+        } catch (Exception ex) {
+            System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+            System.exit(0);
+        }
     }
 
 }

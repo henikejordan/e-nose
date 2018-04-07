@@ -1,4 +1,4 @@
-package util;
+package modelo;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;

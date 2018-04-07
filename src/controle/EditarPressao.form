@@ -95,7 +95,7 @@
         <Property name="text" type="java.lang.String" value="M&#xe9;dia m&#xf3;vel:"/>
       </Properties>
     </Component>
-    <Component class="util.JIntegerField" name="jIntegerFieldMedia">
+    <Component class="modelo.JIntegerField" name="jIntegerFieldMedia">
     </Component>
   </SubComponents>
 </Form>

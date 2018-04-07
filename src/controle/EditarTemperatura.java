@@ -44,7 +44,7 @@ public final class EditarTemperatura extends javax.swing.JFrame implements Edita
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jIntegerFieldMedia = new util.JIntegerField();
+        jIntegerFieldMedia = new modelo.JIntegerField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -197,7 +197,7 @@ public final class EditarTemperatura extends javax.swing.JFrame implements Edita
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JCheckBox jCheckBoxTemp;
-    private util.JIntegerField jIntegerFieldMedia;
+    private modelo.JIntegerField jIntegerFieldMedia;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

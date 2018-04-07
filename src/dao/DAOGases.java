@@ -47,7 +47,7 @@ public class DAOGases extends DAO {
     }
 
     @Override
-    public synchronized void setValues(String data_hora, double[] valor, Estatistica mediaMovel) {
+    public synchronized void setValues(String data_hora, double[] valor, Estatistica estatistica) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date parsedDate = dateFormat.parse(data_hora);
@@ -69,12 +69,12 @@ public class DAOGases extends DAO {
 
     private double getMaximo(String data_ini, String data_fim) {
         double maximo = 0;
-        ResultSet resultado = getConecta().executaSQL("select max(maximo) from (SELECT "
+        ResultSet resultado = getConecta().executaSQL("select max(maximo) from (select "
                 + "( "
-                + "SELECT max(v) "
-                + "FROM (VALUES (mq2), (mq3), (mq4), (mq5), (mq6), (mq7), (mq8), (mq9), (mq135)) AS value(v) "
+                + "select max(v) "
+                + "from (values (mq2), (mq3), (mq4), (mq5), (mq6), (mq7), (mq8), (mq9), (mq135)) as value(v) "
                 + ") as maximo, data_hora "
-                + "FROM gases) as maxgases "
+                + "from gases) as maxgases "
                 + "where data_hora >= '" + data_ini + " 00:00:00' "
                 + "and data_hora <= '" + data_fim + " 23:59:59' ");
 
@@ -92,12 +92,12 @@ public class DAOGases extends DAO {
 
     private double getMinimo(String data_ini, String data_fim) {
         double minimo = 0;
-        ResultSet resultado = getConecta().executaSQL("select min(minimo) from (SELECT "
+        ResultSet resultado = getConecta().executaSQL("select min(minimo) from (select "
                 + "( "
-                + "SELECT min(v) "
-                + "FROM (VALUES (mq2), (mq3), (mq4), (mq5), (mq6), (mq7), (mq8), (mq9), (mq135)) AS value(v) "
+                + "select min(v) "
+                + "from (values (mq2), (mq3), (mq4), (mq5), (mq6), (mq7), (mq8), (mq9), (mq135)) as value(v) "
                 + ") as minimo, data_hora "
-                + "FROM gases) as mingases "
+                + "from gases) as mingases "
                 + "where data_hora >= '" + data_ini + " 00:00:00' "
                 + "and data_hora <= '" + data_fim + " 23:59:59' ");
 

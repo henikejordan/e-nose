@@ -52,7 +52,7 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jIntegerFieldMedia = new util.JIntegerField();
+        jIntegerFieldMedia = new modelo.JIntegerField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -287,7 +287,7 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
     private javax.swing.JCheckBox jCheckBoxMq7;
     private javax.swing.JCheckBox jCheckBoxMq8;
     private javax.swing.JCheckBox jCheckBoxMq9;
-    private util.JIntegerField jIntegerFieldMedia;
+    private modelo.JIntegerField jIntegerFieldMedia;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
