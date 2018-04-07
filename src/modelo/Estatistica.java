@@ -4,19 +4,30 @@ package modelo;
  *
  * @author usuario
  */
-public class MediaMovel {
+public class Estatistica {
 
     private final int N;
     private final double[] valor;
+    private final String opc;
 
-    public MediaMovel(int N) {
+    public Estatistica(int N, String opc) {
         this.N = N;
         valor = new double[N];
+        this.opc = opc;
     }
 
     public double calcula(double original) {
         atualiza(original);
-        return retiraMaioresDesvios();
+        switch (opc) {
+            case "Média":
+                return media();
+            case "Mediana":
+                return mediana();
+            case "Retirar Extremos":
+                return retiraExtremos();
+            default:
+                return retiraMaioresDesvios();
+        }
     }
 
     public void atualiza(double original) {
@@ -48,6 +59,10 @@ public class MediaMovel {
             }
         }
         return index;
+    }
+
+    public double normaliza(double valor, double min, double max) {
+        return (valor - min) / (max - min);
     }
 
     public double desvioPadrao() {

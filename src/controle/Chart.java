@@ -4,7 +4,7 @@ import dao.DAO;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
-import modelo.MediaMovel;
+import modelo.Estatistica;
 import modelo.Sensor;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
@@ -20,12 +20,12 @@ public abstract class Chart {
     private Sensor sensor;
     private XYChart xyChart;
     private DAO dao;
-    private MediaMovel mediaMovel;
+    private Estatistica estatistica;
 
-    public Chart(Sensor sensor, DAO dao, MediaMovel mediaMovel) {
+    public Chart(Sensor sensor, DAO dao, Estatistica estatistica) {
         this.sensor = sensor;
         this.dao = dao;
-        this.mediaMovel = mediaMovel;
+        this.estatistica = estatistica;
     }
 
     public Sensor getSensor() {
@@ -60,12 +60,12 @@ public abstract class Chart {
         return sensor.getUnidade();
     }
 
-    public MediaMovel getMediaMovel() {
-        return mediaMovel;
+    public Estatistica getEstatistica() {
+        return estatistica;
     }
 
-    public void setMediaMovel(MediaMovel mediaMovel) {
-        this.mediaMovel = mediaMovel;
+    public void setEstatistica(Estatistica estatistica) {
+        this.estatistica = estatistica;
     }
 
     public void createPanel(final XChartPanel chartPanel) {

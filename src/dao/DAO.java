@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import modelo.MediaMovel;
+import modelo.Estatistica;
 import util.ConectaBanco;
 
 /**
@@ -16,16 +16,31 @@ public abstract class DAO {
 
     private final ConectaBanco conecta = ConectaBanco.getInstance();
     private final String sensor;
+    private final String data_hora_ini, data_hora_fim;
 
-    public DAO(String sensor) {
+    public DAO(String sensor, String data_hora_ini, String data_hora_fim) {
         this.sensor = sensor;
+        this.data_hora_ini = data_hora_ini;
+        this.data_hora_fim = data_hora_fim;
     }
 
     public ConectaBanco getConecta() {
         return conecta;
     }
 
-    public List<Date> getTimes(String data_hora_ini, String data_hora_fim) {
+    public String getSensor() {
+        return sensor;
+    }
+
+    public String getData_hora_ini() {
+        return data_hora_ini;
+    }
+
+    public String getData_hora_fim() {
+        return data_hora_fim;
+    }
+
+    public List<Date> getTimes() {
         List<Date> data = new ArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -47,8 +62,8 @@ public abstract class DAO {
         return data;
     }
 
-    public abstract List<Double> getValues(String info, String data_hora_ini, String data_hora_fim, MediaMovel mediaMovel);
+    public abstract List<Double> getValues(String info, Estatistica mediaMovel);
 
-    public abstract void setValues(String data_hora, double[] valor, MediaMovel mediaMovel);
+    public abstract void setValues(String data_hora, double[] valor, Estatistica mediaMovel);
 
 }

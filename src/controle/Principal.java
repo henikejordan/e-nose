@@ -10,7 +10,7 @@ import javax.swing.text.MaskFormatter;
 import dao.ConcreteCreatorDAO;
 import modelo.ConcreteCreatorSensor;
 import dao.DAO;
-import modelo.MediaMovel;
+import modelo.Estatistica;
 import modelo.Sensor;
 
 /**
@@ -319,67 +319,76 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
-        String port = (String) jComboBoxPorta.getSelectedItem();
+        String port = (String) jComboBoxPorta.getSelectedItem(), dataHoraIni, dataHoraFim;
         Sensor sensor;
         DAO dao;
-        MediaMovel mediaMovel;
+        Estatistica mediaMovel;
+        try {
+            SimpleDateFormat formatoAtual = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            SimpleDateFormat formatoDesejado = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            dataHoraIni = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataIni.getText() + " " + jFormattedTextFieldHoraIni.getText()));
+            dataHoraFim = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataFim.getText() + " " + jFormattedTextFieldHoraFim.getText()));
+        } catch (ParseException ex) {
+            ex.getMessage();
+            return;
+        }
         if (jCheckBoxGases.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Gases");
-            dao = new ConcreteCreatorDAO().factoryMethod("Gases");
+            dao = new ConcreteCreatorDAO().factoryMethod("Gases", dataHoraIni, dataHoraFim);
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarGases.getOpcIndices());
                 sensor.setInfo(editarGases.getOpcInfo());
-                mediaMovel = new MediaMovel(editarGases.getMedia());
+                mediaMovel = new Estatistica(editarGases.getMedia(), "Retirar Maiores Desvios");
                 buildChart(sensor, port, dao, mediaMovel);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarGases.getIndices());
                 sensor.setInfo(editarGases.getInfo());
-                mediaMovel = new MediaMovel(editarGases.getMedia());
+                mediaMovel = new Estatistica(editarGases.getMedia(), "Retirar Maiores Desvios");
                 showChart(sensor, dao, mediaMovel);
             }
         }
         if (jCheckBoxPressao.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Pressão Atmosférica");
-            dao = new ConcreteCreatorDAO().factoryMethod("Pressão Atmosférica");
+            dao = new ConcreteCreatorDAO().factoryMethod("Pressão Atmosférica", dataHoraIni, dataHoraFim);
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarPressao.getOpcIndices());
                 sensor.setInfo(editarPressao.getOpcInfo());
-                mediaMovel = new MediaMovel(editarPressao.getMedia());
+                mediaMovel = new Estatistica(editarPressao.getMedia(), "Retirar Maiores Desvios");
                 buildChart(sensor, port, dao, mediaMovel);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarPressao.getIndices());
                 sensor.setInfo(editarPressao.getInfo());
-                mediaMovel = new MediaMovel(editarPressao.getMedia());
+                mediaMovel = new Estatistica(editarPressao.getMedia(), "Retirar Maiores Desvios");
                 showChart(sensor, dao, mediaMovel);
             }
         }
         if (jCheckBoxTemp.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Temperatura");
-            dao = new ConcreteCreatorDAO().factoryMethod("Temperatura");
+            dao = new ConcreteCreatorDAO().factoryMethod("Temperatura", dataHoraIni, dataHoraFim);
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarTemperatura.getOpcIndices());
                 sensor.setInfo(editarTemperatura.getOpcInfo());
-                mediaMovel = new MediaMovel(editarTemperatura.getMedia());
+                mediaMovel = new Estatistica(editarTemperatura.getMedia(), "Retirar Maiores Desvios");
                 buildChart(sensor, port, dao, mediaMovel);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarTemperatura.getIndices());
                 sensor.setInfo(editarTemperatura.getInfo());
-                mediaMovel = new MediaMovel(editarTemperatura.getMedia());
+                mediaMovel = new Estatistica(editarTemperatura.getMedia(), "Retirar Maiores Desvios");
                 showChart(sensor, dao, mediaMovel);
             }
         }
         if (jCheckBoxUmidade.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Umidade do Ar");
-            dao = new ConcreteCreatorDAO().factoryMethod("Umidade do Ar");
+            dao = new ConcreteCreatorDAO().factoryMethod("Umidade do Ar", dataHoraIni, dataHoraFim);
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarUmidade.getOpcIndices());
                 sensor.setInfo(editarUmidade.getOpcInfo());
-                mediaMovel = new MediaMovel(editarUmidade.getMedia());
+                mediaMovel = new Estatistica(editarUmidade.getMedia(), "Retirar Maiores Desvios");
                 buildChart(sensor, port, dao, mediaMovel);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarUmidade.getIndices());
                 sensor.setInfo(editarUmidade.getInfo());
-                mediaMovel = new MediaMovel(editarUmidade.getMedia());
+                mediaMovel = new Estatistica(editarUmidade.getMedia(), "Retirar Maiores Desvios");
                 showChart(sensor, dao, mediaMovel);
             }
         }
@@ -433,7 +442,7 @@ public class Principal extends javax.swing.JFrame {
         editarPressao.setVisible(true);
     }//GEN-LAST:event_jButtonEditarPressaoActionPerformed
 
-    private GravacaoChart buildChart(Sensor sensor, String port, DAO dao, MediaMovel mediaMovel) {
+    private GravacaoChart buildChart(Sensor sensor, String port, DAO dao, Estatistica mediaMovel) {
         try {
             long tempo = Long.parseLong(jTextFieldTempo.getText());
             return new GravacaoChart(sensor, port, tempo, dao, mediaMovel);
@@ -443,19 +452,8 @@ public class Principal extends javax.swing.JFrame {
         return null;
     }
 
-    private LeituraChart showChart(Sensor sensor, DAO dao, MediaMovel mediaMovel) {
-        String dataHoraIni, dataHoraFim;
-        try {
-            SimpleDateFormat formatoAtual = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            SimpleDateFormat formatoDesejado = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            dataHoraIni = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataIni.getText() + " " + jFormattedTextFieldHoraIni.getText()));
-            dataHoraFim = formatoDesejado.format(formatoAtual.parse(jFormattedTextFieldDataFim.getText() + " " + jFormattedTextFieldHoraFim.getText()));
-
-            return new LeituraChart(sensor, dataHoraIni, dataHoraFim, dao, mediaMovel);
-        } catch (ParseException ex) {
-            ex.getMessage();
-        }
-        return null;
+    private LeituraChart showChart(Sensor sensor, DAO dao, Estatistica mediaMovel) {
+        return new LeituraChart(sensor, dao, mediaMovel);
     }
 
     public static void main(String args[]) {

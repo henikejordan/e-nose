@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import dao.DAO;
-import modelo.MediaMovel;
+import modelo.Estatistica;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 import modelo.Sensor;
@@ -15,14 +15,11 @@ import modelo.Sensor;
  */
 public final class LeituraChart extends Chart {
 
-    private final String dataHoraIni, dataHoraFim;
     private List<Date> xData;
     private final List<Double>[] yData;
 
-    public LeituraChart(Sensor sensor, String dataHoraIni, String dataHoraFim, DAO dao, MediaMovel mediaMovel) {
-        super(sensor, dao, mediaMovel);
-        this.dataHoraIni = dataHoraIni;
-        this.dataHoraFim = dataHoraFim;
+    public LeituraChart(Sensor sensor, DAO dao, Estatistica estatistica) {
+        super(sensor, dao, estatistica);
         yData = new List[sensor.getInfo().length];
 
         go();
@@ -56,12 +53,12 @@ public final class LeituraChart extends Chart {
     @Override
     public List<Double> getData(int indice, int num) {
         String aux[] = getSensor().getInfo();
-        return getDao().getValues(aux[indice], dataHoraIni, dataHoraFim, getMediaMovel());
+        return getDao().getValues(aux[indice], getEstatistica());
     }
 
     @Override
     public List<Date> getTime() {
-        return getDao().getTimes(dataHoraIni, dataHoraFim);
+        return getDao().getTimes();
     }
 
 }

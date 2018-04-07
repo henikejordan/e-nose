@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import dao.DAO;
-import modelo.MediaMovel;
+import modelo.Estatistica;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 import modelo.Sensor;
@@ -29,8 +29,8 @@ public final class GravacaoChart extends Chart {
     private List<Date> xData;
     private List<Double>[] yData;
 
-    public GravacaoChart(Sensor sensor, String port, long seconds, DAO dao, MediaMovel mediaMovel) {
-        super(sensor, dao, mediaMovel);
+    public GravacaoChart(Sensor sensor, String port, long seconds, DAO dao, Estatistica estatistica) {
+        super(sensor, dao, estatistica);
         this.seconds = seconds;
         valor = new double[sensor.getInfo().length];
         yData = new List[sensor.getInfo().length];
@@ -121,7 +121,7 @@ public final class GravacaoChart extends Chart {
         }
 
         //Store data
-        getDao().setValues(dataHora, valor, getMediaMovel());
+        getDao().setValues(dataHora, valor, getEstatistica());
 
         // Limit the total number of points
         while (xData.size() > 50) {

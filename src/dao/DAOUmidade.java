@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import modelo.MediaMovel;
+import modelo.Estatistica;
 
 /**
  *
@@ -15,12 +15,12 @@ import modelo.MediaMovel;
  */
 public class DAOUmidade extends DAO {
 
-    public DAOUmidade(String sensor) {
-        super(sensor);
+    public DAOUmidade(String sensor, String data_hora_ini, String data_hora_fim) {
+        super(sensor, data_hora_ini, data_hora_fim);
     }
 
     @Override
-    public synchronized void setValues(String data_hora, double[] valor, MediaMovel mediaMovel) {
+    public synchronized void setValues(String data_hora, double[] valor, Estatistica mediaMovel) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date parsedDate = dateFormat.parse(data_hora);
@@ -41,17 +41,17 @@ public class DAOUmidade extends DAO {
     }
 
     @Override
-    public List<Double> getValues(String info, String data_hora_ini, String data_hora_fim, MediaMovel mediaMovel) {
+    public List<Double> getValues(String info, Estatistica estatistica) {
         List<Double> data = new ArrayList<>();
         ResultSet resultado = getConecta().executaSQL("select * from umidade "
-                + "where data_hora >= '" + data_hora_ini + "' "
-                + "and data_hora <= '" + data_hora_fim + "' "
+                + "where data_hora >= '" + getData_hora_ini() + "' "
+                + "and data_hora <= '" + getData_hora_fim() + "' "
                 //+ "and data_hora::text like '____-__-__ __:__:_0' "
                 + "order by data_hora");
 
         try {
             while (resultado.next()) {
-                data.add(mediaMovel.calcula(resultado.getDouble("Umidade")));
+                data.add(estatistica.calcula(resultado.getDouble("Umidade")));
             }
         } catch (Exception ex) {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
