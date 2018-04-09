@@ -36,7 +36,7 @@ public class DAOGases extends DAO {
 
         try {
             while (resultado.next()) {
-                data.add(estatistica.calcula(estatistica.normaliza(resultado.getDouble(info.replaceAll("-", "")), min, max)));
+                data.add(estatistica.calcula(resultado.getDouble(info.replaceAll("-", ""))));
             }
         } catch (Exception ex) {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());

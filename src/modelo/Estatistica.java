@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Arrays;
+
 /**
  *
  * @author usuario
@@ -86,7 +88,9 @@ public class Estatistica {
         if (N == 1) {
             return valor[0];
         }
-        return (valor[primeiro] + valor[primeiro + 1]) / 2;
+        double aux[] = Arrays.copyOf(valor, N);
+        Arrays.sort(aux);
+        return (aux[primeiro] + aux[primeiro + 1]) / 2;
     }
 
     public double retiraExtremos() {

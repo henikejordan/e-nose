@@ -330,60 +330,56 @@ public class Principal extends javax.swing.JFrame {
         if (jCheckBoxGases.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Gases");
             dao = new ConcreteCreatorDAO().factoryMethod("Gases", dataHoraIni, dataHoraFim);
+            estatistica = new Estatistica(editarGases.getMedia(), "Retirar Maiores Desvios");
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarGases.getOpcIndices());
                 sensor.setInfo(editarGases.getOpcInfo());
-                estatistica = new Estatistica(editarGases.getMedia(), "Retirar Maiores Desvios");
                 GravacaoChart gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarGases.getIndices());
                 sensor.setInfo(editarGases.getInfo());
-                estatistica = new Estatistica(editarGases.getMedia(), "Retirar Maiores Desvios");
                 LeituraChart leituraChart = new LeituraChart(sensor, dao, estatistica);
             }
         }
         if (jCheckBoxPressao.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Pressão Atmosférica");
             dao = new ConcreteCreatorDAO().factoryMethod("Pressão Atmosférica", dataHoraIni, dataHoraFim);
+            estatistica = new Estatistica(editarPressao.getMedia(), "Retirar Maiores Desvios");
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarPressao.getOpcIndices());
                 sensor.setInfo(editarPressao.getOpcInfo());
-                estatistica = new Estatistica(editarPressao.getMedia(), "Retirar Maiores Desvios");
                 GravacaoChart gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarPressao.getIndices());
                 sensor.setInfo(editarPressao.getInfo());
-                estatistica = new Estatistica(editarPressao.getMedia(), "Retirar Maiores Desvios");
                 LeituraChart leituraChart = new LeituraChart(sensor, dao, estatistica);
             }
         }
         if (jCheckBoxTemp.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Temperatura");
             dao = new ConcreteCreatorDAO().factoryMethod("Temperatura", dataHoraIni, dataHoraFim);
+            estatistica = new Estatistica(editarTemperatura.getMedia(), "Retirar Maiores Desvios");
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarTemperatura.getOpcIndices());
                 sensor.setInfo(editarTemperatura.getOpcInfo());
-                estatistica = new Estatistica(editarTemperatura.getMedia(), "Retirar Maiores Desvios");
                 GravacaoChart gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarTemperatura.getIndices());
                 sensor.setInfo(editarTemperatura.getInfo());
-                estatistica = new Estatistica(editarTemperatura.getMedia(), "Retirar Maiores Desvios");
                 LeituraChart leituraChart = new LeituraChart(sensor, dao, estatistica);
             }
         }
         if (jCheckBoxUmidade.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Umidade do Ar");
             dao = new ConcreteCreatorDAO().factoryMethod("Umidade do Ar", dataHoraIni, dataHoraFim);
+            estatistica = new Estatistica(editarUmidade.getMedia(), "Retirar Maiores Desvios");
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarUmidade.getOpcIndices());
                 sensor.setInfo(editarUmidade.getOpcInfo());
-                estatistica = new Estatistica(editarUmidade.getMedia(), "Retirar Maiores Desvios");
                 GravacaoChart gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarUmidade.getIndices());
                 sensor.setInfo(editarUmidade.getInfo());
-                estatistica = new Estatistica(editarUmidade.getMedia(), "Retirar Maiores Desvios");
                 LeituraChart leituraChart = new LeituraChart(sensor, dao, estatistica);
             }
         }
