@@ -20,7 +20,7 @@ public class DAOUmidade extends DAO {
     }
 
     @Override
-    public List<Double> getValues(String info, Estatistica estatistica) {
+    public synchronized List<Double> getValues(String info, Estatistica estatistica) {
         List<Double> data = new ArrayList<>();
         ResultSet resultado = getConecta().executaSQL("select * from umidade "
                 + "where data_hora >= '" + getData_hora_ini() + "' "

@@ -26,7 +26,7 @@ public class DAOGases extends DAO {
     }
 
     @Override
-    public List<Double> getValues(String info, Estatistica estatistica) {
+    public synchronized List<Double> getValues(String info, Estatistica estatistica) {
         List<Double> data = new ArrayList<>();
         ResultSet resultado = getConecta().executaSQL("select * from gases "
                 + "where data_hora >= '" + getData_hora_ini() + "' "
@@ -54,8 +54,8 @@ public class DAOGases extends DAO {
             Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
 
             PreparedStatement pst = getConecta().getConnection().prepareStatement("insert into gases "
-                    + "(data_hora, mq2, mq3, mq4, mq5, mq6, mq7, mq8, mq9, mq135) "
-                    + "values(?,?,?,?,?,?,?,?,?,?)");
+                    + "(data_hora, mq2, mq3, mq4, mq5, mq6, mq7, mq8, mq9, mq135, tgs822) "
+                    + "values(?,?,?,?,?,?,?,?,?,?,?)");
             pst.setTimestamp(1, timestamp);
             for (int i = 0; i < valor.length; i++) {
                 pst.setDouble(i + 2, valor[i]);
@@ -70,10 +70,8 @@ public class DAOGases extends DAO {
     private double getMaximo(String data_ini, String data_fim) {
         double maximo = 0;
         ResultSet resultado = getConecta().executaSQL("select max(maximo) from (select "
-                + "( "
-                + "select max(v) "
-                + "from (values (mq2), (mq3), (mq4), (mq5), (mq6), (mq7), (mq8), (mq9), (mq135)) as value(v) "
-                + ") as maximo, data_hora "
+                + "(select max(v) from (values (mq2), (mq3), (mq4), (mq5), (mq6), "
+                + "(mq7), (mq8), (mq9), (mq135), (tgs822)) as value(v)) as maximo, data_hora "
                 + "from gases) as maxgases "
                 + "where data_hora >= '" + data_ini + " 00:00:00' "
                 + "and data_hora <= '" + data_fim + " 23:59:59' ");
@@ -93,10 +91,8 @@ public class DAOGases extends DAO {
     private double getMinimo(String data_ini, String data_fim) {
         double minimo = 0;
         ResultSet resultado = getConecta().executaSQL("select min(minimo) from (select "
-                + "( "
-                + "select min(v) "
-                + "from (values (mq2), (mq3), (mq4), (mq5), (mq6), (mq7), (mq8), (mq9), (mq135)) as value(v) "
-                + ") as minimo, data_hora "
+                + "(select min(v) from (values (mq2), (mq3), (mq4), (mq5), (mq6), "
+                + "(mq7), (mq8), (mq9), (mq135), (tgs822)) as value(v)) as minimo, data_hora "
                 + "from gases) as mingases "
                 + "where data_hora >= '" + data_ini + " 00:00:00' "
                 + "and data_hora <= '" + data_fim + " 23:59:59' ");

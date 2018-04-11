@@ -9,11 +9,11 @@ import javax.swing.JOptionPane;
 public final class EditarGases extends javax.swing.JFrame implements Editar {
 
     private static EditarGases instance = null;
-    private final String[] opcInfo = {"MQ-2", "MQ-3", "MQ-4", "MQ-5", "MQ-6", "MQ-7", "MQ-8", "MQ-9", "MQ-135"};
-    private final int[] opcIndices = {13, 0, 1, 2, 3, 4, 5, 6, 7};
+    private final String[] opcInfo = {"MQ-2", "MQ-3", "MQ-4", "MQ-5", "MQ-6", "MQ-7", "MQ-8", "MQ-9", "MQ-135", "TGS822"};
+    private final int[] opcIndices = {13, 0, 1, 2, 3, 4, 5, 6, 7, 8};
     private String[] info;
     private int[] indices;
-    private final boolean[] estado = new boolean[9];
+    private final boolean[] estado = new boolean[10];
 
     /**
      * Creates new form EditarGases
@@ -53,6 +53,7 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
         jButtonCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jIntegerFieldMedia = new modelo.JIntegerField();
+        jCheckBoxTgs822 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -106,6 +107,9 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
 
         jLabel1.setText("Média móvel:");
 
+        jCheckBoxTgs822.setSelected(true);
+        jCheckBoxTgs822.setText("TGS822");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,7 +131,8 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
                                     .addComponent(jCheckBoxMq8)
                                     .addComponent(jCheckBoxMq7)
                                     .addComponent(jCheckBoxMq9)
-                                    .addComponent(jCheckBoxMq135))
+                                    .addComponent(jCheckBoxMq135)
+                                    .addComponent(jCheckBoxTgs822))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -161,7 +166,9 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
                     .addComponent(jCheckBoxMq5)
                     .addComponent(jCheckBoxMq135))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxMq6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxMq6)
+                    .addComponent(jCheckBoxTgs822))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,7 +208,8 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
     public boolean isSelecionado() {
         return jCheckBoxMq2.isSelected() || jCheckBoxMq3.isSelected() || jCheckBoxMq4.isSelected()
                 || jCheckBoxMq5.isSelected() || jCheckBoxMq6.isSelected() || jCheckBoxMq7.isSelected()
-                || jCheckBoxMq8.isSelected() || jCheckBoxMq9.isSelected() || jCheckBoxMq135.isSelected();
+                || jCheckBoxMq8.isSelected() || jCheckBoxMq9.isSelected() || jCheckBoxMq135.isSelected()
+                || jCheckBoxTgs822.isSelected();
     }
 
     @Override
@@ -215,6 +223,7 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
         estado[6] = jCheckBoxMq8.isSelected();
         estado[7] = jCheckBoxMq9.isSelected();
         estado[8] = jCheckBoxMq135.isSelected();
+        estado[9] = jCheckBoxTgs822.isSelected();
     }
 
     @Override
@@ -228,6 +237,7 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
         jCheckBoxMq8.setSelected(estado[6]);
         jCheckBoxMq9.setSelected(estado[7]);
         jCheckBoxMq135.setSelected(estado[8]);
+        jCheckBoxTgs822.setSelected(estado[9]);
     }
 
     @Override
@@ -287,6 +297,7 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
     private javax.swing.JCheckBox jCheckBoxMq7;
     private javax.swing.JCheckBox jCheckBoxMq8;
     private javax.swing.JCheckBox jCheckBoxMq9;
+    private javax.swing.JCheckBox jCheckBoxTgs822;
     private modelo.JIntegerField jIntegerFieldMedia;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

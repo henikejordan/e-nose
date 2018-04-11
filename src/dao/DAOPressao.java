@@ -20,7 +20,7 @@ public class DAOPressao extends DAO {
     }
 
     @Override
-    public List<Double> getValues(String info, Estatistica estatistica) {
+    public synchronized List<Double> getValues(String info, Estatistica estatistica) {
         List<Double> data = new ArrayList<>();
         ResultSet resultado = getConecta().executaSQL("select * from pressao "
                 + "where data_hora >= '" + getData_hora_ini() + "' "
