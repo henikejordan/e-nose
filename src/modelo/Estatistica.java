@@ -32,6 +32,12 @@ public class Estatistica {
         }
     }
 
+    public void zeraJanela() {
+        for (int i = 0; i < N; i++) {
+            valor[i] = 0.0;
+        }
+    }
+
     public void atualiza(double original) {
         for (int i = N - 1; i > 0; i--) {
             valor[i] = valor[i - 1];

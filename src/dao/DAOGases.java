@@ -33,6 +33,7 @@ public class DAOGases extends DAO {
                 + "and data_hora <= '" + getData_hora_fim() + "' "
                 //+ "and data_hora::text like '____-__-__ __:__:_0' "
                 + "order by data_hora");
+        estatistica.zeraJanela();
 
         try {
             while (resultado.next()) {
