@@ -34,10 +34,11 @@ public final class LeituraChart extends Chart {
     @Override
     public XYChart getChart() {
         xData = getTime();
-
         for (int i = 0; i < getSensor().getIndices().length; i++) {
             yData[i] = getData(i, i);
         }
+
+        equals();
 
         if (xData.isEmpty()) {
             xData.add(Calendar.getInstance().getTime());
@@ -59,6 +60,25 @@ public final class LeituraChart extends Chart {
     @Override
     public List<Date> getTime() {
         return getDao().getTimes();
+    }
+
+    private void equals() {
+        int menor = xData.size();
+        for (int i = 0; i < getSensor().getInfo().length; i++) {
+            if (yData[i].size() < menor) {
+                menor = yData[i].size();
+            }
+        }
+
+        while (xData.size() > menor) {
+            xData.remove(xData.size() - 1);
+        }
+
+        for (int i = 0; i < getSensor().getInfo().length; i++) {
+            while (yData[i].size() > menor) {
+                yData[i].remove(yData[i].size() - 1);
+            }
+        }
     }
 
 }
