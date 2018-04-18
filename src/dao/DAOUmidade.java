@@ -15,8 +15,8 @@ import modelo.Estatistica;
  */
 public class DAOUmidade extends DAO {
 
-    public DAOUmidade(String sensor, String data_hora_ini, String data_hora_fim) {
-        super(sensor, data_hora_ini, data_hora_fim);
+    public DAOUmidade(String data_hora_ini, String data_hora_fim) {
+        super("umidade", data_hora_ini, data_hora_fim);
     }
 
     @Override

@@ -15,8 +15,8 @@ import modelo.Estatistica;
  */
 public class DAOPressao extends DAO {
 
-    public DAOPressao(String sensor, String data_hora_ini, String data_hora_fim) {
-        super(sensor, data_hora_ini, data_hora_fim);
+    public DAOPressao(String data_hora_ini, String data_hora_fim) {
+        super("pressao", data_hora_ini, data_hora_fim);
     }
 
     @Override

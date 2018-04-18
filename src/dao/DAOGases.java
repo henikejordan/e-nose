@@ -15,14 +15,8 @@ import modelo.Estatistica;
  */
 public class DAOGases extends DAO {
 
-    private final double min;
-    private final double max;
-
-    public DAOGases(String sensor, String data_hora_ini, String data_hora_fim) {
-        super(sensor, data_hora_ini, data_hora_fim);
-        String[] data_ini = data_hora_ini.split(" "), data_fim = data_hora_fim.split(" ");
-        min = getMinimo(data_ini[0], data_fim[0]);
-        max = getMaximo(data_ini[0], data_fim[0]);
+    public DAOGases(String data_hora_ini, String data_hora_fim) {
+        super("gases", data_hora_ini, data_hora_fim);
     }
 
     @Override
@@ -66,48 +60,6 @@ public class DAOGases extends DAO {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
             System.exit(0);
         }
-    }
-
-    private double getMaximo(String data_ini, String data_fim) {
-        double maximo = 0;
-        ResultSet resultado = getConecta().executaSQL("select max(maximo) from (select "
-                + "(select max(v) from (values (mq2), (mq3), (mq4), (mq5), (mq6), "
-                + "(mq7), (mq8), (mq9), (mq135), (tgs822)) as value(v)) as maximo, data_hora "
-                + "from gases) as maxgases "
-                + "where data_hora >= '" + data_ini + " 00:00:00' "
-                + "and data_hora <= '" + data_fim + " 23:59:59' ");
-
-        try {
-            while (resultado.next()) {
-                maximo = resultado.getDouble("max");
-            }
-        } catch (Exception ex) {
-            System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
-            System.exit(0);
-        }
-
-        return maximo;
-    }
-
-    private double getMinimo(String data_ini, String data_fim) {
-        double minimo = 0;
-        ResultSet resultado = getConecta().executaSQL("select min(minimo) from (select "
-                + "(select min(v) from (values (mq2), (mq3), (mq4), (mq5), (mq6), "
-                + "(mq7), (mq8), (mq9), (mq135), (tgs822)) as value(v)) as minimo, data_hora "
-                + "from gases) as mingases "
-                + "where data_hora >= '" + data_ini + " 00:00:00' "
-                + "and data_hora <= '" + data_fim + " 23:59:59' ");
-
-        try {
-            while (resultado.next()) {
-                minimo = resultado.getDouble("min");
-            }
-        } catch (Exception ex) {
-            System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
-            System.exit(0);
-        }
-
-        return minimo;
     }
 
 }
