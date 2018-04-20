@@ -330,7 +330,7 @@ public class Principal extends javax.swing.JFrame {
         if (jCheckBoxGases.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Gases");
             dao = new ConcreteCreatorDAO().factoryMethod("Gases", dataHoraIni, dataHoraFim);
-            estatistica = new Estatistica(editarGases.getMedia(), "Retirar Maiores Desvios");
+            estatistica = new Estatistica(editarGases.getMedia(), "Media Sem Desvios");
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarGases.getOpcIndices());
                 sensor.setInfo(editarGases.getOpcInfo());
@@ -344,7 +344,7 @@ public class Principal extends javax.swing.JFrame {
         if (jCheckBoxPressao.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Pressão Atmosférica");
             dao = new ConcreteCreatorDAO().factoryMethod("Pressão Atmosférica", dataHoraIni, dataHoraFim);
-            estatistica = new Estatistica(editarPressao.getMedia(), "Retirar Maiores Desvios");
+            estatistica = new Estatistica(editarPressao.getMedia(), "Media Sem Desvios");
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarPressao.getOpcIndices());
                 sensor.setInfo(editarPressao.getOpcInfo());
@@ -358,7 +358,7 @@ public class Principal extends javax.swing.JFrame {
         if (jCheckBoxTemp.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Temperatura");
             dao = new ConcreteCreatorDAO().factoryMethod("Temperatura", dataHoraIni, dataHoraFim);
-            estatistica = new Estatistica(editarTemperatura.getMedia(), "Retirar Maiores Desvios");
+            estatistica = new Estatistica(editarTemperatura.getMedia(), "Media Sem Desvios");
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarTemperatura.getOpcIndices());
                 sensor.setInfo(editarTemperatura.getOpcInfo());
@@ -372,7 +372,7 @@ public class Principal extends javax.swing.JFrame {
         if (jCheckBoxUmidade.isSelected()) {
             sensor = new ConcreteCreatorSensor().factoryMethod("Umidade do Ar");
             dao = new ConcreteCreatorDAO().factoryMethod("Umidade do Ar", dataHoraIni, dataHoraFim);
-            estatistica = new Estatistica(editarUmidade.getMedia(), "Retirar Maiores Desvios");
+            estatistica = new Estatistica(editarUmidade.getMedia(), "Media Sem Desvios");
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarUmidade.getOpcIndices());
                 sensor.setInfo(editarUmidade.getOpcInfo());

@@ -21,14 +21,20 @@ public class Estatistica {
     public double calcula(double original) {
         atualiza(original);
         switch (opc) {
-            case "Média":
-                return media();
             case "Mediana":
                 return mediana();
-            case "Retirar Extremos":
-                return retiraExtremos();
+            case "Média":
+                return media();
+            case "Média Ponderada":
+                return mediaPonderada();
+            case "Média Exponencial":
+                return mediaExponencial();
+            case "Media Sem Extremos":
+                return mediaSemExtremos();
+            case "Media Sem Desvios":
+                return mediaSemDesvios();
             default:
-                return retiraMaioresDesvios();
+                return mediaPonderadaSemDesvios();
         }
     }
 
@@ -81,14 +87,6 @@ public class Estatistica {
         return Math.sqrt(total / N);
     }
 
-    public double media() {
-        double total = 0;
-        for (int i = 0; i < N; i++) {
-            total += valor[i];
-        }
-        return total / N;
-    }
-
     public double mediana() {
         int primeiro = N / 2;
         if (N == 1) {
@@ -99,7 +97,15 @@ public class Estatistica {
         return (aux[primeiro] + aux[primeiro + 1]) / 2;
     }
 
-    public double retiraExtremos() {
+    public double media() {
+        double total = 0;
+        for (int i = 0; i < N; i++) {
+            total += valor[i];
+        }
+        return total / N;
+    }
+
+    public double mediaSemExtremos() {
         double total = 0;
         int aux = 0, maior = maior(), menor = menor();
 
@@ -115,7 +121,7 @@ public class Estatistica {
         return total / aux;
     }
 
-    public double retiraMaioresDesvios() {
+    public double mediaSemDesvios() {
         double desvioPadrao = desvioPadrao(), media = media(), total = 0;
         int aux = 0;
 
@@ -129,6 +135,40 @@ public class Estatistica {
             return valor[0];
         }
         return total / aux;
+    }
+
+    public double mediaPonderada() {
+        double total = 0;
+        int den = 0;
+        for (int i = 0; i < N; i++) {
+            total += valor[i] * (N - i);
+            den += (N - i);
+        }
+        return total / den;
+    }
+
+    public double mediaPonderadaSemDesvios() {
+        double desvioPadrao = desvioPadrao(), media = media(), total = 0;
+        int den = 0;
+
+        for (int i = 0; i < N; i++) {
+            if (Math.abs(valor[i] - media) < 3 * desvioPadrao) {
+                total += valor[i] * (N - i);
+                den += (N - i);
+            }
+        }
+        if (den == 0) {
+            return valor[0];
+        }
+        return total / den;
+    }
+
+    public double mediaExponencial() {
+        double total = 0, alpha = 0.01;
+        for (int i = 0; i < N; i++) {
+            total += valor[i] * Math.pow(1 - alpha, i);
+        }
+        return alpha * total;
     }
 
 }
