@@ -15,8 +15,8 @@ import modelo.Estatistica;
  */
 public class DAOTemperatura extends DAO {
 
-    public DAOTemperatura(String sensor, String data_hora_ini, String data_hora_fim) {
-        super(sensor, data_hora_ini, data_hora_fim);
+    public DAOTemperatura(String data_hora_ini, String data_hora_fim) {
+        super("temperatura", data_hora_ini, data_hora_fim);
     }
 
     @Override
