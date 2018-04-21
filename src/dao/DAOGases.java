@@ -49,8 +49,8 @@ public class DAOGases extends DAO {
             Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
 
             PreparedStatement pst = getConecta().getConnection().prepareStatement("insert into gases "
-                    + "(data_hora, mq2, mq3, mq4, mq5, mq6, mq7, mq8, mq9, mq135, tgs822) "
-                    + "values(?,?,?,?,?,?,?,?,?,?,?)");
+                    + "(data_hora, mq2, mq3, mq4, mq5, mq6, mq7, mq8, mq9, mq135, tgs822, tgs2600, tgs2602, tgs2603) "
+                    + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             pst.setTimestamp(1, timestamp);
             for (int i = 0; i < valor.length; i++) {
                 pst.setDouble(i + 2, valor[i]);

@@ -9,11 +9,12 @@ import javax.swing.JOptionPane;
 public final class EditarGases extends javax.swing.JFrame implements Editar {
 
     private static EditarGases instance = null;
-    private final String[] opcInfo = {"MQ-2", "MQ-3", "MQ-4", "MQ-5", "MQ-6", "MQ-7", "MQ-8", "MQ-9", "MQ-135", "TGS822"};
-    private final int[] opcIndices = {13, 0, 1, 2, 3, 4, 5, 6, 7, 8};
+    private final String[] opcInfo = {"MQ-2", "MQ-3", "MQ-4", "MQ-5", "MQ-6", "MQ-7", "MQ-8", 
+                                      "MQ-9", "MQ-135", "TGS822", "TGS2600", "TGS2602", "TGS2603"};
+    private final int[] opcIndices = {13, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
     private String[] info;
     private int[] indices;
-    private final boolean[] estado = new boolean[10];
+    private final boolean[] estado = new boolean[13];
 
     /**
      * Creates new form EditarGases
@@ -54,6 +55,9 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
         jLabel1 = new javax.swing.JLabel();
         jIntegerFieldMedia = new modelo.JIntegerField();
         jCheckBoxTgs822 = new javax.swing.JCheckBox();
+        jCheckBoxTgs2600 = new javax.swing.JCheckBox();
+        jCheckBoxTgs2602 = new javax.swing.JCheckBox();
+        jCheckBoxTgs2603 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -110,6 +114,15 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
         jCheckBoxTgs822.setSelected(true);
         jCheckBoxTgs822.setText("TGS822");
 
+        jCheckBoxTgs2600.setSelected(true);
+        jCheckBoxTgs2600.setText("TGS2600");
+
+        jCheckBoxTgs2602.setSelected(true);
+        jCheckBoxTgs2602.setText("TGS2602");
+
+        jCheckBoxTgs2603.setSelected(true);
+        jCheckBoxTgs2603.setText("TGS2603");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,57 +132,71 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBoxMq3)
-                                    .addComponent(jCheckBoxMq6)
-                                    .addComponent(jCheckBoxMq2)
-                                    .addComponent(jCheckBoxMq5)
-                                    .addComponent(jCheckBoxMq4))
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBoxMq8)
-                                    .addComponent(jCheckBoxMq7)
-                                    .addComponent(jCheckBoxMq9)
-                                    .addComponent(jCheckBoxMq135)
-                                    .addComponent(jCheckBoxTgs822))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jCheckBoxMq8)
+                            .addComponent(jLabel1)
+                            .addComponent(jIntegerFieldMedia, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButtonConfirmar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                                .addComponent(jButtonCancelar)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jIntegerFieldMedia, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(jButtonCancelar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxMq3)
+                                    .addComponent(jCheckBoxMq2)
+                                    .addComponent(jCheckBoxMq5)
+                                    .addComponent(jCheckBoxMq4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxMq9)
+                                    .addComponent(jCheckBoxMq135)
+                                    .addComponent(jCheckBoxTgs822)
+                                    .addComponent(jCheckBoxTgs2600)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxMq6)
+                                    .addComponent(jCheckBoxMq7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxTgs2602)
+                                    .addComponent(jCheckBoxTgs2603))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxMq2)
-                    .addComponent(jCheckBoxMq7))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBoxMq2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBoxMq3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBoxMq4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBoxMq5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBoxMq9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBoxMq135)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBoxTgs822)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBoxTgs2600)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxMq3)
-                    .addComponent(jCheckBoxMq8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxMq4)
-                    .addComponent(jCheckBoxMq9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxMq5)
-                    .addComponent(jCheckBoxMq135))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBoxMq6)
-                    .addComponent(jCheckBoxTgs822))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                    .addComponent(jCheckBoxTgs2602))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBoxMq7)
+                    .addComponent(jCheckBoxTgs2603))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBoxMq8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jIntegerFieldMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,7 +236,8 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
         return jCheckBoxMq2.isSelected() || jCheckBoxMq3.isSelected() || jCheckBoxMq4.isSelected()
                 || jCheckBoxMq5.isSelected() || jCheckBoxMq6.isSelected() || jCheckBoxMq7.isSelected()
                 || jCheckBoxMq8.isSelected() || jCheckBoxMq9.isSelected() || jCheckBoxMq135.isSelected()
-                || jCheckBoxTgs822.isSelected();
+                || jCheckBoxTgs822.isSelected() || jCheckBoxTgs2600.isSelected() || jCheckBoxTgs2602.isSelected()
+                || jCheckBoxTgs2603.isSelected();
     }
 
     @Override
@@ -224,6 +252,9 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
         estado[7] = jCheckBoxMq9.isSelected();
         estado[8] = jCheckBoxMq135.isSelected();
         estado[9] = jCheckBoxTgs822.isSelected();
+        estado[10] = jCheckBoxTgs2600.isSelected();
+        estado[11] = jCheckBoxTgs2602.isSelected();
+        estado[12] = jCheckBoxTgs2603.isSelected();
     }
 
     @Override
@@ -238,6 +269,9 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
         jCheckBoxMq9.setSelected(estado[7]);
         jCheckBoxMq135.setSelected(estado[8]);
         jCheckBoxTgs822.setSelected(estado[9]);
+        jCheckBoxTgs2600.setSelected(estado[10]);
+        jCheckBoxTgs2602.setSelected(estado[11]);
+        jCheckBoxTgs2603.setSelected(estado[12]);
     }
 
     @Override
@@ -297,6 +331,9 @@ public final class EditarGases extends javax.swing.JFrame implements Editar {
     private javax.swing.JCheckBox jCheckBoxMq7;
     private javax.swing.JCheckBox jCheckBoxMq8;
     private javax.swing.JCheckBox jCheckBoxMq9;
+    private javax.swing.JCheckBox jCheckBoxTgs2600;
+    private javax.swing.JCheckBox jCheckBoxTgs2602;
+    private javax.swing.JCheckBox jCheckBoxTgs2603;
     private javax.swing.JCheckBox jCheckBoxTgs822;
     private modelo.JIntegerField jIntegerFieldMedia;
     private javax.swing.JLabel jLabel1;
