@@ -22,7 +22,7 @@ import modelo.Sensor;
 public final class GravacaoChart extends Chart {
 
     private static TwoWaySerialComm serialComm;
-    private String dataHora;
+    private String dataHora, classe;
     private double[] valor;
     private Timer timer = new Timer();
     private long seconds;
@@ -121,7 +121,7 @@ public final class GravacaoChart extends Chart {
         }
 
         //Store data
-        getDao().setValues(dataHora, valor, getEstatistica());
+        getDao().setValues(dataHora, valor, getEstatistica(), classe);
 
         // Limit the total number of points
         while (xData.size() > 50) {
@@ -138,6 +138,14 @@ public final class GravacaoChart extends Chart {
         for (int i = 0; i < getSensor().getInfo().length; i++) {
             getXyChart().updateXYSeries(aux[i], xData, yData[i], null);
         }
+    }
+
+    public String getClasse() {
+        return classe;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
     }
 
 }
