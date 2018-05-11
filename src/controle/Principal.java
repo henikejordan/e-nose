@@ -23,8 +23,8 @@ public class Principal extends javax.swing.JFrame {
     private EditarPressao editarPressao = EditarPressao.getInstance();
     private EditarTemperatura editarTemperatura = EditarTemperatura.getInstance();
     private EditarUmidade editarUmidade = EditarUmidade.getInstance();
-    private GravacaoChart gravacaoChart = null;
-    private LeituraChart leituraChart = null;
+    private GravacaoChart gravacaoChart[] = new GravacaoChart[4];
+    private LeituraChart leituraChart[] = new LeituraChart[4];
 
     public Principal() {
         initComponents();
@@ -355,11 +355,11 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarGases.getOpcIndices());
                 sensor.setInfo(editarGases.getOpcInfo());
-                gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
+                gravacaoChart[0] = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarGases.getIndices());
                 sensor.setInfo(editarGases.getInfo());
-                leituraChart = new LeituraChart(sensor, dao, estatistica);
+                leituraChart[0] = new LeituraChart(sensor, dao, estatistica);
             }
         }
         if (jCheckBoxPressao.isSelected()) {
@@ -369,11 +369,11 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarPressao.getOpcIndices());
                 sensor.setInfo(editarPressao.getOpcInfo());
-                gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
+                gravacaoChart[1] = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarPressao.getIndices());
                 sensor.setInfo(editarPressao.getInfo());
-                leituraChart = new LeituraChart(sensor, dao, estatistica);
+                leituraChart[1] = new LeituraChart(sensor, dao, estatistica);
             }
         }
         if (jCheckBoxTemp.isSelected()) {
@@ -383,11 +383,11 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarTemperatura.getOpcIndices());
                 sensor.setInfo(editarTemperatura.getOpcInfo());
-                gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
+                gravacaoChart[2] = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarTemperatura.getIndices());
                 sensor.setInfo(editarTemperatura.getInfo());
-                leituraChart = new LeituraChart(sensor, dao, estatistica);
+                leituraChart[2] = new LeituraChart(sensor, dao, estatistica);
             }
         }
         if (jCheckBoxUmidade.isSelected()) {
@@ -397,11 +397,11 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarUmidade.getOpcIndices());
                 sensor.setInfo(editarUmidade.getOpcInfo());
-                gravacaoChart = new GravacaoChart(sensor, port, tempo, dao, estatistica);
+                gravacaoChart[3] = new GravacaoChart(sensor, port, tempo, dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarUmidade.getIndices());
                 sensor.setInfo(editarUmidade.getInfo());
-                leituraChart = new LeituraChart(sensor, dao, estatistica);
+                leituraChart[3] = new LeituraChart(sensor, dao, estatistica);
             }
         }
     }//GEN-LAST:event_jButtonAbrirActionPerformed
@@ -445,9 +445,13 @@ public class Principal extends javax.swing.JFrame {
     private void jTextFieldClasseKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldClasseKeyReleased
         if (gravacaoChart != null) {
             if (jTextFieldClasse.getText().length() == 0) {
-                gravacaoChart.setClasse(null);
+                for (GravacaoChart gc : gravacaoChart) {
+                    gc.setClasse(null);
+                }
             } else {
-                gravacaoChart.setClasse(jTextFieldClasse.getText());
+                for (GravacaoChart gc : gravacaoChart) {
+                    gc.setClasse(jTextFieldClasse.getText());
+                }
             }
         }
     }//GEN-LAST:event_jTextFieldClasseKeyReleased

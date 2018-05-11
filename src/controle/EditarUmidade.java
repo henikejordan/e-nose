@@ -10,7 +10,7 @@ public final class EditarUmidade extends javax.swing.JFrame implements Editar {
 
     private static EditarUmidade instance = null;
     private final String[] opcInfo = {"Umidade do Ar"};
-    private final int[] opcIndices = {20};
+    private final int[] opcIndices = {19};
     private String[] info;
     private int[] indices;
     private final boolean[] estado = new boolean[1];
