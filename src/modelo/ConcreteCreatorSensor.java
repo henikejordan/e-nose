@@ -13,6 +13,10 @@ public class ConcreteCreatorSensor implements CreatorSensor {
                 return new Gases();
             case "Pressão Atmosférica":
                 return new Pressao();
+            case "Poeira 10":
+                return new Poeira10();
+            case "Poeira 25":
+                return new Poeira25();
             case "Temperatura":
                 return new Temperatura();
             case "Umidade do Ar":

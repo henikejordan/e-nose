@@ -93,7 +93,7 @@
     <column id="COL22" populated="true" UUID="49ab881e-c004-483b-b7d0-dd6f0c58f27c" autoIncrement="false" autoIncrementSequenceName="Gases_TGS2603_seq" defaultValue="" name="TGS2603" nullable="1" physicalName="TGS2603" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL23" populated="true" UUID="13a51ba9-ed35-4d90-8b81-674af89e4d41" autoIncrement="false" autoIncrementSequenceName="Gases_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL23" populated="true" UUID="13a51ba9-ed35-4d90-8b81-674af89e4d41" autoIncrement="false" autoIncrementSequenceName="Gases_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -119,7 +119,7 @@
     <column id="COL29" populated="true" UUID="546a3ca2-65a4-4d6c-8330-cd5e0ea3bfa5" autoIncrement="false" autoIncrementSequenceName="Umidade_temperatura_seq" defaultValue="" name="temperatura" nullable="1" physicalName="temperatura" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL30" populated="true" UUID="91eea0cc-01ed-423b-9e1c-319db4b93be0" autoIncrement="false" autoIncrementSequenceName="Temperatura_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL30" populated="true" UUID="91eea0cc-01ed-423b-9e1c-319db4b93be0" autoIncrement="false" autoIncrementSequenceName="Temperatura_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -145,7 +145,7 @@
     <column id="COL36" populated="true" UUID="53c42f3f-55ab-46ad-8dfb-a82db50e09ee" autoIncrement="false" autoIncrementSequenceName="Umidade_umidade_seq" defaultValue="" name="umidade" nullable="1" physicalName="umidade" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL37" populated="true" UUID="d7f00917-63f7-410a-b90c-87b4394eca60" autoIncrement="false" autoIncrementSequenceName="Umidade_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL37" populated="true" UUID="d7f00917-63f7-410a-b90c-87b4394eca60" autoIncrement="false" autoIncrementSequenceName="Umidade_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -171,7 +171,7 @@
     <column id="COL43" populated="true" UUID="72706019-1f2f-43ba-8b65-e9f2e3af3a79" autoIncrement="false" autoIncrementSequenceName="Umidade_pressao_seq" defaultValue="" name="pressao" nullable="1" physicalName="pressao" precision="0" referenceCount="1" scale="0" source-column-ref="COL36" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL44" populated="true" UUID="ac99bcd0-e828-42a5-ac53-88427a05faf8" autoIncrement="false" autoIncrementSequenceName="Pressao_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="30" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL44" populated="true" UUID="ac99bcd0-e828-42a5-ac53-88427a05faf8" autoIncrement="false" autoIncrementSequenceName="Pressao_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -185,6 +185,58 @@
     </index>
    </folder>
   </table>
+  <table id="TAB47" populated="true" UUID="84431c88-c493-4b2b-95fe-81fd65fc61bb" name="Poeira_10" objectType="TABLE" physicalName="Poeira_10" >
+   <remarks></remarks>
+   <folder id="FOLTAB471" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL48" populated="true" UUID="1f5e1dee-b5d3-4e59-b76e-c95a202aee02" autoIncrement="true" autoIncrementSequenceName="Poeira_10_id_poeira_10_seq" defaultValue="" name="id_poeira_10" nullable="0" physicalName="id_poeira_10" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL49" populated="true" UUID="231765b8-064b-44cb-a159-a9bb64daf92c" autoIncrement="false" autoIncrementSequenceName="Poeira_10_data_hora_seq" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL50" populated="true" UUID="fe15a90b-8964-4db7-9ab2-9a667ecddd79" autoIncrement="false" autoIncrementSequenceName="Poeira_10_poeira_10_seq" defaultValue="" name="poeira_10" nullable="1" physicalName="poeira_10" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+     <remarks></remarks>
+    </column>
+    <column id="COL51" populated="true" UUID="2dac9f1b-a822-4317-bf43-286c1ad0fe07" autoIncrement="false" autoIncrementSequenceName="Poeira_10_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB473" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB472" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB474" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX52" populated="true" UUID="36552376-6af6-4370-9440-e35344febd2c" clustered="false" name="id_poeira_10" physicalName="id_poeira_10" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC53" populated="true" UUID="5cafeb75-05bb-41b2-a9ac-c62db4bcc06d" ascendingOrDescending="UNSPECIFIED" column-ref="COL48" name="id_poeira_10" physicalName="id_poeira_10" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB54" populated="true" UUID="5378ec24-1b0b-4d3e-96f6-6498d4871c03" name="Poeira_25" objectType="TABLE" physicalName="Poeira_25" >
+   <remarks></remarks>
+   <folder id="FOLTAB541" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL55" populated="true" UUID="387ee64d-5758-4acb-8063-ae48bc6e5c00" autoIncrement="true" autoIncrementSequenceName="Poeira_25_id_poeira_25_seq" defaultValue="" name="id_poeira_25" nullable="0" physicalName="id_poeira_25" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL56" populated="true" UUID="97e690e1-3feb-408c-aa1a-6763fcd858f8" autoIncrement="false" autoIncrementSequenceName="Poeira_25_data_hora_seq" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL57" populated="true" UUID="426daccf-2df7-425a-8e1c-731e269d31e6" autoIncrement="false" autoIncrementSequenceName="Poeira_25_poeira_25_seq" defaultValue="" name="poeira_25" nullable="1" physicalName="poeira_25" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+     <remarks></remarks>
+    </column>
+    <column id="COL58" populated="true" UUID="731ff054-f0d9-4294-b081-a03820a35fc0" autoIncrement="false" autoIncrementSequenceName="Poeira_25_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB543" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB542" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB544" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX59" populated="true" UUID="f5d09783-9926-4f5a-8739-491ab86b3e3f" clustered="false" name="id_poeira_25" physicalName="id_poeira_10" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC60" populated="true" UUID="cd8d4ca6-d74d-42bd-80d3-16aabbde0306" ascendingOrDescending="UNSPECIFIED" column-ref="COL55" name="id_poeira_25" physicalName="id_poeira_25" />
+    </index>
+   </folder>
+  </table>
   <relationships>
   </relationships>
  </target-database>
@@ -195,7 +247,9 @@
   <table-pane table-ref="TAB7" x="443" y="127" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB26" x="174" y="229" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB33" x="184" y="104" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB40" x="183" y="353" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB40" x="183" y="355" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB47" x="686" y="165" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB54" x="704" y="299" bgColor="0xf0f0f0" fgColor="0x000000" rounded="false" dashed="false"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">

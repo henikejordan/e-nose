@@ -4,8 +4,20 @@
  <print-settings numCopies="1" zoom="1.0" pageNumbersPrinted="true" orientation="1" paperWidth="612.0" paperHeight="792.0" leftBorder="50.0" rightBorder="50.0" topBorder="50.0" bottomBorder="50.0" />
  <project-data-sources>
   <data-source id="DS0">
+   <property key="Logical" value="Postgres" />
    <property key="Connection Type" value="PostgreSQL" />
-   <property key="Logical" value="Modelo de Dados" />
+   <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/" />
+   <property key="UID" value="postgres" />
+   <property key="PWD" value="12345" />
+   <property key="ca.sqlpower.architect.etl.kettle.database" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.port" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.hostname" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.repos.login" value="" />
+   <property key="ca.sqlpower.architect.etl.kettle.repos.password" value="" />
+  </data-source>
+  <data-source id="DS0">
+   <property key="Logical" value="Postgres" />
+   <property key="Connection Type" value="PostgreSQL" />
    <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/" />
    <property key="UID" value="postgres" />
    <property key="PWD" value="12345" />
@@ -17,7 +29,7 @@
   </data-source>
   <data-source id="DS0">
    <property key="Connection Type" value="PostgreSQL" />
-   <property key="Logical" value="Modelo de Dados" />
+   <property key="Logical" value="Postgres" />
    <property key="JDBC URL" value="jdbc:postgresql://localhost:5432/" />
    <property key="UID" value="postgres" />
    <property key="PWD" value="12345" />
@@ -29,7 +41,7 @@
   </data-source>
  </project-data-sources>
  <source-databases>
-  <database id="DB0" populated="true" UUID="2983f0e2-c15a-474c-9dc4-2b77cb9d290f" dbcs-ref="DS0" name="Modelo de Dados" physicalName="Postgres" >
+  <database id="DB0" populated="true" UUID="2983f0e2-c15a-474c-9dc4-2b77cb9d290f" dbcs-ref="DS0" name="Postgres" physicalName="Postgres" >
    <catalog id="CAT1" populated="true" UUID="cf4dda93-e65c-4a12-af66-8c832ebd41c4" name="postgres" nativeTerm="database" physicalName="postgres" >
     <schema id="SCH2" populated="false" UUID="c659a36b-5682-4ff7-ac3b-76d0f15f127f" name="information_schema" nativeTerm="schema" physicalName="information_schema" >
     </schema>
@@ -43,159 +55,219 @@
    <relationships>
    </relationships>
   </database>
+  <database id="DB6" populated="true" UUID="bd4027e5-2292-4e3d-abd9-7b9e31c7bfb8" dbcs-ref="DS0" name="Postgres" physicalName="Postgres" >
+   <catalog id="CAT7" populated="false" UUID="32835b31-4408-4574-8e76-6c0208be494a" name="postgres" nativeTerm="database" physicalName="postgres" >
+   </catalog>
+   <relationships>
+   </relationships>
+  </database>
  </source-databases>
  <target-database id="ppdb" dbcs-ref="DS0">
-  <table id="TAB7" populated="true" UUID="5208b352-bd18-49db-be46-bae512e9e718" name="Gases" objectType="TABLE" physicalName="Gases" >
+  <table id="TAB9" populated="true" UUID="5208b352-bd18-49db-be46-bae512e9e718" name="Gases" objectType="TABLE" physicalName="Gases" >
    <remarks></remarks>
-   <folder id="FOLTAB71" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL8" populated="true" UUID="ae1f9d5d-bd93-4fa5-a229-e30ce874e4d0" autoIncrement="true" autoIncrementSequenceName="Gases_id_gases_seq" defaultValue="" name="id_gases" nullable="0" physicalName="id_gases" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+   <folder id="FOLTAB91" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL10" populated="true" UUID="ae1f9d5d-bd93-4fa5-a229-e30ce874e4d0" autoIncrement="true" autoIncrementSequenceName="Gases_id_gases_seq" defaultValue="" name="id_gases" nullable="0" physicalName="id_gases" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL9" populated="true" UUID="07d55826-9f03-4dad-a573-eab9dedf9dbf" autoIncrement="false" autoIncrementSequenceName="Gases_data_hora_seq" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+    <column id="COL11" populated="true" UUID="07d55826-9f03-4dad-a573-eab9dedf9dbf" autoIncrement="false" autoIncrementSequenceName="Gases_data_hora_seq" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks></remarks>
     </column>
-    <column id="COL10" populated="true" UUID="9e55c3a6-cd5b-4beb-9e55-47cf77cea379" autoIncrement="false" autoIncrementSequenceName="Gases_MQ2_seq" defaultValue="" name="MQ2" nullable="1" physicalName="MQ2" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL12" populated="true" UUID="9e55c3a6-cd5b-4beb-9e55-47cf77cea379" autoIncrement="false" autoIncrementSequenceName="Gases_MQ2_seq" defaultValue="" name="MQ2" nullable="1" physicalName="MQ2" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL11" populated="true" UUID="89055ab5-54c2-43bc-841a-d05478f138a6" autoIncrement="false" autoIncrementSequenceName="Gases_MQ3_seq" defaultValue="" name="MQ3" nullable="1" physicalName="MQ3" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL13" populated="true" UUID="89055ab5-54c2-43bc-841a-d05478f138a6" autoIncrement="false" autoIncrementSequenceName="Gases_MQ3_seq" defaultValue="" name="MQ3" nullable="1" physicalName="MQ3" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL12" populated="true" UUID="16aa82cd-8620-4b68-b31d-fc656da7ff54" autoIncrement="false" autoIncrementSequenceName="Gases_MQ4_seq" defaultValue="" name="MQ4" nullable="1" physicalName="MQ4" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL14" populated="true" UUID="16aa82cd-8620-4b68-b31d-fc656da7ff54" autoIncrement="false" autoIncrementSequenceName="Gases_MQ4_seq" defaultValue="" name="MQ4" nullable="1" physicalName="MQ4" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL13" populated="true" UUID="c88fe37c-af81-4ca3-8cbf-d24773fcdb19" autoIncrement="false" autoIncrementSequenceName="Gases_MQ5_seq" defaultValue="" name="MQ5" nullable="1" physicalName="MQ5" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL15" populated="true" UUID="c88fe37c-af81-4ca3-8cbf-d24773fcdb19" autoIncrement="false" autoIncrementSequenceName="Gases_MQ5_seq" defaultValue="" name="MQ5" nullable="1" physicalName="MQ5" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL14" populated="true" UUID="6a18843f-b629-436e-9221-8b867c4cf6a5" autoIncrement="false" autoIncrementSequenceName="Gases_MQ6_seq" defaultValue="" name="MQ6" nullable="1" physicalName="MQ6" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL16" populated="true" UUID="6a18843f-b629-436e-9221-8b867c4cf6a5" autoIncrement="false" autoIncrementSequenceName="Gases_MQ6_seq" defaultValue="" name="MQ6" nullable="1" physicalName="MQ6" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL15" populated="true" UUID="de35ddea-521f-495c-883f-be3b0e16f194" autoIncrement="false" autoIncrementSequenceName="Gases_MQ7_seq" defaultValue="" name="MQ7" nullable="1" physicalName="MQ7" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL17" populated="true" UUID="de35ddea-521f-495c-883f-be3b0e16f194" autoIncrement="false" autoIncrementSequenceName="Gases_MQ7_seq" defaultValue="" name="MQ7" nullable="1" physicalName="MQ7" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL16" populated="true" UUID="dc2c74ee-7878-40a6-b24c-42233ab191fb" autoIncrement="false" autoIncrementSequenceName="Gases_MQ8_seq" defaultValue="" name="MQ8" nullable="1" physicalName="MQ8" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL18" populated="true" UUID="dc2c74ee-7878-40a6-b24c-42233ab191fb" autoIncrement="false" autoIncrementSequenceName="Gases_MQ8_seq" defaultValue="" name="MQ8" nullable="1" physicalName="MQ8" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL17" populated="true" UUID="9c11e142-8bfd-4acc-9e81-47b2e95d321c" autoIncrement="false" autoIncrementSequenceName="Gases_MQ9_seq" defaultValue="" name="MQ9" nullable="1" physicalName="MQ9" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL19" populated="true" UUID="9c11e142-8bfd-4acc-9e81-47b2e95d321c" autoIncrement="false" autoIncrementSequenceName="Gases_MQ9_seq" defaultValue="" name="MQ9" nullable="1" physicalName="MQ9" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL18" populated="true" UUID="6bce8b0a-ee3e-4220-8b3f-8e61b1e70ab5" autoIncrement="false" autoIncrementSequenceName="Gases_MQ135_seq" defaultValue="" name="MQ135" nullable="1" physicalName="MQ135" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL20" populated="true" UUID="6bce8b0a-ee3e-4220-8b3f-8e61b1e70ab5" autoIncrement="false" autoIncrementSequenceName="Gases_MQ135_seq" defaultValue="" name="MQ135" nullable="1" physicalName="MQ135" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL19" populated="true" UUID="de94577c-9c74-4e76-b6c0-17162b7d4076" autoIncrement="false" autoIncrementSequenceName="Gases_TGS822_seq" defaultValue="" name="TGS822" nullable="1" physicalName="TGS822" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL21" populated="true" UUID="de94577c-9c74-4e76-b6c0-17162b7d4076" autoIncrement="false" autoIncrementSequenceName="Gases_TGS822_seq" defaultValue="" name="TGS822" nullable="1" physicalName="TGS822" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL20" populated="true" UUID="365e5f78-afc3-47f8-bc57-2be397388c7b" autoIncrement="false" autoIncrementSequenceName="Gases_TGS2600_seq" defaultValue="" name="TGS2600" nullable="1" physicalName="TGS2600" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL22" populated="true" UUID="365e5f78-afc3-47f8-bc57-2be397388c7b" autoIncrement="false" autoIncrementSequenceName="Gases_TGS2600_seq" defaultValue="" name="TGS2600" nullable="1" physicalName="TGS2600" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL21" populated="true" UUID="312e56ef-ba65-419e-917a-b3eac3f3f202" autoIncrement="false" autoIncrementSequenceName="Gases_TGS2602_seq" defaultValue="" name="TGS2602" nullable="1" physicalName="TGS2602" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL23" populated="true" UUID="312e56ef-ba65-419e-917a-b3eac3f3f202" autoIncrement="false" autoIncrementSequenceName="Gases_TGS2602_seq" defaultValue="" name="TGS2602" nullable="1" physicalName="TGS2602" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL22" populated="true" UUID="49ab881e-c004-483b-b7d0-dd6f0c58f27c" autoIncrement="false" autoIncrementSequenceName="Gases_TGS2603_seq" defaultValue="" name="TGS2603" nullable="1" physicalName="TGS2603" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL24" populated="true" UUID="49ab881e-c004-483b-b7d0-dd6f0c58f27c" autoIncrement="false" autoIncrementSequenceName="Gases_TGS2603_seq" defaultValue="" name="TGS2603" nullable="1" physicalName="TGS2603" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL23" populated="true" UUID="13a51ba9-ed35-4d90-8b81-674af89e4d41" autoIncrement="false" autoIncrementSequenceName="Gases_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL25" populated="true" UUID="13a51ba9-ed35-4d90-8b81-674af89e4d41" autoIncrement="false" autoIncrementSequenceName="Gases_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
-    <folder id="FOLTAB73" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    <folder id="FOLTAB93" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
-    <folder id="FOLTAB72" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    <folder id="FOLTAB92" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
-    <folder id="FOLTAB74" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX24" populated="true" UUID="fc8e4db6-798a-4c78-819b-657a6b9fec10" clustered="false" name="id_gases" physicalName="id_gases" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC25" populated="true" UUID="49efad52-fd52-40c1-9893-d0b9cdf2eddb" ascendingOrDescending="UNSPECIFIED" column-ref="COL8" name="id_gases" physicalName="id_gases" />
+    <folder id="FOLTAB94" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX26" populated="true" UUID="fc8e4db6-798a-4c78-819b-657a6b9fec10" clustered="false" name="id_gases" physicalName="id_gases" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC27" populated="true" UUID="49efad52-fd52-40c1-9893-d0b9cdf2eddb" ascendingOrDescending="UNSPECIFIED" column-ref="COL10" name="id_gases" physicalName="id_gases" />
     </index>
    </folder>
   </table>
-  <table id="TAB26" populated="true" UUID="772cc9b4-d806-409a-9fc4-8fec8ca513ce" name="Temperatura" objectType="TABLE" physicalName="Temperatura" >
+  <table id="TAB28" populated="true" UUID="772cc9b4-d806-409a-9fc4-8fec8ca513ce" name="Temperatura" objectType="TABLE" physicalName="Temperatura" >
    <remarks></remarks>
-   <folder id="FOLTAB261" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL27" populated="true" UUID="9227949b-3809-4423-999a-fa2fa5364ba4" autoIncrement="true" autoIncrementSequenceName="Temperatura_id_temperatura_seq" defaultValue="" name="id_temperatura" nullable="0" physicalName="id_temperatura" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+   <folder id="FOLTAB281" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL29" populated="true" UUID="9227949b-3809-4423-999a-fa2fa5364ba4" autoIncrement="true" autoIncrementSequenceName="Temperatura_id_temperatura_seq" defaultValue="" name="id_temperatura" nullable="0" physicalName="id_temperatura" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL28" populated="true" UUID="0f127859-6958-4f58-9e79-06e1ffd3eed9" autoIncrement="false" autoIncrementSequenceName="Informacao_data_hora_seq_1" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" source-column-ref="COL9" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+    <column id="COL30" populated="true" UUID="0f127859-6958-4f58-9e79-06e1ffd3eed9" autoIncrement="false" autoIncrementSequenceName="Informacao_data_hora_seq_1" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" source-column-ref="COL11" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks></remarks>
     </column>
-    <column id="COL29" populated="true" UUID="546a3ca2-65a4-4d6c-8330-cd5e0ea3bfa5" autoIncrement="false" autoIncrementSequenceName="Umidade_temperatura_seq" defaultValue="" name="temperatura" nullable="1" physicalName="temperatura" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL31" populated="true" UUID="546a3ca2-65a4-4d6c-8330-cd5e0ea3bfa5" autoIncrement="false" autoIncrementSequenceName="Umidade_temperatura_seq" defaultValue="" name="temperatura" nullable="1" physicalName="temperatura" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL30" populated="true" UUID="91eea0cc-01ed-423b-9e1c-319db4b93be0" autoIncrement="false" autoIncrementSequenceName="Temperatura_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL32" populated="true" UUID="91eea0cc-01ed-423b-9e1c-319db4b93be0" autoIncrement="false" autoIncrementSequenceName="Temperatura_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
-    <folder id="FOLTAB263" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    <folder id="FOLTAB283" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
-    <folder id="FOLTAB262" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    <folder id="FOLTAB282" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
-    <folder id="FOLTAB264" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX31" populated="true" UUID="ed953343-7a4d-4c62-a992-79d3cbef07d3" clustered="false" name="id_temperatura" physicalName="id_temperatura" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC32" populated="true" UUID="03468955-d9a9-47a1-b435-cfa86bfe3a42" ascendingOrDescending="UNSPECIFIED" column-ref="COL27" name="id_temperatura" physicalName="id_temperatura" />
+    <folder id="FOLTAB284" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX33" populated="true" UUID="ed953343-7a4d-4c62-a992-79d3cbef07d3" clustered="false" name="id_temperatura" physicalName="id_temperatura" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC34" populated="true" UUID="03468955-d9a9-47a1-b435-cfa86bfe3a42" ascendingOrDescending="UNSPECIFIED" column-ref="COL29" name="id_temperatura" physicalName="id_temperatura" />
     </index>
    </folder>
   </table>
-  <table id="TAB33" populated="true" UUID="b062964b-1070-4051-9d68-20e71a295e2a" name="Umidade" objectType="TABLE" physicalName="Umidade" >
+  <table id="TAB35" populated="true" UUID="b062964b-1070-4051-9d68-20e71a295e2a" name="Umidade" objectType="TABLE" physicalName="Umidade" >
    <remarks></remarks>
-   <folder id="FOLTAB331" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL34" populated="true" UUID="70060d0a-b5e3-40f2-a034-b9d8ea31cfed" autoIncrement="true" autoIncrementSequenceName="Umidade_id_umidade_seq" defaultValue="" name="id_umidade" nullable="0" physicalName="id_umidade" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+   <folder id="FOLTAB351" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL36" populated="true" UUID="70060d0a-b5e3-40f2-a034-b9d8ea31cfed" autoIncrement="true" autoIncrementSequenceName="Umidade_id_umidade_seq" defaultValue="" name="id_umidade" nullable="0" physicalName="id_umidade" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL35" populated="true" UUID="a5f3bfb2-15a0-47d6-8b1c-cbccac5118ad" autoIncrement="false" autoIncrementSequenceName="Informacao_data_hora_seq_2" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+    <column id="COL37" populated="true" UUID="a5f3bfb2-15a0-47d6-8b1c-cbccac5118ad" autoIncrement="false" autoIncrementSequenceName="Informacao_data_hora_seq_2" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks></remarks>
     </column>
-    <column id="COL36" populated="true" UUID="53c42f3f-55ab-46ad-8dfb-a82db50e09ee" autoIncrement="false" autoIncrementSequenceName="Umidade_umidade_seq" defaultValue="" name="umidade" nullable="1" physicalName="umidade" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL38" populated="true" UUID="53c42f3f-55ab-46ad-8dfb-a82db50e09ee" autoIncrement="false" autoIncrementSequenceName="Umidade_umidade_seq" defaultValue="" name="umidade" nullable="1" physicalName="umidade" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL37" populated="true" UUID="d7f00917-63f7-410a-b90c-87b4394eca60" autoIncrement="false" autoIncrementSequenceName="Umidade_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL39" populated="true" UUID="d7f00917-63f7-410a-b90c-87b4394eca60" autoIncrement="false" autoIncrementSequenceName="Umidade_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
-    <folder id="FOLTAB333" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    <folder id="FOLTAB353" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
-    <folder id="FOLTAB332" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    <folder id="FOLTAB352" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
-    <folder id="FOLTAB334" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX38" populated="true" UUID="f48b4bcc-9779-4094-8046-23902d2f5a45" clustered="false" name="id_umidade" physicalName="id_umidade" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC39" populated="true" UUID="e161a788-93c5-4917-9b50-948865af4485" ascendingOrDescending="UNSPECIFIED" column-ref="COL34" name="id_umidade" physicalName="id_umidade" />
+    <folder id="FOLTAB354" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX40" populated="true" UUID="f48b4bcc-9779-4094-8046-23902d2f5a45" clustered="false" name="id_umidade" physicalName="id_umidade" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC41" populated="true" UUID="e161a788-93c5-4917-9b50-948865af4485" ascendingOrDescending="UNSPECIFIED" column-ref="COL36" name="id_umidade" physicalName="id_umidade" />
     </index>
    </folder>
   </table>
-  <table id="TAB40" populated="true" UUID="c2e614a8-b89f-42f2-85bd-d7443b32168f" name="Pressao" objectType="TABLE" physicalName="Pressao" >
+  <table id="TAB42" populated="true" UUID="c2e614a8-b89f-42f2-85bd-d7443b32168f" name="Pressao" objectType="TABLE" physicalName="Pressao" >
    <remarks></remarks>
-   <folder id="FOLTAB401" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL41" populated="true" UUID="9f1c2478-b66d-4654-810f-ccfa60f4a378" autoIncrement="true" autoIncrementSequenceName="Pressao_id_pressao_seq" defaultValue="" name="id_pressao" nullable="0" physicalName="id_pressao" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+   <folder id="FOLTAB421" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL43" populated="true" UUID="9f1c2478-b66d-4654-810f-ccfa60f4a378" autoIncrement="true" autoIncrementSequenceName="Pressao_id_pressao_seq" defaultValue="" name="id_pressao" nullable="0" physicalName="id_pressao" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL42" populated="true" UUID="ddf746ca-bdcc-4a5d-b728-ee88471e3d5b" autoIncrement="false" autoIncrementSequenceName="Informacao_data_hora_seq_3" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" source-column-ref="COL9" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+    <column id="COL44" populated="true" UUID="ddf746ca-bdcc-4a5d-b728-ee88471e3d5b" autoIncrement="false" autoIncrementSequenceName="Informacao_data_hora_seq_3" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" source-column-ref="COL11" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks></remarks>
     </column>
-    <column id="COL43" populated="true" UUID="72706019-1f2f-43ba-8b65-e9f2e3af3a79" autoIncrement="false" autoIncrementSequenceName="Umidade_pressao_seq" defaultValue="" name="pressao" nullable="1" physicalName="pressao" precision="0" referenceCount="1" scale="0" source-column-ref="COL36" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+    <column id="COL45" populated="true" UUID="72706019-1f2f-43ba-8b65-e9f2e3af3a79" autoIncrement="false" autoIncrementSequenceName="Umidade_pressao_seq" defaultValue="" name="pressao" nullable="1" physicalName="pressao" precision="0" referenceCount="1" scale="0" source-column-ref="COL38" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
      <remarks></remarks>
     </column>
-    <column id="COL44" populated="true" UUID="ac99bcd0-e828-42a5-ac53-88427a05faf8" autoIncrement="false" autoIncrementSequenceName="Pressao_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL46" populated="true" UUID="ac99bcd0-e828-42a5-ac53-88427a05faf8" autoIncrement="false" autoIncrementSequenceName="Pressao_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
-    <folder id="FOLTAB403" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    <folder id="FOLTAB423" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
-    <folder id="FOLTAB402" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    <folder id="FOLTAB422" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
-    <folder id="FOLTAB404" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX45" populated="true" UUID="fac5f1a5-5a12-41f5-b71e-e1e7bd6d0755" clustered="false" name="id_pressao" physicalName="id_pressao" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC46" populated="true" UUID="e700f037-b276-457b-89ce-45f0b2b96b20" ascendingOrDescending="UNSPECIFIED" column-ref="COL41" name="id_pressao" physicalName="id_pressao" />
+    <folder id="FOLTAB424" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX47" populated="true" UUID="fac5f1a5-5a12-41f5-b71e-e1e7bd6d0755" clustered="false" name="id_pressao" physicalName="id_pressao" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC48" populated="true" UUID="e700f037-b276-457b-89ce-45f0b2b96b20" ascendingOrDescending="UNSPECIFIED" column-ref="COL43" name="id_pressao" physicalName="id_pressao" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB49" populated="true" UUID="84431c88-c493-4b2b-95fe-81fd65fc61bb" name="Poeira_10" objectType="TABLE" physicalName="Poeira_10" >
+   <remarks></remarks>
+   <folder id="FOLTAB491" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL50" populated="true" UUID="1f5e1dee-b5d3-4e59-b76e-c95a202aee02" autoIncrement="true" autoIncrementSequenceName="Poeira_10_id_poeira_10_seq" defaultValue="" name="id_poeira_10" nullable="0" physicalName="id_poeira_10" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL51" populated="true" UUID="231765b8-064b-44cb-a159-a9bb64daf92c" autoIncrement="false" autoIncrementSequenceName="Poeira_10_data_hora_seq" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL52" populated="true" UUID="fe15a90b-8964-4db7-9ab2-9a667ecddd79" autoIncrement="false" autoIncrementSequenceName="Poeira_10_poeira_10_seq" defaultValue="" name="poeira_10" nullable="1" physicalName="poeira_10" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+     <remarks></remarks>
+    </column>
+    <column id="COL53" populated="true" UUID="2dac9f1b-a822-4317-bf43-286c1ad0fe07" autoIncrement="false" autoIncrementSequenceName="Poeira_10_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB493" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB492" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB494" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX54" populated="true" UUID="36552376-6af6-4370-9440-e35344febd2c" clustered="false" name="id_poeira_10" physicalName="id_poeira_10" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC55" populated="true" UUID="5cafeb75-05bb-41b2-a9ac-c62db4bcc06d" ascendingOrDescending="UNSPECIFIED" column-ref="COL50" name="id_poeira_10" physicalName="id_poeira_10" />
+    </index>
+   </folder>
+  </table>
+  <table id="TAB56" populated="true" UUID="5378ec24-1b0b-4d3e-96f6-6498d4871c03" name="Poeira_25" objectType="TABLE" physicalName="Poeira_25" >
+   <remarks></remarks>
+   <folder id="FOLTAB561" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL57" populated="true" UUID="97e9851a-eb38-4507-a642-d435615f0b52" autoIncrement="true" autoIncrementSequenceName="Poeira_25_id_poeira_25_seq" defaultValue="" name="id_poeira_25" nullable="0" physicalName="id_poeira_25" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+     <remarks></remarks>
+    </column>
+    <column id="COL58" populated="true" UUID="97e690e1-3feb-408c-aa1a-6763fcd858f8" autoIncrement="false" autoIncrementSequenceName="Poeira_25_data_hora_seq" defaultValue="" name="data_hora" nullable="0" physicalName="data_hora" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+     <remarks></remarks>
+    </column>
+    <column id="COL59" populated="true" UUID="426daccf-2df7-425a-8e1c-731e269d31e6" autoIncrement="false" autoIncrementSequenceName="Poeira_25_poeira_25_seq" defaultValue="" name="poeira_25" nullable="1" physicalName="poeira_25" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="7" userDefinedTypeUUID="8fe516a5-9833-4170-9572-50e78bbf221f" >
+     <remarks></remarks>
+    </column>
+    <column id="COL60" populated="true" UUID="731ff054-f0d9-4294-b081-a03820a35fc0" autoIncrement="false" autoIncrementSequenceName="Poeira_25_classe_seq" defaultValue="" name="classe" nullable="1" physicalName="classe" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    </folder>
+    <folder id="FOLTAB563" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    </folder>
+    <folder id="FOLTAB562" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    </folder>
+    <folder id="FOLTAB564" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX61" populated="true" UUID="f5d09783-9926-4f5a-8739-491ab86b3e3f" clustered="false" name="id_poeira_25" physicalName="id_poeira_25" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC62" populated="true" UUID="33888f2e-f020-4017-a67f-33e5158a7372" ascendingOrDescending="UNSPECIFIED" column-ref="COL57" name="id_poeira_25" physicalName="id_poeira_25" />
     </index>
    </folder>
   </table>
   <relationships>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
-  <table-pane table-ref="TAB7" x="443" y="127" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB26" x="174" y="229" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB33" x="184" y="104" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB40" x="183" y="353" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB9" x="443" y="127" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB28" x="174" y="229" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB35" x="184" y="104" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB42" x="183" y="355" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB49" x="686" y="165" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB56" x="680" y="336" bgColor="0xf0f0f0" fgColor="0x000000" rounded="false" dashed="false"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">
