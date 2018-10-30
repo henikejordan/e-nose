@@ -525,11 +525,15 @@ public class Principal extends javax.swing.JFrame {
         if (gravacaoChart != null) {
             if (jTextFieldClasse.getText().length() == 0) {
                 for (GravacaoChart gc : gravacaoChart) {
-                    gc.setClasse(null);
+                    if (gc != null) {
+                        gc.setClasse(null);
+                    }
                 }
             } else {
                 for (GravacaoChart gc : gravacaoChart) {
-                    gc.setClasse(jTextFieldClasse.getText());
+                    if (gc != null) {
+                        gc.setClasse(jTextFieldClasse.getText());
+                    }
                 }
             }
         }
