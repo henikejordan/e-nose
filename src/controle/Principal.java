@@ -398,12 +398,11 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarGases.getOpcIndices());
                 sensor.setInfo(editarGases.getOpcInfo());
-                gravacaoChart[0] = new GravacaoChart(sensor, port, tempo, dao, estatistica);
-                gravacaoChart[0].setClasse(jTextFieldClasse.getText());
+                gravacaoChart[0] = new GravacaoChart(sensor, port, tempo, jTextFieldClasse.getText(), dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarGases.getIndices());
                 sensor.setInfo(editarGases.getInfo());
-                leituraChart[0] = new LeituraChart(sensor, dao, estatistica);
+                leituraChart[0] = new LeituraChart(sensor, jTextFieldClasse.getText(), dao, estatistica);
             }
         }
         if (jCheckBoxPressao.isSelected()) {
@@ -413,12 +412,11 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarPressao.getOpcIndices());
                 sensor.setInfo(editarPressao.getOpcInfo());
-                gravacaoChart[1] = new GravacaoChart(sensor, port, tempo, dao, estatistica);
-                gravacaoChart[1].setClasse(jTextFieldClasse.getText());
+                gravacaoChart[1] = new GravacaoChart(sensor, port, tempo, jTextFieldClasse.getText(), dao, estatistica);
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarPressao.getIndices());
                 sensor.setInfo(editarPressao.getInfo());
-                leituraChart[1] = new LeituraChart(sensor, dao, estatistica);
+                leituraChart[1] = new LeituraChart(sensor, jTextFieldClasse.getText(), dao, estatistica);
             }
         }
         if (jCheckBoxTemp.isSelected()) {
@@ -428,12 +426,13 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarTemperatura.getOpcIndices());
                 sensor.setInfo(editarTemperatura.getOpcInfo());
-                gravacaoChart[2] = new GravacaoChart(sensor, port, tempo, dao, estatistica);
+                gravacaoChart[2] = new GravacaoChart(sensor, port, tempo, jTextFieldClasse.getText(), dao, estatistica);
                 gravacaoChart[2].setClasse(jTextFieldClasse.getText());
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarTemperatura.getIndices());
                 sensor.setInfo(editarTemperatura.getInfo());
-                leituraChart[2] = new LeituraChart(sensor, dao, estatistica);
+                leituraChart[2] = new LeituraChart(sensor, jTextFieldClasse.getText(), dao, estatistica);
+                leituraChart[2].setClasse(jTextFieldClasse.getText());
             }
         }
         if (jCheckBoxUmidade.isSelected()) {
@@ -443,12 +442,13 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarUmidade.getOpcIndices());
                 sensor.setInfo(editarUmidade.getOpcInfo());
-                gravacaoChart[3] = new GravacaoChart(sensor, port, tempo, dao, estatistica);
+                gravacaoChart[3] = new GravacaoChart(sensor, port, tempo, jTextFieldClasse.getText(), dao, estatistica);
                 gravacaoChart[3].setClasse(jTextFieldClasse.getText());
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarUmidade.getIndices());
                 sensor.setInfo(editarUmidade.getInfo());
-                leituraChart[3] = new LeituraChart(sensor, dao, estatistica);
+                leituraChart[3] = new LeituraChart(sensor, jTextFieldClasse.getText(), dao, estatistica);
+                leituraChart[3].setClasse(jTextFieldClasse.getText());
             }
         }
         if (jCheckBoxPoeira10.isSelected()) {
@@ -458,12 +458,13 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarPoeira10.getOpcIndices());
                 sensor.setInfo(editarPoeira10.getOpcInfo());
-                gravacaoChart[4] = new GravacaoChart(sensor, port, tempo, dao, estatistica);
+                gravacaoChart[4] = new GravacaoChart(sensor, port, tempo, jTextFieldClasse.getText(), dao, estatistica);
                 gravacaoChart[4].setClasse(jTextFieldClasse.getText());
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarPoeira10.getIndices());
                 sensor.setInfo(editarPoeira10.getInfo());
-                leituraChart[4] = new LeituraChart(sensor, dao, estatistica);
+                leituraChart[4] = new LeituraChart(sensor, jTextFieldClasse.getText(), dao, estatistica);
+                leituraChart[4].setClasse(jTextFieldClasse.getText());
             }
         }
         if (jCheckBoxPoeira25.isSelected()) {
@@ -473,12 +474,13 @@ public class Principal extends javax.swing.JFrame {
             if (!"".equals(port) && jRadioButtonLer.isSelected()) {
                 sensor.setIndices(editarPoeira25.getOpcIndices());
                 sensor.setInfo(editarPoeira25.getOpcInfo());
-                gravacaoChart[5] = new GravacaoChart(sensor, port, tempo, dao, estatistica);
+                gravacaoChart[5] = new GravacaoChart(sensor, port, tempo, jTextFieldClasse.getText(), dao, estatistica);
                 gravacaoChart[5].setClasse(jTextFieldClasse.getText());
             } else if (jRadioButtonRel.isSelected()) {
                 sensor.setIndices(editarPoeira25.getIndices());
                 sensor.setInfo(editarPoeira25.getInfo());
-                leituraChart[5] = new LeituraChart(sensor, dao, estatistica);
+                leituraChart[5] = new LeituraChart(sensor, jTextFieldClasse.getText(), dao, estatistica);
+                leituraChart[5].setClasse(jTextFieldClasse.getText());
             }
         }
     }//GEN-LAST:event_jButtonAbrirActionPerformed

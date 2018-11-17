@@ -18,14 +18,16 @@ import org.knowm.xchart.style.Styler;
 public abstract class Chart {
 
     private Sensor sensor;
+    private String classe;
+    private Estatistica estatistica;
     private XYChart xyChart;
     private DAO dao;
-    private Estatistica estatistica;
 
-    public Chart(Sensor sensor, DAO dao, Estatistica estatistica) {
+    public Chart(Sensor sensor, String classe, DAO dao, Estatistica estatistica) {
         this.sensor = sensor;
-        this.dao = dao;
+        this.classe = classe;
         this.estatistica = estatistica;
+        this.dao = dao;
     }
 
     public Sensor getSensor() {
@@ -58,6 +60,14 @@ public abstract class Chart {
 
     public String getYAxisInfo() {
         return sensor.getUnidade();
+    }
+
+    public String getClasse() {
+        return classe;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
     }
 
     public Estatistica getEstatistica() {

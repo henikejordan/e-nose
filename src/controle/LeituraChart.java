@@ -18,8 +18,8 @@ public final class LeituraChart extends Chart {
     private List<Date> xData;
     private final List<Double>[] yData;
 
-    public LeituraChart(Sensor sensor, DAO dao, Estatistica estatistica) {
-        super(sensor, dao, estatistica);
+    public LeituraChart(Sensor sensor, String classe, DAO dao, Estatistica estatistica) {
+        super(sensor, classe, dao, estatistica);
         yData = new List[sensor.getInfo().length];
 
         go();
@@ -54,7 +54,7 @@ public final class LeituraChart extends Chart {
     @Override
     public List<Double> getData(int indice, int num) {
         String aux[] = getSensor().getInfo();
-        return getDao().getValues(aux[indice], getEstatistica());
+        return getDao().getValues(aux[indice], getEstatistica(), getClasse());
     }
 
     @Override

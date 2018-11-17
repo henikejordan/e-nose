@@ -62,7 +62,7 @@ public abstract class DAO {
         return data;
     }
 
-    public abstract List<Double> getValues(String info, Estatistica estatistica);
+    public abstract List<Double> getValues(String info, Estatistica estatistica, String classe);
 
     public abstract void setValues(String data_hora, double[] valor, Estatistica estatistica, String classe);
 

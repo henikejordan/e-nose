@@ -20,12 +20,12 @@ public class DAOPoeira25 extends DAO {
     }
 
     @Override
-    public synchronized List<Double> getValues(String info, Estatistica estatistica) {
+    public synchronized List<Double> getValues(String info, Estatistica estatistica, String classe) {
         List<Double> data = new ArrayList<>();
         ResultSet resultado = getConecta().executaSQL("select * from poeira_25 "
                 + "where data_hora >= '" + getData_hora_ini() + "' "
                 + "and data_hora <= '" + getData_hora_fim() + "' "
-                //+ "and data_hora::text like '____-__-__ __:__:_0' "
+                + "and classe like '%" + classe + "%' "
                 + "order by data_hora");
 
         try {
