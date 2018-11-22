@@ -40,14 +40,14 @@ public abstract class DAO {
         return data_hora_fim;
     }
 
-    public List<Date> getTimes() {
+    public List<Date> getTimes(String classe) {
         List<Date> data = new ArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         ResultSet resultado = getConecta().executaSQL("select * from " + sensor + " "
                 + "where data_hora >= '" + data_hora_ini + "' "
                 + "and data_hora <= '" + data_hora_fim + "' "
-                //+ "and data_hora::text like '____-__-__ __:__:_0' "
+                + "and classe like '%" + classe + "%' "
                 + "order by data_hora");
 
         try {

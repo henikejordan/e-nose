@@ -59,7 +59,7 @@ public final class LeituraChart extends Chart {
 
     @Override
     public List<Date> getTime() {
-        return getDao().getTimes();
+        return getDao().getTimes(getClasse());
     }
 
     private void equals() {
